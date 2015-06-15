@@ -1,0 +1,6 @@
+Options -indexes
+
+AuthType	Basic
+AuthName	"Restricted Area"
+AuthUserFile	/var/www/webuser
+Require		valid-user

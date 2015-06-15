@@ -1,0 +1,29 @@
+body > div {
+  margin-top: 3em;
+}
+
+.navbar-brand img {
+  height: 25px;
+}
+
+.datarow div {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.datarow.even {
+ background-color: #e0e0e0;
+}
+.datarow.odd {
+ background-color: #c0c0c0;
+}
+
+.datarow .newlog-msg {
+	cursor: zoom-in;
+}
+
+p.debugfooter {
+	float: right;
+	color: #999999;
+	font-size: 75%;
+}
