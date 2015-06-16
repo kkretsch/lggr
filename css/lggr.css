@@ -22,6 +22,11 @@ body > div {
 	cursor: zoom-in;
 }
 
+#dialog {
+	max-height: 500px !important;
+	overflow: auto;
+}
+
 p.debugfooter {
 	float: right;
 	color: #999999;
