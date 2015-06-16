@@ -38,7 +38,7 @@ $page = $state->getPage();
 try {
 	if($state->isSearch()) {
 
-		$aEvents = $l->getText($state->getSearch(), $page*100, 100);
+		$aEvents = $l->getText($state->getSearch(), $page*LggrState::PAGELEN, LggrState::PAGELEN);
 		$searchvalue = htmlentities($state->getSearch());
 		$isSearch=true;
 		$sFilter = 'Full text search result <strong>' . $searchvalue . '</strong>';
@@ -48,7 +48,7 @@ try {
 		$host = $state->getHost();
 		$level = $state->getLevel();
 
-		$aEvents = $l->getFiltered($host, $level, $page*100, 100);
+		$aEvents = $l->getFiltered($host, $level, $page*LggrState::PAGELEN, LggrState::PAGELEN);
 		$searchvalue='';
 		$isSearch=false;
 		$sFilter='';
@@ -61,7 +61,7 @@ try {
 
 		$sFilter = null;
 
-		$aEvents = $l->getLatest($page*100, 100);
+		$aEvents = $l->getLatest($page*LggrState::PAGELEN, LggrState::PAGELEN);
 		$searchvalue='';
 		$isSearch=false;
 
@@ -175,7 +175,7 @@ foreach($aServers as $server) {
   </ul>
 </div><!-- dropdown -->
 
-<p><div class="btn-group" role="group" aria-label="level">
+<p><div class="btn-group btn-group-xs" role="group" aria-label="level">
 <?php
 foreach($aLevels as $level) {
 	if($state->isLevel() && ($level->level == $state->getLevel())) {

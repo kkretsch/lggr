@@ -96,20 +96,24 @@ ORDER BY c DESC
 		return $a;
 	} // function
 
-	function getLatest($from=0, $count=100) {
+	function getLatest($from=0, $count=LggrState::PAGELEN) {
 		$v = $this->getViewName();
-		$sql = "
+
+		$sqlSize = "SELECT COUNT(*) AS c FROM $v";
+		$sqlData = "
 SELECT * FROM $v
 ORDER BY `date` DESC
 LIMIT $from,$count";
 
-		return $this->sendResult($sql);
+		$this->getResultSize($sqlSize);
+		return $this->sendResult($sqlData);
 	} // function
 
-	function getFiltered($host=null, $level=null, $from=0, $count=100) {
+	function getFiltered($host=null, $level=null, $from=0, $count=LggrState::PAGELEN) {
 		$v = $this->getViewName();
 
-		$sql = "SELECT * FROM $v";
+		$sqlSize = "SELECT COUNT(*) AS c FROM $v";
+		$sqlData = "SELECT * FROM $v";
 
 		$aWhere = array();
 		if(null != $host) {
@@ -122,41 +126,47 @@ LIMIT $from,$count";
 		} // if
 
 		if(count($aWhere) > 0) {
-			$sql .= " WHERE " . implode(' AND ', $aWhere);
+			$sqlSize .= " WHERE " . implode(' AND ', $aWhere);
+			$sqlData .= " WHERE " . implode(' AND ', $aWhere);
 		} // if
 
-		$sql .= " ORDER BY `date` DESC LIMIT $from,$count";
+		$sqlData .= " ORDER BY `date` DESC LIMIT $from,$count";
 
-		return $this->sendResult($sql);
+		$this->getResultSize($sqlSize);
+		return $this->sendResult($sqlData);
 	} // function
 
-	function getByHost($host, $from=0, $count=100) {
+	function getByHost($host, $from=0, $count=LggrState::PAGELEN) {
 		$v = $this->getViewName();
 		$sTmp = $this->db->escape_string($host);
 
-		$sql = "
+		$sqlSize = "SELECT COUNT(*) AS c FROM $v WHERE host='$sTmp'";
+		$sqlData = "
 SELECT * FROM $v
 WHERE host='$sTmp'
 ORDER BY `date` DESC
 LIMIT $from,$count";
 
-		return $this->sendResult($sql);
+		$this->getResultSize($sqlSize);
+		return $this->sendResult($sqlData);
 	} // function
 
-	function getByLevel($level, $from=0, $count=100) {
+	function getByLevel($level, $from=0, $count=LggrState::PAGELEN) {
 		$v = $this->getViewName();
 		$sTmp = $this->db->escape_string($level);
 
-		$sql = "
+		$sqlSize = "SELECT COUNT(*) AS c FROM $v WHERE level='$sTmp'";
+		$sqlData = "
 SELECT * FROM $v
 WHERE level='$sTmp'
 ORDER BY `date` DESC
 LIMIT $from,$count";
 
-		return $this->sendResult($sql);
+		$this->getResultSize($sqlSize);
+		return $this->sendResult($sqlData);
 	} // function
 
-	function getText($q, $from=0, $count=100) {
+	function getText($q, $from=0, $count=LggrState::PAGELEN) {
 		$v = $this->getViewName();
 		$sTmp = $this->db->escape_string($q);
 
@@ -168,6 +178,19 @@ LIMIT $from,$count";
 
 		return $this->sendResult($sql);
 
+	} // function
+
+
+	private function getResultSize($sql) {
+		$res = $this->db->query($sql);
+		if(false === $res) {
+			throw new Exception($this->db->error);
+		} // if
+		if($row = $res->fetch_object()) {
+			$i = $row->c;
+			$this->state->setResultSize($i);
+		} // if
+		$res->close();
 	} // function
 
 	private function sendResult($sql) {

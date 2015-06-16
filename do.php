@@ -31,17 +31,20 @@ switch($_GET['a']) {
 	case 'host':
 		$state->setHost($_GET['host']);
 		$state->setPage(0);
+		$state->setResultSize(0);
 		break;
 
 	case 'level':
 		$state->setLevel($_GET['level']);
 		$state->setPage(0);
+		$state->setResultSize(0);
 		break;
 
 	case 'range':
 		$i = intval($_GET['range']);
 		$state->setRange($i);
 		$state->setPage(0);
+		$state->setResultSize(0);
 		break;
 	
 	case 'paginate':
