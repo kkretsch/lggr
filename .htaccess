@@ -1,5 +1,12 @@
 Options -indexes
 
+Header always set Strict-Transport-Security "max-age=31536000"
+
+ExpiresActive	On
+ExpiresByType	text/css		"access plus 1 month"
+ExpiresByType	image/png		"access plus 1 month"
+ExpiresByType	application/javascript	"access plus 1 month"
+
 AuthType	Basic
 AuthName	"Restricted Area"
 AuthUserFile	/var/www/webuser
