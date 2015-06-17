@@ -1,7 +1,5 @@
 <?php
 
-require_once 'config_class.php';
-
 class Lggr {
 
 	private $config=null;

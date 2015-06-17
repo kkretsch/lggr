@@ -1,8 +1,9 @@
 <?php
 
+spl_autoload_register(function($class) {
+	include 'inc/' . strtolower($class) . '_class.php';
+});
 
-require_once 'inc/lggrstate_class.php';
-require_once 'inc/lggr_class.php';
 require 'tpl/head.inc.php';
 
 session_start();
