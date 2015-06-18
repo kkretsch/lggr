@@ -109,11 +109,16 @@ $aLevelCount = array();
 foreach($aLevels as $level) {
 	$aLevelCount[$level->level] = $level->c;
 	switch($level->level) {
+	case 'emerg':
+	case 'crit':
 	case 'err':
 		$label='progress-bar-danger';
 		break;
-	case 'notice':
+	case 'warning':
 		$label='progress-bar-warning';
+		break;
+	case 'notice':
+		$label='progress-bar-primary';
 		break;
 	case 'info':
 		$label='progress-bar-success';
@@ -129,17 +134,26 @@ EOL;
 } // foreach
 ?>
 </div>
-          <p>Distribution of selected event levels.</p>
+	<p>Distribution of selected event levels.</p>
+	<p class="lggr-level-buttons">
 <?php
+if(isset($aLevelCount['emerg'])) {
+	echo '<button class="btn btn-sm btn-danger" type="button">Emergency <span class="badge">' . $aLevelCount['emerg'] . '</span></button> ';
+}
+if(isset($aLevelCount['crit'])) {
+	echo '<button class="btn btn-sm btn-danger" type="button">Critical <span class="badge">' . $aLevelCount['crit'] . '</span></button> ';
+}
 if(isset($aLevelCount['err'])) {
-	echo '<button class="btn btn-primary" type="button">Error <span class="badge">' . $aLevelCount['err'] . '</span></button>';
+	echo '<button class="btn btn-sm btn-danger" type="button">Error <span class="badge">' . $aLevelCount['err'] . '</span></button> ';
 }
-?>
-<?php
+if(isset($aLevelCount['err'])) {
+	echo '<button class="btn btn-sm btn-warning" type="button">Warning <span class="badge">' . $aLevelCount['warning'] . '</span></button> ';
+}
 if(isset($aLevelCount['notice'])) {
-	echo '<button class="btn btn-primary" type="button">Notice <span class="badge">' . $aLevelCount['notice'] . '</span></button>';
+	echo '<button class="btn btn-sm btn-primary" type="button">Notice <span class="badge">' . $aLevelCount['notice'] . '</span></button> ';
 }
 ?>
+	</p>
         </div>
 
         <div class="col-md-4">

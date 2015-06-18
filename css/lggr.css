@@ -6,6 +6,10 @@ body > div {
   height: 25px;
 }
 
+p.lggr-level-buttons {
+  line-height: 250%;
+}
+
 .datarow div {
   white-space: nowrap;
   overflow: hidden;
