@@ -236,9 +236,12 @@ foreach($aEvents as $event) {
 	} // if
 
 	switch($event->level) {
+	case 'emerg': $label = '<span class="label label-danger">Emergency</span>'; break;
+	case 'crit': $label = '<span class="label label-danger">Critical</span>'; break;
 	case 'err': $label = '<span class="label label-danger">Error</span>'; break;
-	case 'notice': $label='<span class="label label-warning">Notice</span>'; break;
-	case 'info': $label = '<span class="label label-info">Info</span>'; break;
+	case 'warning': $label = '<span class="label label-warning">Warning</span>'; break;
+	case 'notice': $label='<span class="label label-primary">Notice</span>'; break;
+	case 'info': $label = '<span class="label label-success">Info</span>'; break;
 	default: $label = '<span class="label label-default">' . $event->level . '</span>';
 	} // switch
 
