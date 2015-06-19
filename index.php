@@ -263,4 +263,7 @@ include 'tpl/paginate.inc.php';
 
 </div>
 
-<?php require 'tpl/foot.inc.php' ?>
+<?php
+$aPerf = $l->getPerf();
+require 'tpl/foot.inc.php'
+?>

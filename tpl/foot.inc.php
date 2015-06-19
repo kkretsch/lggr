@@ -1,7 +1,7 @@
     <div class="container">
       <hr>
       <footer>
-        <p class="debugfooter">Session: <?= $_COOKIE['PHPSESSID'] ?> by <?= htmlentities($_SERVER['REMOTE_USER']) ?></p>
+        <p class="debugfooter"><?= $aPerf['count'] ?> queries in <?= $aPerf['time'] ?> seconds. Session: <?= $_COOKIE['PHPSESSID'] ?> by <?= htmlentities($_SERVER['REMOTE_USER']) ?></p>
         <p>&copy; <a href="http://lggr.io" target="_blank">lggr.io</a> 2015</p>
       </footer>
     </div> <!-- /container -->

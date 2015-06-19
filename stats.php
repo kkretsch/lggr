@@ -106,4 +106,7 @@ EOL;
 
 </script>
 
-<?php require 'tpl/foot.inc.php' ?>
+<?php
+$aPerf = $l->getPerf();
+require 'tpl/foot.inc.php'
+?>

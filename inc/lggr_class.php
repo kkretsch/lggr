@@ -5,13 +5,19 @@ class Lggr {
 	private $config=null;
 	private $db=null;
 	private $state=null;
+	private $perfTime=null;
+	private $perfCount=null;
 
 	function __construct(LggrState $state) {
 		$this->config = new Config();
 		$this->state = $state;
-		$this->db = new mysqli('localhost', $this->config->getDbUSer(), $this->config->getDbPwd(), $this->config->getDbName());
+
+		$this->perfCount=0;
+		$this->perfTime=0;
 
 		$this->checkSecurity();
+
+		$this->db = new mysqli('localhost', $this->config->getDbUSer(), $this->config->getDbPwd(), $this->config->getDbName());
 	} // constructor
 
 	function __destruct() {
@@ -36,6 +42,9 @@ class Lggr {
 	}
 
 	function getLevels() {
+		$this->perfCount++;
+		$startTime = microtime(true);
+
 		$v = $this->getViewName();
 		$a = array();
 		$sql = "
@@ -62,10 +71,15 @@ ORDER BY c DESC
 			$level->f = round($f, 2);
 		} // foreach
 
+		$this->perfTime += microtime(true)-$startTime;
+
 		return $a;
 	} // function
 
 	function getServers() {
+		$this->perfCount++;
+		$startTime = microtime(true);
+
 		$v = $this->getViewName();
 		$a = array();
 		$sql = "
@@ -92,10 +106,15 @@ ORDER BY c DESC
 			$host->f = round($f, 2);
 		} // foreach
 
+		$this->perfTime += microtime(true)-$startTime;
+
 		return $a;
 	} // function
 
 	function getLatest($from=0, $count=LggrState::PAGELEN) {
+		$this->perfCount += 2;
+		$startTime = microtime(true);
+
 		$v = $this->getViewName();
 
 		$sqlSize = "SELECT COUNT(*) AS c FROM $v";
@@ -105,10 +124,17 @@ ORDER BY `date` DESC
 LIMIT $from,$count";
 
 		$this->getResultSize($sqlSize);
-		return $this->sendResult($sqlData);
+		$a = $this->sendResult($sqlData);
+
+		$this->perfTime += microtime(true)-$startTime;
+
+		return $a;
 	} // function
 
 	function getFiltered($host=null, $level=null, $from=0, $count=LggrState::PAGELEN) {
+		$this->perfCount += 2;
+		$startTime = microtime(true);
+
 		$v = $this->getViewName();
 
 		$sqlSize = "SELECT COUNT(*) AS c FROM $v";
@@ -132,40 +158,17 @@ LIMIT $from,$count";
 		$sqlData .= " ORDER BY `date` DESC LIMIT $from,$count";
 
 		$this->getResultSize($sqlSize);
-		return $this->sendResult($sqlData);
-	} // function
+		$a = $this->sendResult($sqlData);
 
-	function getByHost($host, $from=0, $count=LggrState::PAGELEN) {
-		$v = $this->getViewName();
-		$sTmp = $this->db->escape_string($host);
+		$this->perfTime += microtime(true)-$startTime;
 
-		$sqlSize = "SELECT COUNT(*) AS c FROM $v WHERE host='$sTmp'";
-		$sqlData = "
-SELECT * FROM $v
-WHERE host='$sTmp'
-ORDER BY `date` DESC
-LIMIT $from,$count";
-
-		$this->getResultSize($sqlSize);
-		return $this->sendResult($sqlData);
-	} // function
-
-	function getByLevel($level, $from=0, $count=LggrState::PAGELEN) {
-		$v = $this->getViewName();
-		$sTmp = $this->db->escape_string($level);
-
-		$sqlSize = "SELECT COUNT(*) AS c FROM $v WHERE level='$sTmp'";
-		$sqlData = "
-SELECT * FROM $v
-WHERE level='$sTmp'
-ORDER BY `date` DESC
-LIMIT $from,$count";
-
-		$this->getResultSize($sqlSize);
-		return $this->sendResult($sqlData);
+		return $a;
 	} // function
 
 	function getText($q, $from=0, $count=LggrState::PAGELEN) {
+		$this->perfCount++;
+		$startTime = microtime(true);
+
 		$v = $this->getViewName();
 		$sTmp = $this->db->escape_string($q);
 
@@ -175,17 +178,27 @@ WHERE message LIKE '%{$sTmp}%'
 ORDER BY `date` DESC
 LIMIT $from,$count";
 
-		return $this->sendResult($sql);
+		$a = $this->sendResult($sql);
 
+		$this->perfTime += microtime(true)-$startTime;
+
+		return $a;
 	} // function
 
 	function getMessagesPerHour() {
+		$this->perfCount++;
+		$startTime = microtime(true);
+
 		$sql = "
 SELECT HOUR(TIME(`date`)) AS h, COUNT(*) AS c
 FROM Today
 GROUP BY h";
 
-		return $this->sendResult($sql);
+		$a = $this->sendResult($sql);
+
+		$this->perfTime += microtime(true)-$startTime;
+
+		return $a;
 	} // function
 
 
@@ -214,6 +227,13 @@ GROUP BY h";
 
 		$res->close();
 		return $a;
+	} // function
+
+	public function getPerf() {
+		return array(
+			'count' => $this->perfCount,
+			'time' =>  $this->perfTime
+		);
 	} // function
 
 } // class
