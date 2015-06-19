@@ -41,6 +41,7 @@ class Lggr {
 		$sql = "
 SELECT level, COUNT(*) AS c FROM $v
 GROUP BY level
+ORDER BY c DESC
 ";
 
 		$res = $this->db->query($sql);
@@ -176,6 +177,15 @@ LIMIT $from,$count";
 
 		return $this->sendResult($sql);
 
+	} // function
+
+	function getMessagesPerHour() {
+		$sql = "
+SELECT HOUR(TIME(`date`)) AS h, COUNT(*) AS c
+FROM Today
+GROUP BY h";
+
+		return $this->sendResult($sql);
 	} // function
 
 

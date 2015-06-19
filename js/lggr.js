@@ -26,5 +26,4 @@ $('button.newlog-range').on('click', function() {
 	window.location.href = "./do.php?a=range&range=" + iRange;
 });
 
-
 });
