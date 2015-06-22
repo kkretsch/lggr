@@ -1,9 +1,9 @@
 <?php
 
-class Config extends AbstractConfig {
+class AdminConfig extends AbstractConfig {
 
 	function __construct() {
-		$this->setDbUser('lggr');
+		$this->setDbUser('lggradmin');
 		$this->setDbPwd('lggr');
 		$this->setDbName('lggrdev');
 	} // constructor

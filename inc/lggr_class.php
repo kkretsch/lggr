@@ -8,14 +8,15 @@ class Lggr {
 	private $perfTime=null;
 	private $perfCount=null;
 
-	function __construct(LggrState $state) {
-		$this->config = new Config();
+	function __construct(LggrState $state, AbstractConfig $config) {
+		$this->config = $config;
 		$this->state = $state;
 
 		$this->perfCount=0;
 		$this->perfTime=0;
 
-		$this->checkSecurity();
+		if(!$this->state->isLocalCall())
+			$this->checkSecurity();
 
 		$this->db = new mysqli('localhost', $this->config->getDbUSer(), $this->config->getDbPwd(), $this->config->getDbName());
 	} // constructor
@@ -199,6 +200,25 @@ GROUP BY h";
 		$this->perfTime += microtime(true)-$startTime;
 
 		return $a;
+	} // function
+
+	/* delete anything older than maxage hours, or 4 weeks */
+	function purgeOldMessages($maxage=672) {
+		$this->perfCount++;
+		$startTime = microtime(true);
+
+		$sql = "
+DELETE FROM newlogs
+WHERE `date` < (NOW() - INTERVAL $maxage hour)
+";
+		$res = $this->db->query($sql);
+		if(false === $res) {
+			throw new Exception($this->db->error);
+		} // if
+
+		$this->perfTime += microtime(true)-$startTime;
+
+		return $this->db->affected_rows;
 	} // function
 
 

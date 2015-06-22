@@ -16,7 +16,8 @@ if(isset($_SESSION[LggrState::SESSIONNAME])) {
 
 $l = null;
 try {
-	$l = new Lggr($state);
+	$config = new Config();
+	$l = new Lggr($state, $config);
 
 	$aLevels = $l->getLevels();
 	$aServers = $l->getServers();

@@ -4,6 +4,8 @@ spl_autoload_register(function($class) {
 	include 'inc/' . strtolower($class) . '_class.php';
 });
 
+$searchvalue='';
+
 require 'tpl/head.inc.php';
 
 session_start();
@@ -25,7 +27,8 @@ $aColors=array(
 
 $l = null;
 try {
-	$l = new Lggr($state);
+	$config = new Config();
+	$l = new Lggr($state, $config);
 
 	$aLevels = $l->getLevels();
 	$aServers = $l->getServers();

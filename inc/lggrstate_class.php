@@ -5,6 +5,7 @@ class LggrState {
 	const SESSIONNAME = 'LggrState';
 	const PAGELEN = 100;
 
+	private $bLocalCall=false;
 	private $bSearch=false;
 	private $sSearch=null;
 	private $iPage=0;
@@ -14,6 +15,7 @@ class LggrState {
 	private $iResultSize=0;	// result size of last query
 
 	function __construct() {
+		$this->bLocalCall=false;
 		$this->iPage=0;
 		$this->bSearch=false;
 		$this->sSearch=null;
@@ -75,6 +77,13 @@ class LggrState {
 	}
 	public function getResultSize() {
 		return $this->iResultSize;
+	}
+
+	public function setLocalCall($b) {
+		$this->bLocalCall = $b;
+	}
+	public function isLocalCall() {
+		return $this->bLocalCall;
 	}
 
 } // class
