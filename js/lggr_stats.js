@@ -15,6 +15,6 @@ ctx = $("#chartServers").get(0).getContext("2d");
 var chartServers = new Chart(ctx).Bar(dataServers, options);
 
 ctx = $("#chartLevels").get(0).getContext("2d");
-var chartLevels = new Chart(ctx).PolarArea(dataLevels, options);
+var chartLevels = new Chart(ctx).PolarArea(dataLevels, {animateRotate: true, showScale: false});
 
 });

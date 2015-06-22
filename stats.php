@@ -51,7 +51,7 @@ require 'tpl/nav.inc.php';
     <div class="col-md-6"><h2>Servers</h2><canvas id="chartServers"></canvas></div>
   </div>
   <div class="row">
-    <div class="col-md-4"><h2>Message levels distribution</h2><canvas id="chartLevels"></canvas></div>
+    <div class="col-md-4"><h2>Message levels relative distribution</h2><canvas id="chartLevels"></canvas></div>
     <div class="col-md-4"><canvas id="myChart2"></canvas></div>
     <div class="col-md-4"><canvas id="myChart3"></canvas></div>
   </div>
