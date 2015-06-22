@@ -1,7 +1,7 @@
 <?php
 
 spl_autoload_register(function($class) {
-	include '../inc/' . strtolower($class) . '_class.php';
+	include __DIR__ . '/../inc/' . strtolower($class) . '_class.php';
 });
 
 $iCount=0;
