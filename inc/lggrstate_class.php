@@ -13,6 +13,9 @@ class LggrState {
 	private $sHost=null;
 	private $sLevel=null;
 	private $iRange=24;	// default 24h = today, sort of
+	private $bFromTo=false;
+	private $tsFrom=null;
+	private $tsTo=null;
 	private $iResultSize=0;	// result size of last query
 
 	function __construct() {
@@ -25,6 +28,9 @@ class LggrState {
 		$this->sHost=null;
 		$this->sLevel=null;
 		$this->iRange=24;
+		$this->bFromTo=false;
+		$this->tsFrom=null;
+		$this->tsTo=null;
 		$this->iResultSize=0;
 	} // constructor
 
@@ -83,6 +89,25 @@ class LggrState {
 	}
 	public function getRange() {
 		return $this->iRange;
+	}
+
+	public function setFromTo($tsFrom, $tsTo) {
+		if(null==$tsFrom && null==$tsTo) {
+			$this->bFromTo=false;
+		} else {
+			$this->bFromTo=true;
+		} // if
+		$this->tsFrom=$tsFrom;
+		$this->tsTo=$tsTo;
+	}
+	public function isFromTo() {
+		return $this->bFromTo;
+	}
+	public function getFrom() {
+		return $this->tsFrom;
+	}
+	public function getTo() {
+		return $this->tsTo;
 	}
 
 	public function setResultSize($i) {

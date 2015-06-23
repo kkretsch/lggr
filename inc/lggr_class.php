@@ -132,6 +132,31 @@ LIMIT $from,$count";
 		return $a;
 	} // function
 
+	function getFromTo($from=0, $count=LggrState::PAGELEN) {
+		$this->perfCount += 2;
+		$startTime = microtime(true);
+
+		$sFrom = $this->db->escape_string($this->state->getFrom());
+		$sTo   = $this->db->escape_string($this->state->getTo());
+
+		$sqlSize = "
+SELECT COUNT(*) AS c FROM newlogs
+WHERE `date` BETWEEN '$sFrom' AND '$sTo'";
+
+		$sqlData = "
+SELECT * FROM newlogs
+WHERE `date` BETWEEN '$sFrom' AND '$sTo'
+ORDER BY `date` DESC
+LIMIT $from,$count";
+
+		$this->getResultSize($sqlSize);
+		$a = $this->sendResult($sqlData);
+
+		$this->perfTime += microtime(true)-$startTime;
+
+		return $a;
+	} // function
+
 	function getFiltered($host=null, $level=null, $from=0, $count=LggrState::PAGELEN) {
 		$this->perfCount += 2;
 		$startTime = microtime(true);

@@ -10,6 +10,13 @@ p.lggr-level-buttons {
   line-height: 250%;
 }
 
+#tsfromto {
+  display: none;
+}
+input.tspick {
+  width: 9em;
+}
+
 .datarow div {
   white-space: nowrap;
   overflow: hidden;

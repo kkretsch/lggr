@@ -1,7 +1,7 @@
 <?php
 
 spl_autoload_register(function($class) {
-	include 'inc/' . strtolower($class) . '_class.php';
+	include __DIR__ . '/inc/' . strtolower($class) . '_class.php';
 });
 
 require 'tpl/head.inc.php';
@@ -61,6 +61,13 @@ try {
 			$sFilter .= 'Filter by server <strong>' . htmlentities($state->getHost()) . '</strong>';
 		if($state->isLevel())
 			$sFilter .= 'Filter by level <strong>' . htmlentities($state->getLevel()) . '</strong>';
+
+	} elseif($state->isFromTo()) {
+
+		$aEvents = $l->getFromTo($page*LggrState::PAGELEN, LggrState::PAGELEN);
+		$sFilter = 'Filter by time range between <strong>' . htmlentities($state->getFrom()) . '</strong> and <strong>' . htmlentities($state->getTo()) . '</strong>';
+		$searchvalue='';
+		$isSearch=false;
 
 	} else {
 
@@ -194,8 +201,24 @@ foreach($aRanges as $rangeValue => $rangeText) {
 		echo '<button type="button" class="btn btn-default newlog-range" data-range="' . $rangeValue . '">' . $rangeText . '</button>';
 	}
 } // foreach
+
+if($state->isFromTo()) {
+	echo '<button type="button" class="btn btn-primary newlog-range" id="btnspecialrange">Special</button>';
+} else {
+	echo '<button type="button" class="btn btn-default newlog-range" id="btnspecialrange">Special</button>';
+} // if
+
 ?>
 </div></p>
+
+<form action="do.php" method="post" id="tsfromto">
+<input type="hidden" name="a" value="fromto">
+<input type="text" name="tsfrom" id="tsfrom" class="tspick" placeholder="from">
+<input type="text" name="tsto" id="tsto" class="tspick" placeholder="to">
+<button type="submit" class="btn btn-default">filter</button>
+</form>
+
+
 <p><a type="button" role="button" href="./do.php?a=reset" class="btn btn-default">
   <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset
 </a></p>

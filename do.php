@@ -6,7 +6,7 @@ spl_autoload_register(function($class) {
 
 session_start();
 
-if(!isset($_GET['a'])) {
+if(!isset($_REQUEST['a'])) {
 	header('Location: index.php');
 	exit;
 } // if
@@ -18,7 +18,7 @@ if(isset($_SESSION[LggrState::SESSIONNAME])) {
 } // if
 
 
-switch($_GET['a']) {
+switch($_REQUEST['a']) {
 
 	case 'reset':
 		$state = new LggrState();
@@ -51,6 +51,14 @@ switch($_GET['a']) {
 		$state->setRange($i);
 		$state->setPage(0);
 		$state->setResultSize(0);
+		$state->setFromTo(null,null);
+		break;
+
+	case 'fromto':
+		$sFrom = $_POST['tsfrom'];
+		$sTo   = $_POST['tsto'];
+		$state->setFromTo($sFrom, $sTo);
+		$state->setRange(null);
 		break;
 	
 	case 'paginate':

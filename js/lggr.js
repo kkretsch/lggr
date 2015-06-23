@@ -21,9 +21,21 @@ $('button.newlog-level').on('click', function() {
 	window.location.href = "./do.php?a=level&level=" + sLevel;
 });
 
+$('button#btnspecialrange').on('click', function(e) {
+	e.stopImmediatePropagation();
+	$(this).parent().find('.btn').removeClass('btn-primary').addClass('btn-default');
+	$(this).addClass('btn-primary');
+	$('#tsfromto').show('fast');
+	return false;
+});
 $('button.newlog-range').on('click', function() {
 	var iRange = $(this).attr('data-range');
 	window.location.href = "./do.php?a=range&range=" + iRange;
+});
+
+$('#tsfrom, #tsto').datetimepicker({
+	dateFormat: 'yy-mm-dd',
+	timeFormat: 'HH:mm:00'
 });
 
 });
