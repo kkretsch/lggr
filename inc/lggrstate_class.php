@@ -8,6 +8,7 @@ class LggrState {
 	private $bLocalCall=false;
 	private $bSearch=false;
 	private $sSearch=null;
+	private $sSearchProg=null;
 	private $iPage=0;
 	private $sHost=null;
 	private $sLevel=null;
@@ -19,6 +20,8 @@ class LggrState {
 		$this->iPage=0;
 		$this->bSearch=false;
 		$this->sSearch=null;
+		$this->bSearchProg=false;
+		$this->sSearchProg=null;
 		$this->sHost=null;
 		$this->sLevel=null;
 		$this->iRange=24;
@@ -36,6 +39,16 @@ class LggrState {
 	}
 	public function getSearch() {
 		return $this->sSearch;
+	}
+
+	public function setSearchProg($s) {
+		if(null != $s) {
+			$this->bSearch = true;
+			$this->sSearchProg = $s;
+		} // if
+	}
+	public function getSearchProg() {
+		return $this->sSearchProg;
 	}
 
 	public function setPage($i) {

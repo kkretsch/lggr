@@ -166,16 +166,26 @@ LIMIT $from,$count";
 		return $a;
 	} // function
 
-	function getText($q, $from=0, $count=LggrState::PAGELEN) {
+	function getText($msg='', $prog='', $from=0, $count=LggrState::PAGELEN) {
 		$this->perfCount++;
 		$startTime = microtime(true);
 
 		$v = $this->getViewName();
-		$sTmp = $this->db->escape_string($q);
+		$sTmpMsg = $this->db->escape_string($msg);
+		$sTmpProg = $this->db->escape_string($prog);
+
+		$aWhere = array();
+		if('' != $msg) {
+			$aWhere[] = "message LIKE '%{$sTmpMsg}%'";
+		} // if
+		if('' != $prog) {
+			$aWhere[] = "program LIKE '%{$sTmpProg}%'";
+		} // if
+		$sWhere = implode(' AND ', $aWhere);
 
 		$sql = "
 SELECT * FROM $v
-WHERE message LIKE '%{$sTmp}%'
+WHERE $sWhere
 ORDER BY `date` DESC
 LIMIT $from,$count";
 

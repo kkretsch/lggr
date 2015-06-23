@@ -16,6 +16,7 @@
           </ul>
           <form method="post" action="./do.php?a=search" class="navbar-form navbar-right">
             <div class="form-group">
+              <input name="prog" placeholder="Search for program" class="form-control" type="text" value="<?= $searchvalueprog ?>">
               <input name="q" placeholder="Search in messages" class="form-control" type="text" value="<?= $searchvalue ?>">
             </div>
             <button type="submit" class="btn btn-success">Search</button>

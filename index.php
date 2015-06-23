@@ -40,10 +40,13 @@ $page = $state->getPage();
 try {
 	if($state->isSearch()) {
 
-		$aEvents = $l->getText($state->getSearch(), $page*LggrState::PAGELEN, LggrState::PAGELEN);
+		$aEvents = $l->getText($state->getSearch(), $state->getSearchProg(), $page*LggrState::PAGELEN, LggrState::PAGELEN);
 		$searchvalue = htmlentities($state->getSearch());
+		$searchvalueprog = htmlentities($state->getSearchProg());
 		$isSearch=true;
-		$sFilter = 'Full text search result <strong>' . $searchvalue . '</strong>';
+		$sFilter = 'Text search for';
+		if('' != $state->getSearch()) $sFilter .= ' message <strong>' . $searchvalue . '</strong>';
+		if('' != $state->getSearchProg()) $sFilter .= ' program <strong>' . $searchvalueprog . '</strong>';
 
 	} elseif($state->isHost() || $state->isLevel()) {
 
