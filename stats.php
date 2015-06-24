@@ -52,7 +52,7 @@ require 'tpl/nav.inc.php';
   </div>
   <div class="row">
     <div class="col-md-4"><h2>Message levels relative distribution</h2><canvas id="chartLevels"></canvas></div>
-    <div class="col-md-4"><canvas id="myChart2"></canvas></div>
+    <div class="col-md-4"><h2>Messages by server</h2><canvas id="chartServersPie"></canvas></div>
     <div class="col-md-4"><canvas id="myChart3"></canvas></div>
   </div>
 </div><!-- container -->
@@ -100,6 +100,25 @@ foreach($aLevels as $level) {
 		value: $newVal,
 		color: "$newCol",
 		label: "{$level->level}",
+	},
+
+EOL;
+} // foreach
+?>
+];
+
+var dataServersPie = [
+<?php
+foreach($aServers as $server) {
+	$sHash = md5($server->host);
+	$cHash     = $sHash[0] . '0' . $sHash[1] . '0' . $sHash[2] . '0';
+	$cHashHigh = $sHash[0] . 'f' . $sHash[1] . 'f' . $sHash[2] . 'f';
+	echo <<<EOL
+	{
+		value: {$server->c},
+		color: "#$cHash",
+		highlight: "#$cHashHigh",
+		label: "{$server->host}"
 	},
 
 EOL;
