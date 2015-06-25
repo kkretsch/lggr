@@ -38,7 +38,7 @@ function loadLatest() {
 				var program = htmlEntities(oEvent.program);
 				var msg = htmlEntities(oEvent.message);
 
-				sTmp += '<div class="row datarow" data-id="' + oEvent.id + '">';
+				sTmp += '<div class="row datarow freshrow" data-id="' + oEvent.id + '">';
 				sTmp += '<div class="col-md-2 col-xs-6 newlog-date">' + oEvent.date + '</div>';
 				sTmp += '<div class="col-md-1 col-xs-2">' + oEvent.facility + '</div>';
 				sTmp += '<div class="col-md-1 col-xs-2">' + label + '</div>';
@@ -51,6 +51,7 @@ function loadLatest() {
 			if(iEvents > 0) {
 				$('div.datablock').children().slice(-iEvents).remove();
 				$('div.datablock').prepend(sTmp);
+				$('div.datablock div.freshrow').slideDown().removeClass('freshrow');
 			} // if
 
 			var ts = new Date();

@@ -28,6 +28,9 @@ input.tspick {
 .datarow:nth-child(odd) {
  background-color: #c0c0c0;
 }
+.datarow.freshrow {
+ display: none;
+}
 
 .datarow .newlog-msg {
 	cursor: zoom-in;
