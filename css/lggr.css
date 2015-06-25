@@ -22,10 +22,10 @@ input.tspick {
   overflow: hidden;
 }
 
-.datarow.even {
+.datarow:nth-child(even) {
  background-color: #e0e0e0;
 }
-.datarow.odd {
+.datarow:nth-child(odd) {
  background-color: #c0c0c0;
 }
 

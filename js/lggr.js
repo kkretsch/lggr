@@ -7,7 +7,7 @@ $("#dialog").dialog({
 	width: 500
 });
 
-$('div.datarow tt').on('click', function() {
+$('div.datablock').on('click', 'tt', function() {
 	var sTxt = $(this).html();
 	var sTitle = $(this).parent().parent().find('.newlog-date').text();
 

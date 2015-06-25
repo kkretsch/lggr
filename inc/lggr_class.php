@@ -132,6 +132,16 @@ LIMIT $from,$count";
 		return $a;
 	} // function
 
+	function getNewer($id) {
+		$sqlData = "
+SELECT * FROM LastHour
+WHERE id>$id
+ORDER BY `date` DESC
+LIMIT " . LggrState::PAGELEN;
+
+		return $this->sendResult($sqlData);
+	} // function
+
 	function getFromTo($from=0, $count=LggrState::PAGELEN) {
 		$this->perfCount += 2;
 		$startTime = microtime(true);

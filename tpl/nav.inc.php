@@ -11,6 +11,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
+            <li><a href="live.php">Live</a></li>
             <li><a href="stats.php">Statistic</a></li>
             <li><a href="https://lggr.io" target="_blank">Project</a></li>
           </ul>

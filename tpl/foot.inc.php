@@ -13,12 +13,21 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <?php
-if('stats'==basename($_SERVER['SCRIPT_NAME'], '.php')) {
-?>
+switch(basename($_SERVER['SCRIPT_NAME'], '.php')) {
+case 'stats':
+	echo <<<EOM
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
     <script src="js/lggr_stats.js"></script>
-<?php
-} // if
+EOM;
+	break;
+
+case 'live':
+	echo <<<EOM
+    <script src="js/lggr_live.js"></script>
+EOM;
+	break;
+} // switch
+
 ?>
     <script src="js/lggr.js"></script>
   </body>
