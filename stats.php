@@ -33,6 +33,9 @@ try {
 	$aLevels = $l->getLevels();
 	$aServers = $l->getServers();
 
+	$aStatistic = $l->getStatistic();
+	$aStatistic = $aStatistic[0];
+
 	$aMsgPerHour = $l->getMessagesPerHour();
 } catch(Exception $e) {
 	echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
@@ -53,7 +56,10 @@ require 'tpl/nav.inc.php';
   <div class="row">
     <div class="col-md-4"><h2>Message levels relative distribution</h2><canvas id="chartLevels"></canvas></div>
     <div class="col-md-4"><h2>Messages by server</h2><canvas id="chartServersPie"></canvas></div>
-    <div class="col-md-4"><canvas id="myChart3"></canvas></div>
+    <div class="col-md-4">
+      <h2>Database</h2>
+      <p>Events in DB: <?= $aStatistic->cnt ?><br>Oldest entry: <?= $aStatistic->oldest ?></p>
+    </div>
   </div>
 </div><!-- container -->
 

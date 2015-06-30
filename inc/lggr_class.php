@@ -247,6 +247,14 @@ GROUP BY h";
 		return $a;
 	} // function
 
+	function getStatistic() {
+		$sql = "
+SELECT COUNT(*) AS cnt, MIN(`date`) AS oldest
+FROM newlogs
+";
+		return $this->sendResult($sql);
+	} // function
+
 	/* delete anything older than maxage hours, or 4 weeks */
 	function purgeOldMessages($maxage=672) {
 		$this->perfCount++;
