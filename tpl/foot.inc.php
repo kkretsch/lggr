@@ -1,7 +1,16 @@
     <div class="container">
       <hr>
       <footer>
-        <p class="debugfooter"><?= $aPerf['count'] ?> queries in <?= $aPerf['time'] ?> seconds. Session: <?= $_COOKIE['PHPSESSID'] ?> by <?= htmlentities($_SERVER['REMOTE_USER']) ?></p>
+<?php
+$pCount = count($aPerf);
+$pTime  = 0;
+foreach($aPerf as $perf) {
+	$aTmp = $perf->getPerf();
+
+	$pTime += $aTmp['time'];
+} // foreach
+?>
+        <p class="debugfooter"><?= $pCount ?> queries in <?= $pTime ?> seconds. Session: <?= $_COOKIE['PHPSESSID'] ?> by <?= htmlentities($_SERVER['REMOTE_USER']) ?></p>
         <p>&copy; <a href="http://lggr.io" target="_blank">lggr.io</a> 2015</p>
       </footer>
     </div> <!-- /container -->

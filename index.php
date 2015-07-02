@@ -55,6 +55,7 @@ try {
 
 		$aEvents = $l->getFiltered($host, $level, $page*LggrState::PAGELEN, LggrState::PAGELEN);
 		$searchvalue='';
+		$searchvalueprog='';
 		$isSearch=false;
 		$sFilter='';
 		if($state->isHost())
@@ -67,6 +68,7 @@ try {
 		$aEvents = $l->getFromTo($page*LggrState::PAGELEN, LggrState::PAGELEN);
 		$sFilter = 'Filter by time range between <strong>' . htmlentities($state->getFrom()) . '</strong> and <strong>' . htmlentities($state->getTo()) . '</strong>';
 		$searchvalue='';
+		$searchvalueprog='';
 		$isSearch=false;
 
 	} else {
@@ -75,6 +77,7 @@ try {
 
 		$aEvents = $l->getLatest($page*LggrState::PAGELEN, LggrState::PAGELEN);
 		$searchvalue='';
+		$searchvalueprog='';
 		$isSearch=false;
 
 	} // if search
