@@ -1,6 +1,7 @@
 <?php
 
 class Lggr {
+	const LASTSTAT=5000;
 
 	private $config=null;
 	private $db=null;
@@ -46,7 +47,8 @@ class Lggr {
 
 		$v = $this->getViewName();
 		$sql = "
-SELECT level, COUNT(*) AS c FROM $v
+SELECT level, COUNT(*) AS c
+FROM (SELECT level FROM $v ORDER BY `date` DESC LIMIT " . self::LASTSTAT . ") AS sub
 GROUP BY level
 ORDER BY c DESC
 ";
@@ -89,11 +91,16 @@ ORDER BY c DESC
 
 		$v = $this->getViewName();
 
-		$sql = "
+/*		$sql = "
 SELECT h.name as host, COUNT(*) AS c
 FROM $v d
 JOIN hosts h ON d.idhost=h.id
 GROUP BY h.id
+ORDER BY c DESC";*/
+		$sql = "
+SELECT host, COUNT(*) AS c 
+FROM (SELECT host FROM $v ORDER BY `date` DESC LIMIT " . self::LASTSTAT . ") AS sub
+GROUP BY host
 ORDER BY c DESC";
 
 		$a = $this->cache->retrieve("servers$v");

@@ -95,7 +95,7 @@ require 'tpl/nav.inc.php';
     <div class="container">
       <div class="row">
         <div class="col-md-4">
-          <h2><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Levels</h2>
+          <h2 title="Levels of last up to <?= Lggr::LASTSTAT ?> entries"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Levels</h2>
           <div class="progress">
 <?php
 $aLevelCount = array();
@@ -150,7 +150,7 @@ if(isset($aLevelCount['notice'])) {
         </div>
 
         <div class="col-md-4">
-          <h2><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> Servers</h2>
+          <h2 title="Reporting servers of last up to <?= Lggr::LASTSTAT ?> entries"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> Servers</h2>
 <?php
 foreach($aServers as $server) {
 	if($server->f < 5) continue;
@@ -246,7 +246,8 @@ if(0 == count($aEvents)) {
 <div class="container datablock">
 <?php
 
-include 'tpl/paginate.inc.php';
+if(!$isSearch)
+	include 'tpl/paginate.inc.php';
 
 $i=0;
 foreach($aEvents as $event) {
@@ -288,7 +289,8 @@ EOL;
 <div id="dialog" title="Details">I'm a dialog</div>
 
 <?php
-include 'tpl/paginate.inc.php';
+if(!$isSearch)
+	include 'tpl/paginate.inc.php';
 ?>
 
 </div>
