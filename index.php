@@ -41,8 +41,8 @@ try {
 	if($state->isSearch()) {
 
 		$aEvents = $l->getText($state->getSearch(), $state->getSearchProg(), $page*LggrState::PAGELEN, LggrState::PAGELEN);
-		$searchvalue = htmlentities($state->getSearch());
-		$searchvalueprog = htmlentities($state->getSearchProg());
+		$searchvalue = htmlentities($state->getSearch(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
+		$searchvalueprog = htmlentities($state->getSearchProg(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
 		$isSearch=true;
 		$sFilter = 'Text search for';
 		if('' != $state->getSearch()) $sFilter .= ' message <strong>' . $searchvalue . '</strong>';
@@ -59,14 +59,14 @@ try {
 		$isSearch=false;
 		$sFilter='';
 		if($state->isHost())
-			$sFilter .= 'Filter by server <strong>' . htmlentities($state->getHost()) . '</strong>';
+			$sFilter .= 'Filter by server <strong>' . htmlentities($state->getHost(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
 		if($state->isLevel())
-			$sFilter .= 'Filter by level <strong>' . htmlentities($state->getLevel()) . '</strong>';
+			$sFilter .= 'Filter by level <strong>' . htmlentities($state->getLevel(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
 
 	} elseif($state->isFromTo()) {
 
 		$aEvents = $l->getFromTo($page*LggrState::PAGELEN, LggrState::PAGELEN);
-		$sFilter = 'Filter by time range between <strong>' . htmlentities($state->getFrom()) . '</strong> and <strong>' . htmlentities($state->getTo()) . '</strong>';
+		$sFilter = 'Filter by time range between <strong>' . htmlentities($state->getFrom(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> and <strong>' . htmlentities($state->getTo(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
 		$searchvalue='';
 		$searchvalueprog='';
 		$isSearch=false;
