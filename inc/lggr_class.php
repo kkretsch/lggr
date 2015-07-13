@@ -180,6 +180,21 @@ LIMIT " . LggrState::PAGELEN;
 		return $a;
 	} // function
 
+	function getEntry($id) {
+		$perf = new LggrPerf();
+
+		$sqlData = "
+SELECT * FROM LastHour
+WHERE id=$id";
+
+		$perf->start($sqlData);
+		$a = $this->sendResult($sqlData);
+		$perf->stop();
+
+		$this->aPerf[] = $perf;
+		return $a;
+	} // function
+
 	function getFromTo($from=0, $count=LggrState::PAGELEN) {
 		$perfSize = new LggrPerf();
 		$perfData = new LggrPerf();

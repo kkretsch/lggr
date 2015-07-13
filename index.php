@@ -269,9 +269,9 @@ foreach($aEvents as $event) {
 	default: $label = '<span class="label label-default">' . $event->level . '</span>';
 	} // switch
 
-	$host = htmlentities($event->host);
-	$program = htmlentities($event->program);
-	$msg = htmlentities($event->message);
+	$host = htmlentities($event->host, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
+	$program = htmlentities($event->program, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
+	$msg = htmlentities($event->message, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
 
 	echo <<<EOL
 <div class="row datarow $rowclass" data-id="{$event->id}">
