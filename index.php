@@ -176,8 +176,13 @@ EOL;
   </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 <?php
+$aServerList = array();
 foreach($aServers as $server) {
-	echo '<li role="presentation"><a role="menuitem" tabindex="-1" href="./do.php?a=host&host=' . urlencode($server->host) . '">' . $server->host . '</a></li>';
+	$aServerList[] = $server->host;
+} // foreach
+sort($aServerList);
+foreach($aServerList as $server) {
+	echo '<li role="presentation"><a role="menuitem" tabindex="-1" href="./do.php?a=host&host=' . urlencode($server) . '">' . $server . '</a></li>';
 } // foreach
 ?>
   </ul>
