@@ -4,6 +4,7 @@ spl_autoload_register(function($class) {
 	include __DIR__ . '/inc/' . strtolower($class) . '_class.php';
 });
 
+define('TITLE', 'live');
 require 'tpl/head.inc.php';
 
 session_start();

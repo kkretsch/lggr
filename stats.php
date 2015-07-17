@@ -6,6 +6,7 @@ spl_autoload_register(function($class) {
 
 $searchvalue='';
 
+define('TITLE', 'statistics');
 require 'tpl/head.inc.php';
 
 session_start();
