@@ -346,14 +346,20 @@ FROM newlogs
 
 	/* delete anything older than maxage hours, or 4 weeks */
 	function purgeOldMessages($maxage=672) {
+		$perf = new LggrPerf();
+
 		$sql = "
 DELETE FROM newlogs
 WHERE `date` < (NOW() - INTERVAL $maxage hour)
 ";
+
+		$perf->start($sql);
 		$res = $this->db->query($sql);
 		if(false === $res) {
 			throw new Exception($this->db->error);
 		} // if
+		$perf->stop();
+		$this->aPerf[] = $perf;
 
 		return $this->db->affected_rows;
 	} // function
