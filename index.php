@@ -253,7 +253,8 @@ if(0 == count($aEvents)) {
 ?>
 </div>
 
-<div class="container datablock">
+<!-- class container for fixed max width, or container-fluid for maximum width -->
+<div class="container-fluid datablock">
 <?php
 
 if(!$isSearch)
