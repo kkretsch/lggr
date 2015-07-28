@@ -49,7 +49,7 @@ if(0 == count($aEvents)) {
 	<h2><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Live view <span id="tslatest"></span></h2>
 </div>
 
-<div class="container datablock">
+<div class="container-fluid datablock">
 <?php
 
 $i=0;
