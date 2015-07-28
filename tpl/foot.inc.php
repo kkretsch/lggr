@@ -9,8 +9,15 @@ foreach($aPerf as $perf) {
 
 	$pTime += $aTmp['time'];
 } // foreach
+
+if(isset($_COOKIE['PHPSESSID'])) {
+	$dbgsession = $_COOKIE['PHPSESSID'];
+} else {
+	$dbgsession = '-';
+} // if
+
 ?>
-        <p class="debugfooter"><?= $pCount ?> queries in <?= $pTime ?> seconds. Session: <?= $_COOKIE['PHPSESSID'] ?> by <?= htmlentities($_SERVER['REMOTE_USER']) ?></p>
+        <p class="debugfooter"><?= $pCount ?> queries in <?= $pTime ?> seconds. Session: <?= $dbgsession ?> by <?= htmlentities($_SERVER['REMOTE_USER']) ?></p>
         <p>&copy; <a href="http://lggr.io" target="_blank">lggr.io</a> 2015</p>
       </footer>
     </div> <!-- /container -->
