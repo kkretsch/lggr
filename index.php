@@ -90,6 +90,10 @@ try {
 	exit;
 }
 
+if (version_compare(phpversion(), '5.4', '<')) {
+	echo '<div class="container"><div class="alert alert-danger" role="alert">Your PHP version ' . phpversion() . ' might be too old, expecting at least 5.4</div></div>';
+} // if
+
 require 'tpl/nav.inc.php';
 ?>
 

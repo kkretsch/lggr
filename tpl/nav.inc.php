@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="./do.php?a=reset"><img src="/img/logo.png" alt="Lggr.io" /></a>
+          <a class="navbar-brand" href="./do.php?a=reset"><img src="./img/logo.png" alt="Lggr.io" /></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">

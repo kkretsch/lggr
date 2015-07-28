@@ -31,7 +31,7 @@ class LggrPerf {
 	} // function
 
 	private function logPerf() {
-		error_log("Perf " . $this->tsLen . ", query " . $this->sQuery);
+		// for debugging cases: error_log("Perf " . $this->tsLen . ", query " . $this->sQuery);
 	} // function
 }
 
