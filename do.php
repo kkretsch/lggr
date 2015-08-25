@@ -26,11 +26,11 @@ switch($_REQUEST['a']) {
 
 	case 'search':
 		$state = new LggrState();
-		if('' != $_POST['prog']) {
-			$state->setSearchProg($_POST['prog']);
+		if('' != trim($_POST['prog'])) {
+			$state->setSearchProg(trim($_POST['prog']));
 		}
-		if('' != $_POST['q']) {
-			$state->setSearch($_POST['q']);
+		if('' != trim($_POST['q'])) {
+			$state->setSearch(trim($_POST['q']));
 		} // if
 		break;
 
