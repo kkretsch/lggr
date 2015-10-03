@@ -10,6 +10,8 @@ foreach($aPerf as $perf) {
 	$pTime += $aTmp['time'];
 } // foreach
 
+$pTime = round($pTime, 4);
+
 if(isset($_COOKIE['PHPSESSID'])) {
 	$dbgsession = $_COOKIE['PHPSESSID'];
 } else {
