@@ -2,6 +2,9 @@
 
 $(document).ready(function() {
 
+var timer=null;
+var running=true;
+
 function htmlEntities(str) {
 	return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -9,6 +12,20 @@ function htmlEntities(str) {
 Date.prototype.timeNow = function () {
 	return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 }
+
+
+$('#pauseplay').click(function() {
+	if(running) {
+		$(this).find('span').removeClass('glyphicon-pause').addClass('glyphicon-play');
+		running = false;
+		clearTimeout(timer);
+	} else {
+		$(this).find('span').removeClass('glyphicon-play').addClass('glyphicon-pause');
+		running = true;
+		timer = setTimeout(loadLatest, 5000);
+	} // if
+	return false;
+});
 
 function loadLatest() {
 	var lastid = $('div.datablock div.datarow:first-child').attr('data-id');
@@ -57,7 +74,7 @@ function loadLatest() {
 			var ts = new Date();
 			$('#tslatest').text(ts.timeNow());
 
-			setTimeout(loadLatest, 5000);
+			timer = setTimeout(loadLatest, 5000);
 		},
 		error: function(e) {
 			console.log(e.message);
@@ -67,6 +84,6 @@ function loadLatest() {
 } // function
 
 
-	setTimeout(loadLatest, 5000);
+	timer = setTimeout(loadLatest, 5000);
 
 });

@@ -46,7 +46,7 @@ if(0 == count($aEvents)) {
 </div>
 
 <div class="container">
-	<h2><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Live view <span id="tslatest"></span></h2>
+	<h2><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Live view <span id="tslatest"></span> <a id="pauseplay" href="#"><span class="glyphicon glyphicon-pause"></span></a></h2>
 </div>
 
 <div class="container-fluid datablock">
