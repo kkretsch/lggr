@@ -1,0 +1,33 @@
+body {
+	color: #000;
+	font-family: Verdana, Arial, sans-serif;
+}
+
+a {
+	color: #000;
+}
+
+nav.navbar, #infoheader, ul.pagination {
+	display: none;
+}
+footer {
+	font-size: 10px;
+}
+
+div.datarow {
+	border-bottom: 1px solid #999;
+	margin-bottom: 0.5em;
+	padding-bottom: 0.5em;
+	font-size: 10px;
+}
+tt {
+	font-size: 10px;
+}
+
+div.col-md-1, div.col-md-2 {
+	float: left;
+	padding-right: 2em;
+}
+div.col-md-5 {
+	clear: left;
+}

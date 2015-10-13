@@ -97,7 +97,7 @@ if (version_compare(phpversion(), '5.4', '<')) {
 require 'tpl/nav.inc.php';
 ?>
 
-    <div class="container">
+    <div class="container" id="infoheader">
       <div class="row">
         <div class="col-md-4">
           <h2 title="Levels of last up to <?= Lggr::LASTSTAT ?> entries"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Levels</h2>
