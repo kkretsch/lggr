@@ -17,14 +17,6 @@ if(isset($_SESSION[LggrState::SESSIONNAME])) {
 	$state = new LggrState();
 } // if
 
-$aColors=array(
-	'emerg' =>	'#d9534f',
-	'crit' =>	'#d9534f',
-	'err' =>	'#d9534f',
-	'warning' =>	'#f0ad4e',
-	'notice' =>	'#337ab7',
-	'info' =>	'#5cb85c'
-);
 
 $l = null;
 try {
@@ -63,77 +55,6 @@ require 'tpl/nav.inc.php';
     </div>
   </div>
 </div><!-- container -->
-
-<script>
-<!-- dynamic data -->
-
-<?php
-$aTmp = array();
-foreach($aMsgPerHour as $hour) {
-	$aTmp[$hour->h] = $hour->c;
-} // foreach
-?>
-var dataMsgsPerHour = {
-	labels: ["<?= implode('","', array_keys($aTmp)) ?>"],
-	datasets: [ {
-		label: "Msgs per hour",
-		fillColor: "rgba(220,220,220,0.5)",
-		data: [<?= implode(',', array_values($aTmp)) ?>],
-	} ]
-};
-
-<?php
-$aTmp = array();
-foreach($aServers as $server) {
-	$aTmp[$server->host] = $server->c;
-} // foreach
-?>
-var dataServers = {
-	labels: ["<?= implode('","', array_keys($aTmp)) ?>"],
-	datasets: [ {
-		label: "Hostname",
-		fillColor: "rgba(151,187,205,0.5)",
-		data: [<?= implode(',', array_values($aTmp)) ?>],
-	} ]
-};
-
-var dataLevels = [
-<?php
-foreach($aLevels as $level) {
-	$newVal = round(log($level->c));
-	$newCol = $aColors[$level->level];
-	echo <<<EOL
-	{
-		value: $newVal,
-		color: "$newCol",
-		label: "{$level->level}",
-	},
-
-EOL;
-} // foreach
-?>
-];
-
-var dataServersPie = [
-<?php
-foreach($aServers as $server) {
-	$sHash = md5($server->host);
-	$cHash     = $sHash[0] . '0' . $sHash[1] . '0' . $sHash[2] . '0';
-	$cHashHigh = $sHash[0] . 'f' . $sHash[1] . 'f' . $sHash[2] . 'f';
-	echo <<<EOL
-	{
-		value: {$server->c},
-		color: "#$cHash",
-		highlight: "#$cHashHigh",
-		label: "{$server->host}"
-	},
-
-EOL;
-} // foreach
-?>
-];
-
-</script>
 
 <?php
 $aPerf = $l->getPerf();

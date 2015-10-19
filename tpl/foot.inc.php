@@ -33,8 +33,10 @@ if(isset($_COOKIE['PHPSESSID'])) {
 <?php
 switch(basename($_SERVER['SCRIPT_NAME'], '.php')) {
 case 'stats':
+	$ts = time();
 	echo <<<EOM
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <script src="js/lggr_stat_data.php?{$ts}"></script>
     <script src="js/lggr_stats.js"></script>
 EOM;
 	break;
