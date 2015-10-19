@@ -2,3 +2,4 @@ t.php
 cache/key_*
 test/*
 test/
+contrib/*
