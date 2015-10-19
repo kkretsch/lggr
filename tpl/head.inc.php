@@ -13,9 +13,9 @@ if(defined('TITLE')) {
 ?>
     <title>Lggr.io <?= $title ?></title>
     <!-- Bootstrap -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" media="screen">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/jquery-ui-timepicker-addon.min.css" media="screen">
+    <link href="<?= $config->getUrlBootstrap() ?>css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="<?= $config->getUrlJqueryui() ?>themes/smoothness/jquery-ui.css" media="screen">
+    <link rel="stylesheet" href="<?= $config->getUrlJAtimepicker() ?>jquery-ui-timepicker-addon.min.css" media="screen">
     <link href="css/lggr.css" rel="stylesheet" media="screen">
     <link href="css/lggr_print.css" rel="stylesheet" media="print">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

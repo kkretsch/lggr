@@ -4,6 +4,8 @@ spl_autoload_register(function($class) {
 	include 'inc/' . strtolower($class) . '_class.php';
 });
 
+$config = new Config();
+
 $searchvalue='';
 
 define('TITLE', 'statistics');
@@ -20,7 +22,6 @@ if(isset($_SESSION[LggrState::SESSIONNAME])) {
 
 $l = null;
 try {
-	$config = new Config();
 	$l = new Lggr($state, $config);
 
 	$aLevels = $l->getLevels();

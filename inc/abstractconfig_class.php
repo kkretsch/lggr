@@ -6,6 +6,12 @@ abstract class AbstractConfig {
 	protected $DBPWD;
 	protected $DBNAME;
 
+	protected $URLBOOTSTRAP;
+	protected $URLJQUERY;
+	protected $URLJQUERYUI;
+	protected $URLJATIMEPICKER;
+	protected $URLCHARTJS;
+
 	final public function getDbUser() {
 		return $this->DBUSER;
 	}
@@ -15,6 +21,22 @@ abstract class AbstractConfig {
 	final public function getDbName() {
 		return $this->DBNAME;
 	}
+	final public function getUrlBootstrap() {
+		return $this->URLBOOTSTRAP;
+	}
+	final public function getUrlJquery() {
+		return $this->URLJQUERY;
+	}
+	final public function getUrlJqueryui() {
+		return $this->URLJQUERYUI;
+	}
+	final public function getUrlJAtimepicker() {
+		return $this->URLJATIMEPICKER;
+	}
+	final public function getUrlChartjs() {
+		return $this->URLCHARTJS;
+	}
+
 
 	protected function setDbUser($s) {
 		$this->DBUSER = $s;
@@ -24,6 +46,21 @@ abstract class AbstractConfig {
 	}
 	protected function setDbname($s) {
 		$this->DBNAME = $s;
+	}
+	protected function setUrlBootstrap($s) {
+		$this->URLBOOTSTRAP = $s;
+	}
+	protected function setUrlJquery($s) {
+		$this->URLJQUERY = $s;
+	}
+	protected function setUrlJqueryui($s) {
+		$this->URLJQUERYUI = $s;
+	}
+	protected function setUrlJAtimepicker($s) {
+		$this->URLJATIMEPICKER = $s;
+	}
+	protected function setUrlChartjs($s) {
+		$this->URLCHARTJS = $s;
 	}
 
 } // class

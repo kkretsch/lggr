@@ -4,6 +4,8 @@ spl_autoload_register(function($class) {
 	include __DIR__ . '/inc/' . strtolower($class) . '_class.php';
 });
 
+$config = new Config();
+
 define('TITLE', 'live');
 require 'tpl/head.inc.php';
 
@@ -17,7 +19,6 @@ if(isset($_SESSION[LggrState::SESSIONNAME])) {
 
 $l = null;
 try {
-	$config = new Config();
 	$l = new Lggr($state, $config);
 
 	$aEvents = $l->getLatest(0, LggrState::PAGELEN);

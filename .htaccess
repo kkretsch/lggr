@@ -2,11 +2,11 @@ Options -indexes
 
 Header always set Strict-Transport-Security "max-age=31536000"
 
-Header always set Content-Security-Policy "default-src 'self' ; script-src 'self' code.jquery.com cdnjs.cloudflare.com maxcdn.bootstrapcdn.com oss.maxcdn.com; style-src 'self' 'unsafe-inline' maxcdn.bootstrapcdn.com code.jquery.com cdnjs.cloudflare.com; img-src 'self' code.jquery.com; font-src 'self' maxcdn.bootstrapcdn.com; report-uri https://report-uri.io/report/e7e84fa898ae6e0d0e8d70e25cd237c7;"
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; report-uri https://report-uri.io/report/e7e84fa898ae6e0d0e8d70e25cd237c7;"
 
 <Files stats.php>
 # Chart.js uses some dynamic functions.
-Header always set Content-Security-Policy "default-src 'self' ; script-src 'self' 'unsafe-eval' code.jquery.com cdnjs.cloudflare.com maxcdn.bootstrapcdn.com oss.maxcdn.com; style-src 'self' 'unsafe-inline' maxcdn.bootstrapcdn.com code.jquery.com cdnjs.cloudflare.com; img-src 'self' code.jquery.com; font-src 'self' maxcdn.bootstrapcdn.com; report-uri https://report-uri.io/report/e7e84fa898ae6e0d0e8d70e25cd237c7;"
+Header always set Content-Security-Policy "default-src 'self' ; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; report-uri https://report-uri.io/report/e7e84fa898ae6e0d0e8d70e25cd237c7;"
 </Files>
 
 ExpiresActive	On
