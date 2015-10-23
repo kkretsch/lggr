@@ -15,10 +15,10 @@
             <li><a href="stats.php">Statistic</a></li>
             <li><a href="https://lggr.io" target="_blank">Project</a></li>
           </ul>
-          <form method="post" action="./do.php?a=search" class="navbar-form navbar-right">
+          <form id="searchform" method="post" action="./do.php?a=search" class="navbar-form navbar-right">
             <div class="form-group">
-              <input name="prog" placeholder="Search for program" class="form-control" type="text" value="<?= $searchvalueprog ?>">
-              <input name="q" placeholder="Search in messages" class="form-control" type="text" value="<?= $searchvalue ?>">
+              <input id="prog" name="prog" placeholder="Search for program" class="form-control" type="text" value="<?= $searchvalueprog ?>">
+              <input id="q" name="q" placeholder="Search in messages" class="form-control" type="text" value="<?= $searchvalue ?>">
             </div>
             <button type="submit" class="btn btn-success">Search</button>
           </form>

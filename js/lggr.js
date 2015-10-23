@@ -39,12 +39,18 @@ $('#tsfrom, #tsto').datetimepicker({
 });
 
 $("body").keydown(function(e) {
+	// only if not focus inside input text fields
+	var oFocused = $(document.activeElement);
+	var sFocused = oFocused.attr('id');
+	if(('prog' == sFocused) || ('q' == sFocused)) return;
+
 	var oLink = null;
 	if(e.which == 37) { // left
 		oLink = $('div.datablock nav:first-child ul.pagination a.pageleft');
 	} else if(e.which == 39) { // right
 		oLink = $('div.datablock nav:first-child ul.pagination a.pageright');
 	} // if
+
 	if(null != oLink) {
 		var s = oLink.attr('href');
 		location.href = s;
