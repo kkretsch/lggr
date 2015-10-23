@@ -38,4 +38,17 @@ $('#tsfrom, #tsto').datetimepicker({
 	timeFormat: 'HH:mm:00'
 });
 
+$("body").keydown(function(e) {
+	var oLink = null;
+	if(e.which == 37) { // left
+		oLink = $('div.datablock nav:first-child ul.pagination a.pageleft');
+	} else if(e.which == 39) { // right
+		oLink = $('div.datablock nav:first-child ul.pagination a.pageright');
+	} // if
+	if(null != oLink) {
+		var s = oLink.attr('href');
+		location.href = s;
+	} // if
+});
+
 });

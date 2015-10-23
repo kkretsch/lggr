@@ -5,7 +5,7 @@
 $maxPages = ceil($state->getResultSize() / LggrState::PAGELEN); // maximum pages
 
 if($page>0) {
-        echo '<li><a href="./do.php?a=paginate&page=' . ($page-1) . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+        echo '<li><a class="pageleft" href="./do.php?a=paginate&page=' . ($page-1) . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
 } else {
         echo '<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
 } // if
@@ -32,7 +32,7 @@ if($page+4 < $maxPages) {
 if($page+1 >= $maxPages) {
 	echo '<li class="disabled"><a href="./do.php?a=paginate&page=' . ($page+1) . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
 } else {
-	echo '<li><a href="./do.php?a=paginate&page=' . ($page+1) . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+	echo '<li><a class="pageright" href="./do.php?a=paginate&page=' . ($page+1) . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
 } // if
 ?>
   </ul>
