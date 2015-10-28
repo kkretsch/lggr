@@ -4,6 +4,12 @@
 
 $maxPages = ceil($state->getResultSize() / LggrState::PAGELEN); // maximum pages
 
+if($page>9) {
+	echo '<li><a class="" href="./do.php?a=paginate&page=' . ($page-10) . '" aria-label="Ten left"><span aria-hidden="true">&lArr;</span></a></li>';
+} else {
+	echo '<li class="disabled"><a href="#" aria-label="Ten left"><span aria-hidden="true">&lArr;</span></a></li>';
+} // if
+
 if($page>0) {
         echo '<li><a class="pageleft" href="./do.php?a=paginate&page=' . ($page-1) . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
 } else {
@@ -34,6 +40,13 @@ if($page+1 >= $maxPages) {
 } else {
 	echo '<li><a class="pageright" href="./do.php?a=paginate&page=' . ($page+1) . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
 } // if
+
+if($page+10 >= $maxPages) {
+	echo '<li class="disabled"><a href="./do.php?a=paginate&page=' . ($page+10) . '" aria-label="Ten right"><span aria-hidden="true">&rArr;</span></a></li>';
+} else {
+	echo '<li><a class="pageright" href="./do.php?a=paginate&page=' . ($page+10) . '" aria-label="Ten right"><span aria-hidden="true">&rArr;</span></a></li>';
+} // if
+
 ?>
   </ul>
 </nav>
