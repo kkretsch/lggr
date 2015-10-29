@@ -103,7 +103,7 @@ require 'tpl/nav.inc.php';
    <div id="accordion" class="panel-group">
     <div class="panel panel-default">
      <div class="panel-heading"><h4 class="panel-title"><span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Server status and filter ...</a></h4></div>
-     <div id="collapseOne" class="panel-collapse collapse">
+     <div id="collapseOne" class="panel-collapse collapse <?= $state->isPanelOpen()?'in':'' ?>">
       <div class="panel-body">
 
       <div class="row">

@@ -17,6 +17,8 @@ if(isset($_SESSION[LggrState::SESSIONNAME])) {
 	$state = new LggrState();
 } // if
 
+// Are we talking to the user or is this an internal call?
+$isAjax=false;
 
 switch($_REQUEST['a']) {
 
@@ -71,8 +73,24 @@ switch($_REQUEST['a']) {
 		} // if
 		break;
 
+	case 'panelopen':
+		$state->setPanelOpen(true);
+		$isAjax = true;
+		break;
+
+	case 'panelclose':
+		$state->setPanelOpen(false);
+		$isAjax = true;
+		break;
+
 } // switch
 
 $_SESSION[LggrState::SESSIONNAME] = $state;
 
-header('Location: index.php');
+if($isAjax) {
+	header('Content-Type: text/plain');
+	echo 'OK';
+} else {
+	header('Location: index.php');
+} // if
+

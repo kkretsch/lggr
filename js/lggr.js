@@ -59,9 +59,11 @@ $("body").keydown(function(e) {
 
 // panel open/close
 $('#accordion').on('show.bs.collapse', function() {
+	var oA = $.ajax('./do.php?a=panelopen');
 	$('#accordion h4 span.glyphicon').removeClass('glyphicon-circle-arrow-down').addClass('glyphicon-circle-arrow-left');
 });
 $('#accordion').on('hide.bs.collapse', function() {
+	var oA = $.ajax('./do.php?a=panelclose');
 	$('#accordion h4 span.glyphicon').removeClass('glyphicon-circle-arrow-left').addClass('glyphicon-circle-arrow-down');
 });
 

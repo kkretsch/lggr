@@ -17,6 +17,7 @@ class LggrState {
 	private $tsFrom=null;
 	private $tsTo=null;
 	private $iResultSize=0;	// result size of last query
+	private $bPanelOpen=false;
 
 	function __construct() {
 		$this->bLocalCall=false;
@@ -32,6 +33,7 @@ class LggrState {
 		$this->tsFrom=null;
 		$this->tsTo=null;
 		$this->iResultSize=0;
+		$this->bPanelOpen=false;
 	} // constructor
 
 	public function setSearch($s) {
@@ -122,6 +124,13 @@ class LggrState {
 	}
 	public function isLocalCall() {
 		return $this->bLocalCall;
+	}
+
+	public function setPanelOpen($b) {
+		$this->bPanelOpen = $b;
+	}
+	public function isPanelOpen() {
+		return $this->bPanelOpen;
 	}
 
 } // class
