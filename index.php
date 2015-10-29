@@ -99,6 +99,13 @@ require 'tpl/nav.inc.php';
 ?>
 
     <div class="container" id="infoheader">
+
+   <div id="accordion" class="panel-group">
+    <div class="panel panel-default">
+     <div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Server status and filter ...</a></h4></div>
+     <div id="collapseOne" class="panel-collapse collapse">
+      <div class="panel-body">
+
       <div class="row">
         <div class="col-md-4">
           <h2 title="Levels of last up to <?= Lggr::LASTSTAT ?> entries"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Levels</h2>
@@ -238,6 +245,9 @@ if($state->isFromTo()) {
 </a></p>
         </div>
       </div>
+
+</div></div></div></div>
+
     </div> <!-- /container -->
 
 <div class="container">

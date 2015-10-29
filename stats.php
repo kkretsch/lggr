@@ -42,7 +42,7 @@ try {
 require 'tpl/nav.inc.php';
 ?>
 
-<div class="container">
+<div id="statsheader" class="container">
   <div class="row">
     <div class="col-md-6"><h2><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Messages per hour</h2><canvas id="chartMsgsPerHour"></canvas></div>
     <div class="col-md-6"><h2><span class="glyphicon glyphicon-cd" aria-hidden="true"></span> Servers</h2><canvas id="chartServers"></canvas></div>

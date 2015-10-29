@@ -1,5 +1,5 @@
-body > div {
-  margin-top: 3em;
+div#infoheader, div#liveheader, div#statsheader {
+  margin-top: 5em;
 }
 
 .navbar-brand img {
