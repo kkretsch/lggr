@@ -41,6 +41,10 @@ input.tspick {
 	overflow: auto;
 }
 
+h4.panel-title span {
+	float: right;
+}
+
 p.debugfooter {
 	float: right;
 	color: #999999;

@@ -102,7 +102,7 @@ require 'tpl/nav.inc.php';
 
    <div id="accordion" class="panel-group">
     <div class="panel panel-default">
-     <div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Server status and filter ...</a></h4></div>
+     <div class="panel-heading"><h4 class="panel-title"><span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Server status and filter ...</a></h4></div>
      <div id="collapseOne" class="panel-collapse collapse">
       <div class="panel-body">
 
@@ -244,9 +244,12 @@ if($state->isFromTo()) {
   <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset
 </a></p>
         </div>
-      </div>
+      </div><!-- row -->
 
-</div></div></div></div>
+</div><!-- panel-body -->
+</div><!-- collapseOne -->
+</div><!-- panel -->
+</div><!-- panel-group -->
 
     </div> <!-- /container -->
 
