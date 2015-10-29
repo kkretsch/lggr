@@ -57,4 +57,12 @@ $("body").keydown(function(e) {
 	} // if
 });
 
+// panel open/close
+$('#accordion').on('show.bs.collapse', function() {
+	$('#accordion h4 span.glyphicon').removeClass('glyphicon-circle-arrow-down').addClass('glyphicon-circle-arrow-left');
+});
+$('#accordion').on('hide.bs.collapse', function() {
+	$('#accordion h4 span.glyphicon').removeClass('glyphicon-circle-arrow-left').addClass('glyphicon-circle-arrow-down');
+});
+
 });
