@@ -11,16 +11,16 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="live.php">Live</a></li>
-            <li><a href="stats.php">Statistic</a></li>
-            <li><a href="https://lggr.io" target="_blank">Project</a></li>
+            <li><a href="live.php"><?= _('Live') ?></a></li>
+            <li><a href="stats.php"><?= _('Statistic') ?></a></li>
+            <li><a href="https://lggr.io" target="_blank"><?= _('Project') ?></a></li>
           </ul>
           <form id="searchform" method="post" action="./do.php?a=search" class="navbar-form navbar-right">
             <div class="form-group">
-              <input id="prog" name="prog" placeholder="Search for program" class="form-control" type="text" value="<?= $searchvalueprog ?>">
-              <input id="q" name="q" placeholder="Search in messages" class="form-control" type="text" value="<?= $searchvalue ?>">
+              <input id="prog" name="prog" placeholder="<?= _('Search for program') ?>" class="form-control" type="text" value="<?= $searchvalueprog ?>">
+              <input id="q" name="q" placeholder="<?= _('Search in messages') ?>" class="form-control" type="text" value="<?= $searchvalue ?>">
             </div>
-            <button type="submit" class="btn btn-success">Search</button>
+            <button type="submit" class="btn btn-success"><?= _('Search') ?></button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>

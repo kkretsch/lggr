@@ -1,0 +1,57 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: lggr.io\n"
+"POT-Creation-Date: 2015-11-25 09:04+0100\n"
+"PO-Revision-Date: 2015-11-25 09:13+0100\n"
+"Last-Translator: Kai Kretschmann <kkr@mit.de>\n"
+"Language-Team: Kai <info@lggr.io>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: tpl\n"
+"X-Poedit-SearchPathExcluded-0: contrib\n"
+
+#: tpl/nav.inc.php:14
+msgid "Live"
+msgstr "Echtzeit"
+
+#: tpl/nav.inc.php:15
+msgid "Statistic"
+msgstr "Statistik"
+
+#: tpl/nav.inc.php:16
+msgid "Project"
+msgstr "Projekt"
+
+#: tpl/nav.inc.php:20
+msgid "Search for program"
+msgstr "Suche nach Programm"
+
+#: tpl/nav.inc.php:21
+msgid "Search in messages"
+msgstr "Suche in Nachrichten..."
+
+#: tpl/nav.inc.php:23
+msgid "Search"
+msgstr "Suche"
+
+#: tpl/paginate.inc.php:8 tpl/paginate.inc.php:10
+msgid "Ten left"
+msgstr "Zehn Links"
+
+#: tpl/paginate.inc.php:14 tpl/paginate.inc.php:16
+msgid "Previous"
+msgstr "zurück"
+
+#: tpl/paginate.inc.php:39 tpl/paginate.inc.php:41
+msgid "Next"
+msgstr "vor"
+
+#: tpl/paginate.inc.php:45 tpl/paginate.inc.php:47
+msgid "Ten right"
+msgstr "Zehn rechts"
