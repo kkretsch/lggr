@@ -1,24 +1,11 @@
 <?php
 
-spl_autoload_register(function($class) {
-	include 'inc/' . strtolower($class) . '_class.php';
-});
-
-$config = new Config();
+require 'inc/pre.inc.php';
 
 $searchvalue='';
 
 define('TITLE', 'statistics');
 require 'tpl/head.inc.php';
-
-session_start();
-
-if(isset($_SESSION[LggrState::SESSIONNAME])) {
-	$state = $_SESSION[LggrState::SESSIONNAME];
-} else {
-	$state = new LggrState();
-} // if
-
 
 $l = null;
 try {

@@ -33,8 +33,7 @@ if(isset($_SESSION[LggrState::SESSIONNAME])) {
  *
  * Ansonsten via dpkg-reconfigure locales die fehlenden locales nacherzeugen!
  */
-//$lang = 'en_US.UTF-8';
-$lang = 'de_DE.UTF-8';
+$lang = $config->getLocale() . '.UTF-8';
 putenv("LC_ALL=$lang");
 $rc = setlocale(LC_ALL, $lang);
 if(!$rc) error_log("setlocale failed! $lang");

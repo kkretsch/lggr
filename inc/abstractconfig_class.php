@@ -12,6 +12,8 @@ abstract class AbstractConfig {
 	protected $URLJATIMEPICKER;
 	protected $URLCHARTJS;
 
+	protected $LOCALE;
+
 	final public function getDbUser() {
 		return $this->DBUSER;
 	}
@@ -35,6 +37,10 @@ abstract class AbstractConfig {
 	}
 	final public function getUrlChartjs() {
 		return $this->URLCHARTJS;
+	}
+
+	final public function getLocale() {
+		return $this->LOCALE;
 	}
 
 
@@ -61,6 +67,10 @@ abstract class AbstractConfig {
 	}
 	protected function setUrlChartjs($s) {
 		$this->URLCHARTJS = $s;
+	}
+
+	protected function setLocale($s) {
+		$this->LOCALE = $s;
 	}
 
 } // class

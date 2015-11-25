@@ -1,21 +1,9 @@
 <?php
 
-spl_autoload_register(function($class) {
-	include __DIR__ . '/inc/' . strtolower($class) . '_class.php';
-});
-
-$config = new Config();
+require 'inc/pre.inc.php';
 
 define('TITLE', 'live');
 require 'tpl/head.inc.php';
-
-session_start();
-
-if(isset($_SESSION[LggrState::SESSIONNAME])) {
-	$state = $_SESSION[LggrState::SESSIONNAME];
-} else {
-	$state = new LggrState();
-} // if
 
 $l = null;
 try {
