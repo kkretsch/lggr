@@ -102,6 +102,7 @@ require 'tpl/nav.inc.php';
 $aLevelCount = array();
 foreach($aLevels as $level) {
 	$aLevelCount[$level->level] = $level->c;
+	$level->f = round($level->f);
 	switch($level->level) {
 	case 'emerg':
 	case 'crit':
@@ -121,7 +122,7 @@ foreach($aLevels as $level) {
 	} // switch
 
 	echo <<<EOL
-<div class="progress-bar $label" style="width: {$level->f}%" title="{$level->level} {$level->f}%">
+<div class="progress-bar $label" role="progressbar" aria-valuenow="{$level->f}" style="width: {$level->f}%" title="{$level->level} {$level->f}%">
 <span class="sr-only">{$level->f}%</span>
 </div>
 EOL;
@@ -155,6 +156,8 @@ if(isset($aLevelCount['notice'])) {
 <?php
 foreach($aServers as $server) {
 	if($server->f < 5) continue;
+
+	$server->f = round($server->f);
 
         echo <<<EOL
 <div class="progress">
