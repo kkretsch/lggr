@@ -20,9 +20,9 @@ try {
 }
 
 $aRanges = array(
-	'1' => 'This hour',
-	'24' => 'Today',
-	'168' => 'Week'
+	'1' => _('This hour'),
+	'24' => _('Today'),
+	'168' => _('Week')
 );
 
 $page = $state->getPage();
@@ -34,7 +34,7 @@ try {
 		$searchvalue = htmlentities($state->getSearch(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
 		$searchvalueprog = htmlentities($state->getSearchProg(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
 		$isSearch=true;
-		$sFilter = 'Text search for';
+		$sFilter = _('Text search for');
 		if('' != $state->getSearch()) $sFilter .= ' message <strong>' . $searchvalue . '</strong>';
 		if('' != $state->getSearchProg()) $sFilter .= ' program <strong>' . $searchvalueprog . '</strong>';
 
@@ -49,14 +49,14 @@ try {
 		$isSearch=false;
 		$sFilter='';
 		if($state->isHost())
-			$sFilter .= 'Filter by server <strong>' . htmlentities($state->getHost(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+			$sFilter .= _('Filter by server') . ' <strong>' . htmlentities($state->getHost(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
 		if($state->isLevel())
-			$sFilter .= 'Filter by level <strong>' . htmlentities($state->getLevel(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+			$sFilter .= _('Filter by level') . ' <strong>' . htmlentities($state->getLevel(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
 
 	} elseif($state->isFromTo()) {
 
 		$aEvents = $l->getFromTo($page*LggrState::PAGELEN, LggrState::PAGELEN);
-		$sFilter = 'Filter by time range between <strong>' . htmlentities($state->getFrom(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> and <strong>' . htmlentities($state->getTo(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+		$sFilter = _('Filter by time range between') . ' <strong>' . htmlentities($state->getFrom(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> ' . _('and') . ' <strong>' . htmlentities($state->getTo(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
 		$searchvalue='';
 		$searchvalueprog='';
 		$isSearch=false;
@@ -90,13 +90,13 @@ require 'tpl/nav.inc.php';
 
    <div id="accordion" class="panel-group">
     <div class="panel panel-default">
-     <div class="panel-heading"><h4 class="panel-title"><span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Server status and filter ...</a></h4></div>
+     <div class="panel-heading"><h4 class="panel-title"><span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true"></span><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><?= _('Server status and filter') ?> ...</a></h4></div>
      <div id="collapseOne" class="panel-collapse collapse <?= $state->isPanelOpen()?'in':'' ?>">
       <div class="panel-body">
 
       <div class="row">
         <div class="col-md-4">
-          <h2 title="Levels of last up to <?= Lggr::LASTSTAT ?> entries"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Levels</h2>
+          <h2 title="Levels of last up to <?= Lggr::LASTSTAT ?> entries"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> <?= _('Levels') ?></h2>
           <div class="progress">
 <?php
 $aLevelCount = array();
@@ -129,7 +129,7 @@ EOL;
 } // foreach
 ?>
 </div>
-	<p>Distribution of selected event levels.</p>
+	<p><?= _('Distribution of selected event levels.') ?></p>
 	<p class="lggr-level-buttons">
 <?php
 if(isset($aLevelCount['emerg'])) {
@@ -152,7 +152,7 @@ if(isset($aLevelCount['notice'])) {
         </div>
 
         <div class="col-md-4">
-          <h2 title="Reporting servers of last up to <?= Lggr::LASTSTAT ?> entries"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> Servers</h2>
+          <h2 title="Reporting servers of last up to <?= Lggr::LASTSTAT ?> entries"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> <?= _('Servers') ?></h2>
 <?php
 foreach($aServers as $server) {
 	if($server->f < 5) continue;
@@ -168,7 +168,7 @@ foreach($aServers as $server) {
 EOL;
 } // foreach
 ?>
-          <p>Most reporting servers (5% or more).</p>
+          <p><?= _('Most reporting servers (5% or more).') ?></p>
         </div>
 
         <div class="col-md-4">
@@ -215,9 +215,9 @@ foreach($aRanges as $rangeValue => $rangeText) {
 } // foreach
 
 if($state->isFromTo()) {
-	echo '<button type="button" class="btn btn-primary newlog-range" id="btnspecialrange">Special</button>';
+	echo '<button type="button" class="btn btn-primary newlog-range" id="btnspecialrange">' . _('Special') . '</button>';
 } else {
-	echo '<button type="button" class="btn btn-default newlog-range" id="btnspecialrange">Special</button>';
+	echo '<button type="button" class="btn btn-default newlog-range" id="btnspecialrange">' . _('Special') . '</button>';
 } // if
 
 ?>
@@ -232,8 +232,7 @@ if($state->isFromTo()) {
 
 
 <p><a type="button" role="button" href="./do.php?a=reset" class="btn btn-default">
-  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset
-</a></p>
+  <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> <?= _('Reset') ?></a></p>
         </div>
       </div><!-- row -->
 
@@ -252,7 +251,7 @@ if(null != $sFilter) {
 } // if
 
 if(0 == count($aEvents)) {
-	echo '<div class="alert alert-danger" role="alert">empty result</div>';
+	echo '<div class="alert alert-danger" role="alert">' . _('empty result') . '</div>';
 } // if
 
 ?>

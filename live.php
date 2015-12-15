@@ -28,14 +28,14 @@ require 'tpl/nav.inc.php';
 <?php
 
 if(0 == count($aEvents)) {
-	echo '<div class="alert alert-danger" role="alert">empty result</div>';
+	echo '<div class="alert alert-danger" role="alert">' . _('empty result') . '</div>';
 } // if
 
 ?>
 </div>
 
 <div id="liveheader" class="container">
-	<h2><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Live view <span id="tslatest"></span> <a id="pauseplay" href="#"><span class="glyphicon glyphicon-pause"></span></a></h2>
+	<h2><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> <?= _('Live view') ?> <span id="tslatest"></span> <a id="pauseplay" href="#"><span class="glyphicon glyphicon-pause"></span></a></h2>
 </div>
 
 <div class="container-fluid datablock">

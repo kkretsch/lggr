@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lggr.io\n"
-"POT-Creation-Date: 2015-11-25 09:04+0100\n"
-"PO-Revision-Date: 2015-11-25 09:13+0100\n"
+"POT-Creation-Date: 2015-12-15 09:20+0100\n"
+"PO-Revision-Date: 2015-12-15 09:21+0100\n"
 "Last-Translator: Kai Kretschmann <kkr@mit.de>\n"
 "Language-Team: Kai <info@lggr.io>\n"
 "Language: de\n"
@@ -15,6 +15,115 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: tpl\n"
 "X-Poedit-SearchPathExcluded-0: contrib\n"
+
+#: index.php:23
+msgid "This hour"
+msgstr "Aktuelle Stunde"
+
+#: index.php:24
+msgid "Today"
+msgstr "Heute"
+
+#: index.php:25
+msgid "Week"
+msgstr "Woche"
+
+#: index.php:37
+msgid "Text search for"
+msgstr "Text Suche nach"
+
+#: index.php:52
+msgid "Filter by server"
+msgstr "Filter nach Server"
+
+#: index.php:54
+msgid "Filter by level"
+msgstr "Filter nach Level"
+
+#: index.php:59
+msgid "Filter by time range between"
+msgstr "Filter nach Zeitbereich zwischen"
+
+#: index.php:59
+msgid "and"
+msgstr "und"
+
+#: index.php:93
+msgid "Server status and filter"
+msgstr "Server Status und Filter"
+
+#: index.php:99
+msgid "Levels"
+msgstr "Level"
+
+#: index.php:132
+msgid "Distribution of selected event levels."
+msgstr "Verteilung der gewählten Level."
+
+#: index.php:155 stats.php:35
+msgid "Servers"
+msgstr "Server"
+
+#: index.php:171
+#, php-format
+msgid "Most reporting servers (5% or more)."
+msgstr "Server mit den meisten Meldungen (5% oder mehr)."
+
+#: index.php:218 index.php:220
+msgid "Special"
+msgstr "Speziell"
+
+#: index.php:235
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: index.php:254 live.php:31
+msgid "empty result"
+msgstr "leeres Ergebnis"
+
+#: live.php:38
+msgid "Live view"
+msgstr "Echtzeit Ansicht"
+
+#: stats.php:34
+msgid "Messages per hour"
+msgstr "Meldungen pro Stunde"
+
+#: stats.php:38
+msgid "Message levels relative distribution"
+msgstr "Relative Verteilung der Level"
+
+#: stats.php:39
+msgid "Messages by server"
+msgstr "Meldungen pro Server"
+
+#: stats.php:41
+msgid "Database"
+msgstr "Datenbank"
+
+#: stats.php:42
+msgid "Events in DB"
+msgstr "Einträge in Datenbank"
+
+#: stats.php:42
+msgid "Oldest entry"
+msgstr "Ältester Eintrag"
+
+#: tpl/foot.inc.php:22
+msgid "queries in"
+msgstr "Abfragen in"
+
+#: tpl/foot.inc.php:22
+msgid "seconds"
+msgstr "Sekunden"
+
+#: tpl/foot.inc.php:22
+msgid "Session"
+msgstr "Sitzung"
+
+#: tpl/foot.inc.php:22
+msgid "by"
+msgstr "von"
 
 #: tpl/nav.inc.php:14
 msgid "Live"

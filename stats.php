@@ -31,15 +31,15 @@ require 'tpl/nav.inc.php';
 
 <div id="statsheader" class="container">
   <div class="row">
-    <div class="col-md-6"><h2><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Messages per hour</h2><canvas id="chartMsgsPerHour"></canvas></div>
-    <div class="col-md-6"><h2><span class="glyphicon glyphicon-cd" aria-hidden="true"></span> Servers</h2><canvas id="chartServers"></canvas></div>
+    <div class="col-md-6"><h2><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <?= _('Messages per hour') ?></h2><canvas id="chartMsgsPerHour"></canvas></div>
+    <div class="col-md-6"><h2><span class="glyphicon glyphicon-cd" aria-hidden="true"></span> <?= _('Servers') ?></h2><canvas id="chartServers"></canvas></div>
   </div>
   <div class="row">
-    <div class="col-md-4"><h2><span class="glyphicon glyphicon-signal" aria-hidden="true"></span> Message levels relative distribution</h2><canvas id="chartLevels"></canvas></div>
-    <div class="col-md-4"><h2><span class="glyphicon glyphicon-cd" aria-hidden="true"></span> Messages by server</h2><canvas id="chartServersPie"></canvas></div>
+    <div class="col-md-4"><h2><span class="glyphicon glyphicon-signal" aria-hidden="true"></span> <?= _('Message levels relative distribution') ?></h2><canvas id="chartLevels"></canvas></div>
+    <div class="col-md-4"><h2><span class="glyphicon glyphicon-cd" aria-hidden="true"></span> <?= _('Messages by server') ?></h2><canvas id="chartServersPie"></canvas></div>
     <div class="col-md-4">
-      <h2><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Database</h2>
-      <p>Events in DB: <?= number_format($aStatistic->cnt) ?><br>Oldest entry: <?= $aStatistic->oldest ?></p>
+      <h2><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <?= _('Database') ?></h2>
+      <p><?= _('Events in DB') ?>: <?= number_format($aStatistic->cnt) ?><br><?= _('Oldest entry') ?>: <?= $aStatistic->oldest ?></p>
     </div>
   </div>
 </div><!-- container -->
