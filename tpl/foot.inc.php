@@ -20,7 +20,7 @@ if(isset($_COOKIE['PHPSESSID'])) {
 
 ?>
         <p class="debugfooter"><?= $pCount ?> <?= _('queries in') ?> <?= $pTime ?> <?= _('seconds') ?>. <?= _('Session') ?>: <?= $dbgsession ?> <?= _('by') ?> <?= htmlentities($_SERVER['REMOTE_USER']) ?></p>
-        <p>&copy; <a href="http://lggr.io" target="_blank">lggr.io</a> 2015</p>
+        <p>&copy; <a href="http://lggr.io" target="_blank">lggr.io</a> 2016</p>
       </footer>
     </div> <!-- /container -->
 
