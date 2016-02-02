@@ -1,43 +1,109 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server Version:               5.5.43-0+deb7u1 - (Debian)
--- Server Betriebssystem:        debian-linux-gnu
--- HeidiSQL Version:             9.2.0.4971
--- --------------------------------------------------------
+-- MySQL dump 10.15  Distrib 10.0.23-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: logger
+-- ------------------------------------------------------
+-- Server version	10.0.23-MariaDB-0+deb8u1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Exportiere Struktur von Tabelle logger.hosts
-CREATE TABLE IF NOT EXISTS `hosts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- Temporary table structure for view `Archived`
+--
 
--- Daten Export vom Benutzer nicht ausgewählt
+DROP TABLE IF EXISTS `Archived`;
+/*!50001 DROP VIEW IF EXISTS `Archived`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `Archived` (
+  `id` tinyint NOT NULL,
+  `date` tinyint NOT NULL,
+  `facility` tinyint NOT NULL,
+  `level` tinyint NOT NULL,
+  `host` tinyint NOT NULL,
+  `program` tinyint NOT NULL,
+  `pid` tinyint NOT NULL,
+  `archived` tinyint NOT NULL,
+  `message` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
+--
+-- Temporary table structure for view `LastHour`
+--
 
--- Exportiere Struktur von View logger.LastHour
--- Erstelle temporäre Tabelle um View Abhängigkeiten zuvorzukommen
-CREATE TABLE `LastHour` (
-	`id` BIGINT(20) NOT NULL,
-	`date` DATETIME NOT NULL,
-	`facility` ENUM('kern','user','mail','daemon','auth','syslog','lpr','news','uucp','authpriv','ftp','cron','local0','local1','local2','local3','local4','local5','local6','local7') NOT NULL COLLATE 'utf8_general_ci',
-	`level` ENUM('emerg','alert','crit','err','warning','notice','info','debug') NOT NULL COLLATE 'utf8_general_ci',
-	`host` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
-	`program` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
-	`pid` INT(10) UNSIGNED NOT NULL,
-	`message` TEXT NOT NULL COLLATE 'utf8_general_ci',
-	`idhost` INT(11) NULL
-) ENGINE=MyISAM;
+DROP TABLE IF EXISTS `LastHour`;
+/*!50001 DROP VIEW IF EXISTS `LastHour`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `LastHour` (
+  `id` tinyint NOT NULL,
+  `date` tinyint NOT NULL,
+  `facility` tinyint NOT NULL,
+  `level` tinyint NOT NULL,
+  `host` tinyint NOT NULL,
+  `program` tinyint NOT NULL,
+  `archived` tinyint NOT NULL,
+  `message` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
 
+--
+-- Temporary table structure for view `Today`
+--
 
--- Exportiere Struktur von Tabelle logger.newlogs
-CREATE TABLE IF NOT EXISTS `newlogs` (
+DROP TABLE IF EXISTS `Today`;
+/*!50001 DROP VIEW IF EXISTS `Today`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `Today` (
+  `id` tinyint NOT NULL,
+  `date` tinyint NOT NULL,
+  `facility` tinyint NOT NULL,
+  `level` tinyint NOT NULL,
+  `host` tinyint NOT NULL,
+  `program` tinyint NOT NULL,
+  `archived` tinyint NOT NULL,
+  `message` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `Week`
+--
+
+DROP TABLE IF EXISTS `Week`;
+/*!50001 DROP VIEW IF EXISTS `Week`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `Week` (
+  `id` tinyint NOT NULL,
+  `date` tinyint NOT NULL,
+  `facility` tinyint NOT NULL,
+  `level` tinyint NOT NULL,
+  `host` tinyint NOT NULL,
+  `program` tinyint NOT NULL,
+  `archived` tinyint NOT NULL,
+  `message` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `newlogs`
+--
+
+DROP TABLE IF EXISTS `newlogs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `newlogs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `date` datetime NOT NULL,
   `facility` enum('kern','user','mail','daemon','auth','syslog','lpr','news','uucp','authpriv','ftp','cron','local0','local1','local2','local3','local4','local5','local6','local7') NOT NULL,
@@ -45,66 +111,99 @@ CREATE TABLE IF NOT EXISTS `newlogs` (
   `host` varchar(50) NOT NULL,
   `program` varchar(50) NOT NULL,
   `pid` int(10) unsigned NOT NULL,
+  `archived` enum('Y','N') NOT NULL DEFAULT 'N',
   `message` text NOT NULL,
-  `idhost` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `level` (`level`),
-  KEY `host` (`host`),
   KEY `date` (`date`),
-  KEY `idhost` (`idhost`),
-  CONSTRAINT `FK_newlogs_hosts` FOREIGN KEY (`idhost`) REFERENCES `hosts` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='New logging table';
+  KEY `level` (`level`) USING HASH,
+  KEY `host` (`host`) USING HASH,
+  KEY `program` (`program`(5))
+) ENGINE=InnoDB AUTO_INCREMENT=18167518 DEFAULT CHARSET=utf8 COMMENT='New logging table';
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- Daten Export vom Benutzer nicht ausgewählt
+--
+-- Final view structure for view `Archived`
+--
 
+/*!50001 DROP TABLE IF EXISTS `Archived`*/;
+/*!50001 DROP VIEW IF EXISTS `Archived`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `Archived` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`pid` AS `pid`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`archived` = 'Y') */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
--- Exportiere Struktur von View logger.Today
--- Erstelle temporäre Tabelle um View Abhängigkeiten zuvorzukommen
-CREATE TABLE `Today` (
-	`id` BIGINT(20) NOT NULL,
-	`date` DATETIME NOT NULL,
-	`facility` ENUM('kern','user','mail','daemon','auth','syslog','lpr','news','uucp','authpriv','ftp','cron','local0','local1','local2','local3','local4','local5','local6','local7') NOT NULL COLLATE 'utf8_general_ci',
-	`level` ENUM('emerg','alert','crit','err','warning','notice','info','debug') NOT NULL COLLATE 'utf8_general_ci',
-	`host` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
-	`program` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
-	`pid` INT(10) UNSIGNED NOT NULL,
-	`message` TEXT NOT NULL COLLATE 'utf8_general_ci',
-	`idhost` INT(11) NULL
-) ENGINE=MyISAM;
+--
+-- Final view structure for view `LastHour`
+--
 
+/*!50001 DROP TABLE IF EXISTS `LastHour`*/;
+/*!50001 DROP VIEW IF EXISTS `LastHour`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `LastHour` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`date` >= (now() - interval 1 hour)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
--- Exportiere Struktur von View logger.Week
--- Erstelle temporäre Tabelle um View Abhängigkeiten zuvorzukommen
-CREATE TABLE `Week` (
-	`id` BIGINT(20) NOT NULL,
-	`date` DATETIME NOT NULL,
-	`facility` ENUM('kern','user','mail','daemon','auth','syslog','lpr','news','uucp','authpriv','ftp','cron','local0','local1','local2','local3','local4','local5','local6','local7') NOT NULL COLLATE 'utf8_general_ci',
-	`level` ENUM('emerg','alert','crit','err','warning','notice','info','debug') NOT NULL COLLATE 'utf8_general_ci',
-	`host` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
-	`program` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
-	`pid` INT(10) UNSIGNED NOT NULL,
-	`message` TEXT NOT NULL COLLATE 'utf8_general_ci',
-	`idhost` INT(11) NULL
-) ENGINE=MyISAM;
+--
+-- Final view structure for view `Today`
+--
 
+/*!50001 DROP TABLE IF EXISTS `Today`*/;
+/*!50001 DROP VIEW IF EXISTS `Today`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `Today` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (cast(now() as date) = cast(`newlogs`.`date` as date)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
--- Exportiere Struktur von View logger.LastHour
--- Entferne temporäre Tabelle und erstelle die eigentliche View
-DROP TABLE IF EXISTS `LastHour`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `LastHour` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`pid` AS `pid`,`newlogs`.`message` AS `message`,`newlogs`.`idhost` AS `idhost` from `newlogs` where (`newlogs`.`date` >= (now() - interval 1 hour));
+--
+-- Final view structure for view `Week`
+--
 
+/*!50001 DROP TABLE IF EXISTS `Week`*/;
+/*!50001 DROP VIEW IF EXISTS `Week`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `Week` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`date` >= (now() - interval 168 hour)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
--- Exportiere Struktur von View logger.Today
--- Entferne temporäre Tabelle und erstelle die eigentliche View
-DROP TABLE IF EXISTS `Today`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `Today` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`pid` AS `pid`,`newlogs`.`message` AS `message`,`newlogs`.`idhost` AS `idhost` from `newlogs` where (cast(now() as date) = cast(`newlogs`.`date` as date));
-
-
--- Exportiere Struktur von View logger.Week
--- Entferne temporäre Tabelle und erstelle die eigentliche View
-DROP TABLE IF EXISTS `Week`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `Week` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`pid` AS `pid`,`newlogs`.`message` AS `message`,`newlogs`.`idhost` AS `idhost` from `newlogs` where (`newlogs`.`date` >= (now() - interval 168 hour));
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+-- Dump completed on 2016-02-02  7:29:51

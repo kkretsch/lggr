@@ -284,6 +284,12 @@ foreach($aEvents as $event) {
 	default: $label = '<span class="label label-default">' . $event->level . '</span>';
 	} // switch
 
+	switch($event->archived) {
+	case 'Y': $archived = '<span id="arch' . $event->id . '" class="lggr-archived glyphicon glyphicon-warning-sign" aria-hidden="true" title="archived"></span>'; break;
+	case 'N': $archived = '<span id="arch' . $event->id . '" class="lggr-notarchived glyphicon glyphicon-pushpin" aria-hidden="true" title=""></span>'; break;
+	default:  $archived = '?';
+	} // switch
+
 	$host = htmlentities($event->host, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
 	$program = htmlentities($event->program, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
 	$msg = htmlentities($event->message, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
@@ -292,7 +298,7 @@ foreach($aEvents as $event) {
 <div class="row datarow $rowclass" data-id="{$event->id}">
 	<div class="col-md-2 col-xs-6 newlog-date">{$event->date}</div>
 	<div class="col-md-1 col-xs-2">{$event->facility}</div>
-	<div class="col-md-1 col-xs-2">$label</div>
+	<div class="col-md-1 col-xs-2">$archived $label</div>
 	<div class="col-md-1 col-xs-2">$host</div>
 	<div class="col-md-2 col-xs-12">$program</div>
 	<div class="col-md-5 col-xs-12 newlog-msg" title="$msg"><tt>{$msg}</tt></div>

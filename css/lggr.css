@@ -45,6 +45,13 @@ input.tspick {
 	cursor: zoom-in;
 }
 
+span.lggr-notarchived, span.lggr-archived {
+	cursor: pointer;
+}
+span.lggr-archived {
+	color: #f00;
+}
+
 #dialog {
 	max-height: 500px !important;
 	overflow: auto;

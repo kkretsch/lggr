@@ -76,11 +76,31 @@ switch($_REQUEST['a']) {
 	case 'panelopen':
 		$state->setPanelOpen(true);
 		$isAjax = true;
+		$sAjaxReply = 'OK';
 		break;
 
 	case 'panelclose':
 		$state->setPanelOpen(false);
 		$isAjax = true;
+		$sAjaxReply = 'OK';
+		break;
+
+	case 'archive':
+		$config = new AdminConfig();
+		$l = new Lggr($state, $config);
+		$iID = intval($_REQUEST['id']);
+		$l->setArchive($iID, true);
+		$isAjax = true;
+		$sAjaxReply = $iID;
+		break;
+
+	case 'unarchive':
+		$config = new AdminConfig();
+		$l = new Lggr($state, $config);
+		$iID = intval($_REQUEST['id']);
+		$l->setArchive($iID, false);
+		$isAjax = true;
+		$sAjaxReply = $iID;
 		break;
 
 } // switch
@@ -89,7 +109,7 @@ $_SESSION[LggrState::SESSIONNAME] = $state;
 
 if($isAjax) {
 	header('Content-Type: text/plain');
-	echo 'OK';
+	echo $sAjaxReply;
 } else {
 	header('Location: index.php');
 } // if

@@ -137,6 +137,30 @@ ORDER BY c DESC";
 		return $a;
 	} // function
 
+	function getArchived($from=0, $count=LggrState::PAGELEN) {
+		$perfSize = new LggrPerf();
+		$perfData = new LggrPerf();
+
+		$sqlSize = "SELECT COUNT(*) AS c FROM Archived";
+		$sqlData = "
+SELECT * FROM Archived
+ORDER BY `date` DESC
+LIMIT $from,$count";
+
+		$perfSize->start($sqlSize);
+		$this->getResultSize($sqlSize);
+		$perfSize->stop();
+
+		$perfData->start($sqlData);
+		$a = $this->sendResult($sqlData);
+		$perfData->stop();
+
+		$this->aPerf[] = $perfSize;
+		$this->aPerf[] = $perfData;
+
+		return $a;
+	} // function
+
 	function getLatest($from=0, $count=LggrState::PAGELEN) {
 		$perfSize = new LggrPerf();
 		$perfData = new LggrPerf();
@@ -351,6 +375,7 @@ FROM newlogs
 		$sql = "
 DELETE FROM newlogs
 WHERE `date` < (NOW() - INTERVAL $maxage hour)
+AND archived='N'
 ";
 
 		$perf->start($sql);
@@ -362,6 +387,21 @@ WHERE `date` < (NOW() - INTERVAL $maxage hour)
 		$this->aPerf[] = $perf;
 
 		return $this->db->affected_rows;
+	} // function
+
+	function setArchive($iID, $bIsArchived) {
+		$iID = intval($iID);
+		if($bIsArchived) {
+			$sArchive = 'Y';
+		} else {
+			$sArchive = 'N';
+		} // if
+
+		$sql = "UPDATE newlogs SET archived='$sArchive' WHERE id=$iID LIMIT 1";
+		$res = $this->db->query($sql);
+		if(false === $res) {
+			throw new Exception($this->db->error);
+		} // if
 	} // function
 
 	function normalizeHosts() {

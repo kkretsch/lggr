@@ -7,6 +7,29 @@ $("#dialog").dialog({
 	width: 500
 });
 
+$('div.datablock').on('click', 'span.lggr-archived', function() {
+	$(this).removeClass('lggr-archived glyphicon-warning-sign');
+	var sID = $(this).parents('.row').attr('data-id');
+	$.ajax({
+		url: '/do.php?a=unarchive',
+		method: 'POST',
+		data: {id: sID}
+	}).done(function(sReplyID) {
+		$('#arch'+sReplyID).addClass('lggr-notarchived glyphicon-pushpin');
+	});
+});
+$('div.datablock').on('click', 'span.lggr-notarchived', function() {
+	$(this).removeClass('lggr-notarchived glyphicon-pushpin');
+	var sID = $(this).parents('.row').attr('data-id');
+	$.ajax({
+		url: '/do.php?a=archive',
+		method: 'POST',
+		data: {id: sID}
+	}).done(function(sReplyID) {
+		$('#arch'+sReplyID).addClass('lggr-archived glyphicon-warning-sign');
+	});
+});
+
 $('div.datablock').on('click', 'tt', function() {
 	var sTxt = $(this).html();
 	var sTitle = $(this).parent().parent().find('.newlog-date').text();
