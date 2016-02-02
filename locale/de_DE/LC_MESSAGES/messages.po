@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: lggr.io\n"
-"POT-Creation-Date: 2015-12-15 09:20+0100\n"
-"PO-Revision-Date: 2015-12-15 09:21+0100\n"
-"Last-Translator: Kai Kretschmann <kkr@mit.de>\n"
+"POT-Creation-Date: 2016-02-02 20:11+0100\n"
+"PO-Revision-Date: 2016-02-02 20:15+0100\n"
+"Last-Translator: Kai Kretschmann <kai@kaikretschmann.de>\n"
 "Language-Team: Kai <info@lggr.io>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,10 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: tpl\n"
 "X-Poedit-SearchPathExcluded-0: contrib\n"
+
+#: archived.php:49 index.php:254 live.php:31
+msgid "empty result"
+msgstr "leeres Ergebnis"
 
 #: index.php:23
 msgid "This hour"
@@ -77,10 +81,6 @@ msgstr "Speziell"
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: index.php:254 live.php:31
-msgid "empty result"
-msgstr "leeres Ergebnis"
-
 #: live.php:38
 msgid "Live view"
 msgstr "Echtzeit Ansicht"
@@ -134,18 +134,22 @@ msgid "Statistic"
 msgstr "Statistik"
 
 #: tpl/nav.inc.php:16
+msgid "Archived"
+msgstr "Archiviert"
+
+#: tpl/nav.inc.php:17
 msgid "Project"
 msgstr "Projekt"
 
-#: tpl/nav.inc.php:20
+#: tpl/nav.inc.php:21
 msgid "Search for program"
 msgstr "Suche nach Programm"
 
-#: tpl/nav.inc.php:21
+#: tpl/nav.inc.php:22
 msgid "Search in messages"
 msgstr "Suche in Nachrichten..."
 
-#: tpl/nav.inc.php:23
+#: tpl/nav.inc.php:24
 msgid "Search"
 msgstr "Suche"
 

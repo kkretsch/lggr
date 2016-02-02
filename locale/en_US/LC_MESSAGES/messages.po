@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: 2015-11-25 09:04+0100\n"
-"PO-Revision-Date: 2015-11-25 09:04+0100\n"
-"Last-Translator: Kai Kretschmann <kkr@mit.de>\n"
-"Language-Team: \n"
+"Project-Id-Version: lggr.io\n"
+"POT-Creation-Date: 2016-02-02 20:13+0100\n"
+"PO-Revision-Date: 2016-02-02 20:16+0100\n"
+"Last-Translator: Kai Kretschmann <kai@kaikretschmann.de>\n"
+"Language-Team: Kai <info@lggr.io>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,6 +16,115 @@ msgstr ""
 "X-Poedit-SearchPath-1: tpl\n"
 "X-Poedit-SearchPathExcluded-0: contrib\n"
 
+#: archived.php:49 index.php:254 live.php:31
+msgid "empty result"
+msgstr "empty result"
+
+#: index.php:23
+msgid "This hour"
+msgstr "This hour"
+
+#: index.php:24
+msgid "Today"
+msgstr "Today"
+
+#: index.php:25
+msgid "Week"
+msgstr "Week"
+
+#: index.php:37
+msgid "Text search for"
+msgstr "Text search for"
+
+#: index.php:52
+msgid "Filter by server"
+msgstr "Filter by server"
+
+#: index.php:54
+msgid "Filter by level"
+msgstr "Filter by level"
+
+#: index.php:59
+msgid "Filter by time range between"
+msgstr "Filter by time range between"
+
+#: index.php:59
+msgid "and"
+msgstr "and"
+
+#: index.php:93
+msgid "Server status and filter"
+msgstr "Server status and filter"
+
+#: index.php:99
+msgid "Levels"
+msgstr "Levels"
+
+#: index.php:132
+msgid "Distribution of selected event levels."
+msgstr "Distribution of selected event levels."
+
+#: index.php:155 stats.php:35
+msgid "Servers"
+msgstr "Servers"
+
+#: index.php:171
+#, php-format
+msgid "Most reporting servers (5% or more)."
+msgstr "Most reporting servers (5% or more)."
+
+#: index.php:218 index.php:220
+msgid "Special"
+msgstr "Special"
+
+#: index.php:235
+msgid "Reset"
+msgstr "Reset"
+
+#: live.php:38
+msgid "Live view"
+msgstr "Live view"
+
+#: stats.php:34
+msgid "Messages per hour"
+msgstr "Messages per hour"
+
+#: stats.php:38
+msgid "Message levels relative distribution"
+msgstr "Message levels relative distribution"
+
+#: stats.php:39
+msgid "Messages by server"
+msgstr "Messages by server"
+
+#: stats.php:41
+msgid "Database"
+msgstr "Database"
+
+#: stats.php:42
+msgid "Events in DB"
+msgstr "Events in DB"
+
+#: stats.php:42
+msgid "Oldest entry"
+msgstr "Oldest entry"
+
+#: tpl/foot.inc.php:22
+msgid "queries in"
+msgstr "queries in"
+
+#: tpl/foot.inc.php:22
+msgid "seconds"
+msgstr "seconds"
+
+#: tpl/foot.inc.php:22
+msgid "Session"
+msgstr "Session"
+
+#: tpl/foot.inc.php:22
+msgid "by"
+msgstr "by"
+
 #: tpl/nav.inc.php:14
 msgid "Live"
 msgstr "Live"
@@ -25,18 +134,22 @@ msgid "Statistic"
 msgstr "Statistic"
 
 #: tpl/nav.inc.php:16
+msgid "Archived"
+msgstr "Archived"
+
+#: tpl/nav.inc.php:17
 msgid "Project"
 msgstr "Project"
 
-#: tpl/nav.inc.php:20
+#: tpl/nav.inc.php:21
 msgid "Search for program"
 msgstr "Search for program"
 
-#: tpl/nav.inc.php:21
+#: tpl/nav.inc.php:22
 msgid "Search in messages"
 msgstr "Search in messages"
 
-#: tpl/nav.inc.php:23
+#: tpl/nav.inc.php:24
 msgid "Search"
 msgstr "Search"
 

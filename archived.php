@@ -2,7 +2,7 @@
 
 require 'inc/pre.inc.php';
 
-define('TITLE', 'archived');
+define('TITLE', _('Archived'));
 require 'tpl/head.inc.php';
 
 $l = null;
@@ -39,7 +39,7 @@ require 'tpl/nav.inc.php';
 ?>
 
 <div class="container" id="infoheader">
-	Archived, <a href="/do.php?a=exportarchive" target="_blank">export</a> to csv.
+	<?= _('Archived') ?>, <a href="/do.php?a=exportarchive" target="_blank">export</a> to csv.
 </div>
 
 <div class="container">
