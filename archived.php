@@ -8,9 +8,6 @@ require 'tpl/head.inc.php';
 $l = null;
 try {
 	$l = new Lggr($state, $config);
-
-	$aLevels = $l->getLevels();
-	$aServers = $l->getServers();
 } catch(Exception $e) {
 	echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
 
@@ -18,12 +15,6 @@ try {
 
 	exit;
 }
-
-$aRanges = array(
-	'1' => _('This hour'),
-	'24' => _('Today'),
-	'168' => _('Week')
-);
 
 $page = $state->getPage();
 
@@ -48,7 +39,7 @@ require 'tpl/nav.inc.php';
 ?>
 
 <div class="container" id="infoheader">
-	Archived
+	Archived, <a href="/do.php?a=exportarchive" target="_blank">export</a> to csv.
 </div>
 
 <div class="container">

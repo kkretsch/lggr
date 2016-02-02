@@ -103,6 +103,14 @@ switch($_REQUEST['a']) {
 		$sAjaxReply = $iID;
 		break;
 
+	case 'exportarchive':
+		$config = new Config();
+		$l = new Lggr($state, $config);
+		$csv = new LggrCsv($l);
+		$csv->generiere();
+		exit;
+		break;
+
 } // switch
 
 $_SESSION[LggrState::SESSIONNAME] = $state;
