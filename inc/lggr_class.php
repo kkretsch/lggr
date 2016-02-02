@@ -345,6 +345,29 @@ GROUP BY h";
 		return $a;
 	} // function
 
+	function getArchivedStatistic() {
+		$perf = new LggrPerf();
+
+		$sql = "
+SELECT COUNT(*) AS cnt
+FROM Archived
+";
+
+		$a = $this->cache->retrieve('archivedstats');
+		if(null != $a) {
+			return $a;
+		} // if
+
+		$perf->start($sql);
+		$a = $this->sendResult($sql);
+		$perf->stop();
+
+		$this->aPerf[] = $perf;
+
+		$this->cache->store('archivedstats', $a);
+		return $a;
+	} // function
+
 	function getStatistic() {
 		$perf = new LggrPerf();
 

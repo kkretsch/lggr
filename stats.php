@@ -17,6 +17,9 @@ try {
 	$aStatistic = $l->getStatistic();
 	$aStatistic = $aStatistic[0];
 
+	$aArchivedStatistic = $l->getArchivedStatistic();
+	$aArchivedStatistic = $aArchivedStatistic[0];
+
 	$aMsgPerHour = $l->getMessagesPerHour();
 } catch(Exception $e) {
 	echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
@@ -40,6 +43,7 @@ require 'tpl/nav.inc.php';
     <div class="col-md-4">
       <h2><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <?= _('Database') ?></h2>
       <p><?= _('Events in DB') ?>: <?= number_format($aStatistic->cnt) ?><br><?= _('Oldest entry') ?>: <?= $aStatistic->oldest ?></p>
+      <p><?= _('Archived') ?>: <?= number_format($aArchivedStatistic->cnt) ?></p>
     </div>
   </div>
 </div><!-- container -->
