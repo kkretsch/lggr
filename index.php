@@ -38,6 +38,18 @@ try {
 		if('' != $state->getSearch()) $sFilter .= ' message <strong>' . $searchvalue . '</strong>';
 		if('' != $state->getSearchProg()) $sFilter .= ' program <strong>' . $searchvalueprog . '</strong>';
 
+	} elseif($state->isFromTo() && $state->isHost()) {
+
+		$host = $state->getHost();
+
+		$aEvents = $l->getHostFromTo($page*LggrState::PAGELEN, LggrState::PAGELEN);
+
+		$sFilter = _('Filter by time range between') . ' <strong>' . htmlentities($state->getFrom(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> ' . _('and') . ' <strong>' . htmlentities($state->getTo(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>, ';
+		$sFilter .= _('Filter by server') . ' <strong>' . htmlentities($state->getHost(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+		$searchvalue='';
+		$searchvalueprog='';
+		$isSearch=false;
+
 	} elseif($state->isHost() || $state->isLevel()) {
 
 		$host = $state->getHost();

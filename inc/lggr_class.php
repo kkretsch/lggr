@@ -251,6 +251,40 @@ LIMIT $from,$count";
 		return $a;
 	} // function
 
+	function getHostFromTo($from=0, $count=LggrState::PAGELEN) {
+		$perfSize = new LggrPerf();
+		$perfData = new LggrPerf();
+
+		$sHost = $this->db->escape_string($this->state->getHost());
+		$sFrom = $this->db->escape_string($this->state->getFrom());
+		$sTo   = $this->db->escape_string($this->state->getTo());
+
+		$sqlSize = "
+SELECT COUNT(*) AS c FROM newlogs
+WHERE `date` BETWEEN '$sFrom' AND '$sTo'
+AND host='$sHost'";
+
+		$sqlData = "
+SELECT * FROM newlogs
+WHERE `date` BETWEEN '$sFrom' AND '$sTo'
+AND host='$sHost'
+ORDER BY `date` DESC
+LIMIT $from,$count";
+
+		$perfSize->start($sqlSize);
+		$this->getResultSize($sqlSize);
+		$perfSize->stop();
+
+		$perfData->start($sqlData);
+		$a = $this->sendResult($sqlData);
+		$perfData->stop();
+
+		$this->aPerf[] = $perfSize;
+		$this->aPerf[] = $perfData;
+
+		return $a;
+	} // function
+
 	function getFiltered($host=null, $level=null, $from=0, $count=LggrState::PAGELEN) {
 		$perfSize = new LggrPerf();
 		$perfData = new LggrPerf();

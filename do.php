@@ -61,6 +61,8 @@ switch($_REQUEST['a']) {
 		$sTo   = $_POST['tsto'];
 		$state->setFromTo($sFrom, $sTo);
 		$state->setRange(null);
+		$state->setPage(0);
+		$state->setResultSize(0);
 		break;
 	
 	case 'paginate':
