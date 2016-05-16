@@ -12,7 +12,7 @@ class Lggr {
 	function __construct(LggrState $state, AbstractConfig $config) {
 		$this->config = $config;
 		$this->state = $state;
-		$this->cache = new LggrCacheFile();
+		$this->cache = new LggrCacheRedis();
 		$this->aPerf = array(); // of type LggrPerf objects
 
 		if(!$this->state->isLocalCall())
