@@ -1,6 +1,6 @@
 <?php
 
-class LggrCache {
+class LggrCacheFile extends AbstractLggrCache {
 	const MAXAGE = 300; // 5 minutes
 	private $cachepath=null;
 
