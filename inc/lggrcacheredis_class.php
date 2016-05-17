@@ -30,7 +30,7 @@ class LggrCacheRedis extends AbstractLggrCache {
 	} // function
 
 	public function purge($key) {
-		$this->r->del($key);
+		$i = $this->r->delete(SELF::REDISPFX . $key);
 	} // function
 
 } // class

@@ -138,6 +138,15 @@ ORDER BY c DESC";
 	} // function
 
 	function getArchived($from=0, $count=LggrState::PAGELEN) {
+		$iArchivedSize = $this->cache->retrieve("archivedSize");
+		$aArchivedData = $this->cache->retrieve("archivedData" . intval($from));
+
+		if((null != $iArchivedSize) && (null != $aArchivedData)) {
+			$this->state->setResultSize($iArchivedSize);
+			return $aArchivedData;
+		} // if
+
+
 		$perfSize = new LggrPerf();
 		$perfData = new LggrPerf();
 
@@ -157,6 +166,9 @@ LIMIT $from,$count";
 
 		$this->aPerf[] = $perfSize;
 		$this->aPerf[] = $perfData;
+
+		$this->cache->store("archivedSize", $this->state->getResultSize());
+		$this->cache->store("archivedData" . intval($from), $a);
 
 		return $a;
 	} // function
@@ -459,6 +471,9 @@ AND archived='N'
 		if(false === $res) {
 			throw new Exception($this->db->error);
 		} // if
+
+		$this->cache->purge("archivedSize");
+		$this->cache->purge("archivedData0");
 	} // function
 
 	function normalizeHosts() {
