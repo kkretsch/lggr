@@ -34,9 +34,11 @@ if(isset($_COOKIE['PHPSESSID'])) {
 switch(basename($_SERVER['SCRIPT_NAME'], '.php')) {
 case 'stats':
 	$urlchartjs = $config->getUrlChartjs();
+	$urljqcloud = $config->getUrlJQCloud();
 	$ts = time();
 	echo <<<EOM
     <script src="{$urlchartjs}Chart.min.js"></script>
+    <script src="{$urljqcloud}jqcloud.min.js"></script>
     <script src="js/lggr_stat_data.php?{$ts}"></script>
     <script src="js/lggr_stats.js"></script>
 EOM;

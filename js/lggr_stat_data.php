@@ -37,6 +37,8 @@ try {
 	$aStatistic = $aStatistic[0];
 
 	$aMsgPerHour = $l->getMessagesPerHour();
+
+	$aCloud = $l->getCloud();
 } catch(Exception $e) {
 
 	exit;
@@ -109,5 +111,24 @@ foreach($aServers as $server) {
 
 EOL;
 } // foreach
+?>
+];
+
+
+var dataCloudWords = [
+<?php
+foreach($aCloud as $entry) {
+	$prog = $entry->program;
+	if(false !== strpos($prog, '&')) continue;
+	$prog = htmlspecialchars($prog, ENT_QUOTES|ENT_HTML5, 'UTF-8', false);
+	echo <<<EOL
+		{
+			text: "{$prog}",
+			weight: {$entry->c}
+		},
+
+EOL;
+} // foreach
+
 ?>
 ];

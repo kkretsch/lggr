@@ -20,4 +20,8 @@ var chartLevels = new Chart(ctx).PolarArea(dataLevels, {animateRotate: true, sho
 ctx = $("#chartServersPie").get(0).getContext("2d");
 var chartServers = new Chart(ctx).Doughnut(dataServersPie, options);
 
+$('#cloudcontainer').jQCloud(dataCloudWords, {
+	autoResize: true
+});
+
 });

@@ -46,6 +46,9 @@ require 'tpl/nav.inc.php';
       <p><?= _('Archived') ?>: <?= number_format($aArchivedStatistic->cnt) ?></p>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-6"><h2>Program Cloud</h2><div id="cloudcontainer"></div></div>
+  </div>
 </div><!-- container -->
 
 <?php

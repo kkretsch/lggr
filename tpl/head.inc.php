@@ -16,6 +16,7 @@ if(defined('TITLE')) {
     <link href="<?= $config->getUrlBootstrap() ?>css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="<?= $config->getUrlJqueryui() ?>themes/smoothness/jquery-ui.css" media="screen">
     <link rel="stylesheet" href="<?= $config->getUrlJAtimepicker() ?>jquery-ui-timepicker-addon.min.css" media="screen">
+    <link rel="stylesheet" href="<?= $config->getUrlJQCloud() ?>jqcloud.min.css" media="screen">
     <link href="css/lggr.css" rel="stylesheet" media="screen">
     <link href="css/lggr_print.css" rel="stylesheet" media="print">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

@@ -11,6 +11,7 @@ abstract class AbstractConfig {
 	protected $URLJQUERYUI;
 	protected $URLJATIMEPICKER;
 	protected $URLCHARTJS;
+	protected $URLJQCLOUD;
 
 	protected $LOCALE;
 
@@ -37,6 +38,9 @@ abstract class AbstractConfig {
 	}
 	final public function getUrlChartjs() {
 		return $this->URLCHARTJS;
+	}
+	final public function getUrlJQCloud() {
+		return $this->URLJQCLOUD;
 	}
 
 	final public function getLocale() {
@@ -67,6 +71,9 @@ abstract class AbstractConfig {
 	}
 	protected function setUrlChartjs($s) {
 		$this->URLCHARTJS = $s;
+	}
+	protected function setUrlJQCloud($s) {
+		$this->URLJQCLOUD = $s;
 	}
 
 	protected function setLocale($s) {

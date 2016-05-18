@@ -199,6 +199,28 @@ LIMIT $from,$count";
 		return $a;
 	} // function
 
+	function getCloud() {
+		$perf = new LggrPerf();
+
+		$v = $this->getViewName();
+
+		$a = $this->cache->retrieve("cloud$v");
+		if(null != $a) {
+			return $a;
+		} // if
+
+		$sql = "SELECT COUNT(*) AS c, program FROM $v GROUP BY program HAVING CHAR_LENGTH(program)>2 ORDER BY c DESC";
+		$perf->start($sql);
+		$a = $this->sendResult($sql);
+		$perf->stop();
+
+		$this->aPerf[] = $perf;
+
+		$this->cache->store("cloud$v", $a);
+
+		return $a;
+	} // function
+
 	function getNewer($id) {
 		$perf = new LggrPerf();
 

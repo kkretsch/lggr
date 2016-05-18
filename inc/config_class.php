@@ -25,6 +25,7 @@ class Config extends AbstractConfig {
 		$this->setUrlJqueryui('/contrib/jqueryui/');
 		$this->setUrlJAtimepicker('/contrib/timepicker/');
 		$this->setUrlChartjs('/contrib/chartjs/');
+		$this->setUrlJQCloud('/contrib/jqcloud/');
 
 	} // constructor
 

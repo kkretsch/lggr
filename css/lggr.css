@@ -61,6 +61,11 @@ h4.panel-title span {
 	float: right;
 }
 
+#cloudcontainer {
+	width: 100%;
+	height: 250px;
+}
+
 p.debugfooter {
 	float: right;
 	color: #999999;
