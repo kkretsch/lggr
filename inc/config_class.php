@@ -7,8 +7,8 @@ class Config extends AbstractConfig {
 		$this->setDbPwd('lggr');
 		$this->setDbName('lggrdev');
 
-		// Set your preferred language en_US or de_DE
-		$this->setLocale('de_DE');
+		// Set your preferred language en_US, de_DE, or pt_BR
+		$this->setLocale('en_US');
 
 /* remote storage */
 /*
