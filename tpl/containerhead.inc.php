@@ -1,4 +1,4 @@
-<div class="row datarow datatitle">
+<div class="row datatitle">
 	<div class="col-md-2 col-xs-6 newlog-date">Timestamp</div>
 	<div class="col-md-1 col-xs-2">Facility</div>
 	<div class="col-md-1 col-xs-2">Label</div>

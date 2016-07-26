@@ -6,9 +6,9 @@ div#infoheader, div#liveheader, div#statsheader {
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 div#liveheader h2 span.glyphicon-refresh {
-	-webkit-animation: spin 4s linear infinite;
-	-moz-animation: spin 4s linear infinite;
-	animation: spin 4s linear infinite;
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
 }
 
 .navbar-brand img {
@@ -31,22 +31,24 @@ input.tspick {
   overflow: hidden;
 }
 
-.datarow.datatitle {
+.datatitle {
   font-weight: bold;
+  background-color: #a0a0a0;
 }
 
 .datarow:nth-child(even) {
- background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 .datarow:nth-child(odd) {
- background-color: #c0c0c0;
+  background-color: #c0c0c0;
 }
+
 .datarow.freshrow {
- display: none;
+  display: none;
 }
 
 .datarow .newlog-msg {
-	cursor: zoom-in;
+  cursor: zoom-in;
 }
 
 span.lggr-notarchived, span.lggr-archived {

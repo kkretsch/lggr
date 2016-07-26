@@ -38,6 +38,12 @@ if(0 == count($aEvents)) {
 	<h2><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> <?= _('Live view') ?> <span id="tslatest"></span> <a id="pauseplay" href="#"><span class="glyphicon glyphicon-pause"></span></a></h2>
 </div>
 
+<div class="container-fluid">
+<?php
+include 'tpl/containerhead.inc.php';
+?>
+</div>
+
 <div class="container-fluid datablock">
 <?php
 
