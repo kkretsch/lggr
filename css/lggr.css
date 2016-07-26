@@ -31,6 +31,10 @@ input.tspick {
   overflow: hidden;
 }
 
+.datarow.datatitle {
+  font-weight: bold;
+}
+
 .datarow:nth-child(even) {
  background-color: #e0e0e0;
 }

@@ -276,6 +276,8 @@ if(0 == count($aEvents)) {
 if(!$isSearch)
 	include 'tpl/paginate.inc.php';
 
+include 'tpl/containerhead.inc.php';
+
 $i=0;
 foreach($aEvents as $event) {
 	$i++;
@@ -318,6 +320,9 @@ foreach($aEvents as $event) {
 EOL;
 
 } // foreach
+
+include 'tpl/containerhead.inc.php';
+
 ?>
 <div id="dialog" title="Details">I'm a dialog</div>
 
