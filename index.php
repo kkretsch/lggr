@@ -273,10 +273,11 @@ if(0 == count($aEvents)) {
 <div class="container-fluid datablock">
 <?php
 
-if(!$isSearch)
+if(!$isSearch && (0 < count($aEvents)))
 	include 'tpl/paginate.inc.php';
 
-include 'tpl/containerhead.inc.php';
+if(0 < count($aEvents))
+	include 'tpl/containerhead.inc.php';
 
 $i=0;
 foreach($aEvents as $event) {
@@ -321,13 +322,14 @@ EOL;
 
 } // foreach
 
-include 'tpl/containerhead.inc.php';
+if(0 < count($aEvents))
+	include 'tpl/containerhead.inc.php';
 
 ?>
 <div id="dialog" title="Details">I'm a dialog</div>
 
 <?php
-if(!$isSearch)
+if(!$isSearch && (0 < count($aEvents)))
 	include 'tpl/paginate.inc.php';
 ?>
 
