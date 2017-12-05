@@ -36,10 +36,11 @@ class Lggr {
 
 	private function getViewName() {
 		switch($this->state->getRange()) {
-			case 1:   return 'LastHour'; break;
-			case 24:  return 'Today'; break;
-			case 168: return 'Week'; break;
-			default:  return 'Today'; break;
+			case 1:    return 'LastHour'; break;
+			case 24:   return 'Today'; break;
+			case 168:  return 'Week'; break;
+			case 8760: return 'Year'; break;
+			default:   return 'Today'; break;
 		}
 	}
 
@@ -87,17 +88,43 @@ ORDER BY c DESC
 		return $a;
 	} // function
 
+	function getAllServers() {
+		$perf = new LggrPerf();
+
+		$sql = "
+SELECT DISTINCT host
+FROM newlogs";
+
+		$a = $this->cache->retrieve("allservers");
+		if(null != $a) {
+			return $a;
+		} // if
+		$a = array();
+
+		$perf->start($sql);
+
+		$res = $this->db->query($sql);
+		if(false === $res) {
+			throw new Exception($this->db->error);
+		} // if
+		while($row = $res->fetch_object()) {
+			$a[] = $row;
+		} // while
+		$res->close();
+
+		$perf->stop();
+		$this->aPerf[] = $perf;
+
+		$this->cache->store("allservers", $a);
+
+		return $a;
+	} // function
+
 	function getServers() {
 		$perf = new LggrPerf();
 
 		$v = $this->getViewName();
 
-/*		$sql = "
-SELECT h.name as host, COUNT(*) AS c
-FROM $v d
-JOIN hosts h ON d.idhost=h.id
-GROUP BY h.id
-ORDER BY c DESC";*/
 		$sql = "
 SELECT host, COUNT(*) AS c 
 FROM (SELECT host FROM $v ORDER BY `date` DESC LIMIT " . self::LASTSTAT . ") AS sub

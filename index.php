@@ -11,6 +11,7 @@ try {
 
 	$aLevels = $l->getLevels();
 	$aServers = $l->getServers();
+	$aAllServers = $l->getAllServers();
 } catch(Exception $e) {
 	echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
 
@@ -22,7 +23,8 @@ try {
 $aRanges = array(
 	'1' => _('This hour'),
 	'24' => _('Today'),
-	'168' => _('Week')
+	'168' => _('Week'),
+	'8760' => _('Year')
 );
 
 $page = $state->getPage();
@@ -193,7 +195,7 @@ EOL;
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 <?php
 $aServerList = array();
-foreach($aServers as $server) {
+foreach($aAllServers as $server) {
 	$aServerList[] = $server->host;
 } // foreach
 sort($aServerList);
