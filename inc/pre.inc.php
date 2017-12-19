@@ -33,10 +33,13 @@ if(isset($_SESSION[LggrState::SESSIONNAME])) {
  *
  * Ansonsten via dpkg-reconfigure locales die fehlenden locales nacherzeugen!
  */
+const MESSAGES='messages';
 $lang = $config->getLocale() . '.UTF-8';
 putenv("LC_ALL=$lang");
 $rc = setlocale(LC_ALL, $lang);
-if(!$rc) error_log("setlocale failed! $lang");
-bindtextdomain('messages', __DIR__ . '/../locale');
-bind_textdomain_codeset('messages', 'UTF-8');
-textdomain('messages');
+if(!$rc) {
+    error_log("setlocale failed! $lang");
+}
+bindtextdomain(MESSAGES, __DIR__ . '/../locale');
+bind_textdomain_codeset(MESSAGES, 'UTF-8');
+textdomain(MESSAGES);

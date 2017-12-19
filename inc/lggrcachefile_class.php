@@ -23,8 +23,7 @@ class LggrCacheFile extends AbstractLggrCache {
 				return null;
 			} else {
 				$s = file_get_contents($fname);
-				$a = unserialize($s);
-				return $a;
+				return unserialize($s);
 			} // if
 		} else {
 			return null;
@@ -39,8 +38,7 @@ class LggrCacheFile extends AbstractLggrCache {
 
 	private function filterKey($key) {
 		$sTmp = str_replace(' ', '-', $key);
-		$sTmp = preg_replace('/[^A-Za-z0-9\-]/', '', $sTmp);
-		return $sTmp;
+		return preg_replace('/[^A-Za-z0-9\-]/', '', $sTmp);
 	} // function
 
 	private function getFilename($key) {

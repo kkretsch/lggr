@@ -24,7 +24,7 @@ body {
 			<p>Your request has been blocked for security reasons. Please try again in a few minutes.
 Should the problem persist, please email me (see the contact page for details) with the
 following unique ID, which will help to identify your request:<br>
-			<tt><?php echo htmlspecialchars($_SERVER["REDIRECT_UNIQUE_ID"], ENT_QUOTES, 'UTF-8'); ?></tt></p>
+			<code><?php echo htmlspecialchars($_SERVER["REDIRECT_UNIQUE_ID"], ENT_QUOTES, 'UTF-8'); ?></code></p>
 		</div><!-- wrapper -->
 	</body>
 </html>

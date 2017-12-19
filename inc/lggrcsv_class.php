@@ -4,7 +4,7 @@
 class LggrCsv {
 	private $lggr=null;
 
-	const aProperties = [
+	const PROPERTIES = [
 		'id',
 		'date',
 		'facility',
@@ -20,8 +20,7 @@ class LggrCsv {
 	} // constructor
 
 	private function generiereDateiname() {
-		$sCsvFilename = 'lggrarchive_' . date('Ymd') . '.csv';
-		return $sCsvFilename;
+		return 'lggrarchive_' . date('Ymd') . '.csv';
 	}
 
 	function generiere() {
@@ -34,14 +33,14 @@ class LggrCsv {
 		foreach($aEntries as $entry) {
 			if(0 == $iCnt) {
 				// Spaltentitel
-				foreach(self::aProperties as $sProp) {
+				foreach(self::PROPERTIES as $sProp) {
 					echo $sProp . ";";
 				} // foreach
 				echo "\n";
 			} // if 0
 
 			// Wertespalten
-			foreach (self::aProperties as $sProp) {
+			foreach (self::PROPERTIES as $sProp) {
 				$sValue = $entry->$sProp;
 
 				switch($sProp) {

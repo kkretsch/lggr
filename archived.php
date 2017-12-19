@@ -56,8 +56,9 @@ if(0 == count($aEvents)) {
 <div class="container-fluid datablock">
 <?php
 
-if(!$isSearch)
+if(!$isSearch) {
 	include 'tpl/paginate.inc.php';
+} // if
 
 include 'tpl/containerhead.inc.php';
 
@@ -108,8 +109,9 @@ EOL;
 <div id="dialog" title="Details">I'm a dialog</div>
 
 <?php
-if(!$isSearch)
+if(!$isSearch) {
 	include 'tpl/paginate.inc.php';
+} // if
 ?>
 
 </div>

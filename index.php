@@ -37,8 +37,12 @@ try {
 		$searchvalueprog = htmlentities($state->getSearchProg(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
 		$isSearch=true;
 		$sFilter = _('Text search for');
-		if('' != $state->getSearch()) $sFilter .= ' message <strong>' . $searchvalue . '</strong>';
-		if('' != $state->getSearchProg()) $sFilter .= ' program <strong>' . $searchvalueprog . '</strong>';
+		if('' != $state->getSearch()) {
+		    $sFilter .= ' message <strong>' . $searchvalue . '</strong>';
+		}
+		if('' != $state->getSearchProg()) {
+		    $sFilter .= ' program <strong>' . $searchvalueprog . '</strong>';
+		}
 
 	} elseif($state->isFromTo() && $state->isHost()) {
 
@@ -62,10 +66,12 @@ try {
 		$searchvalueprog='';
 		$isSearch=false;
 		$sFilter='';
-		if($state->isHost())
+		if($state->isHost()) {
 			$sFilter .= _('Filter by server') . ' <strong>' . htmlentities($state->getHost(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
-		if($state->isLevel())
+		}
+		if($state->isLevel()) {
 			$sFilter .= _('Filter by level') . ' <strong>' . htmlentities($state->getLevel(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+		}
 
 	} elseif($state->isFromTo()) {
 
@@ -169,7 +175,9 @@ if(isset($aLevelCount['notice'])) {
           <h2 title="Reporting servers of last up to <?= Lggr::LASTSTAT ?> entries"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> <?= _('Servers') ?></h2>
 <?php
 foreach($aServers as $server) {
-	if($server->f < 5) continue;
+	if($server->f < 5) {
+	    continue;
+	}
 
 	$server->f = round($server->f);
 
@@ -275,11 +283,13 @@ if(0 == count($aEvents)) {
 <div class="container-fluid datablock">
 <?php
 
-if(!$isSearch && (0 < count($aEvents)))
+if(!$isSearch && (0 < count($aEvents))) {
 	include 'tpl/paginate.inc.php';
+}
 
-if(0 < count($aEvents))
+if(0 < count($aEvents)) {
 	include 'tpl/containerhead.inc.php';
+}
 
 $i=0;
 foreach($aEvents as $event) {
@@ -324,15 +334,17 @@ EOL;
 
 } // foreach
 
-if(0 < count($aEvents))
+if(0 < count($aEvents)) {
 	include 'tpl/containerhead.inc.php';
+}
 
 ?>
 <div id="dialog" title="Details">I'm a dialog</div>
 
 <?php
-if(!$isSearch && (0 < count($aEvents)))
+if(!$isSearch && (0 < count($aEvents))) {
 	include 'tpl/paginate.inc.php';
+}
 ?>
 
 </div>

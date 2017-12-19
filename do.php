@@ -49,8 +49,7 @@ switch($_REQUEST['a']) {
 		break;
 
 	case 'range':
-		$i = intval($_GET['range']);
-		$state->setRange($i);
+		$state->setRange(intval($_GET['range']));
 		$state->setPage(0);
 		$state->setResultSize(0);
 		$state->setFromTo(null,null);
@@ -68,7 +67,9 @@ switch($_REQUEST['a']) {
 	case 'paginate':
 		if(isset($_GET['page'])) {
 			$i = intval($_GET['page']);
-			if($i<0) $i=0;
+			if($i<0) {
+			    $i=0;
+			}
 
 			$page = $i;
 			$state->setPage($page);
@@ -113,6 +114,9 @@ switch($_REQUEST['a']) {
 		exit;
 		break;
 
+	default:
+	    // no idea what to do, just ignore it
+	    break;
 } // switch
 
 $_SESSION[LggrState::SESSIONNAME] = $state;

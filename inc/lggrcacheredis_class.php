@@ -24,13 +24,14 @@ class LggrCacheRedis extends AbstractLggrCache {
 
 	public function retrieve($key) {
 		$value = $this->r->get(SELF::REDISPFX . $key);
-		if(false === $value) return null;
-		$a = unserialize($value);
-		return $a;
+		if(false === $value) {
+		    return null;
+		}
+		return unserialize($value);
 	} // function
 
 	public function purge($key) {
-		$i = $this->r->delete(SELF::REDISPFX . $key);
+		$this->r->delete(SELF::REDISPFX . $key);
 	} // function
 
 } // class

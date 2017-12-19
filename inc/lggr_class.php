@@ -2,6 +2,8 @@
 
 class Lggr {
 	const LASTSTAT=5000;
+	const ARCHIVEDSIZE='archivedSize';
+	const INNERAND=' AND ';
 
 	private $config=null;
 	private $db=null;
@@ -15,8 +17,9 @@ class Lggr {
 		$this->cache = new LggrCacheRedis();
 		$this->aPerf = array(); // of type LggrPerf objects
 
-		if(!$this->state->isLocalCall())
+		if(!$this->state->isLocalCall()) {
 			$this->checkSecurity();
+		}
 
 		$this->db = new mysqli('localhost', $this->config->getDbUSer(), $this->config->getDbPwd(), $this->config->getDbName());
 		$this->db->set_charset('utf8');
@@ -35,13 +38,15 @@ class Lggr {
 	} // function
 
 	private function getViewName() {
+	    $rcView='';
 		switch($this->state->getRange()) {
-			case 1:    return 'LastHour'; break;
-			case 24:   return 'Today'; break;
-			case 168:  return 'Week'; break;
-			case 8760: return 'Year'; break;
-			default:   return 'Today'; break;
+		    case 1:    $rcView = 'LastHour'; break;
+		    case 24:   $rcView = 'Today'; break;
+		    case 168:  $rcView = 'Week'; break;
+		    case 8760: $rcView = 'Year'; break;
+		    default:   $rcView = 'Today'; break;
 		}
+		return $rcView;
 	}
 
 	function getLevels() {
@@ -165,8 +170,8 @@ ORDER BY c DESC";
 	} // function
 
 	function getArchived($from=0, $count=LggrState::PAGELEN) {
-		$iArchivedSize = $this->cache->retrieve("archivedSize");
-		$aArchivedData = $this->cache->retrieve("archivedData" . intval($from));
+	    $iArchivedSize = $this->cache->retrieve(ARCHIVEDSIZE);
+	    $aArchivedData = $this->cache->retrieve(ARCHIVEDSIZE . intval($from));
 
 		if((null != $iArchivedSize) && (null != $aArchivedData)) {
 			$this->state->setResultSize($iArchivedSize);
@@ -366,8 +371,8 @@ LIMIT $from,$count";
 		} // if
 
 		if(count($aWhere) > 0) {
-			$sqlSize .= " WHERE " . implode(' AND ', $aWhere);
-			$sqlData .= " WHERE " . implode(' AND ', $aWhere);
+		    $sqlSize .= " WHERE " . implode(INNERAND, $aWhere);
+		    $sqlData .= " WHERE " . implode(INNERAND, $aWhere);
 		} // if
 
 		$sqlData .= " ORDER BY `date` DESC LIMIT $from,$count";
@@ -521,7 +526,7 @@ AND archived='N'
 			throw new Exception($this->db->error);
 		} // if
 
-		$this->cache->purge("archivedSize");
+		$this->cache->purge(ARCHIVEDSIZE);
 		$this->cache->purge("archivedData0");
 	} // function
 
@@ -545,7 +550,6 @@ GROUP BY newlogs.host";
 				throw new Exception($this->db->error);
 			} // if
 			$id = $this->db->insert_id;
-			// echo "New $id for $host\n";
 
 			$sql = "UPDATE newlogs SET idhost=$id WHERE host='$host'";
 			$res = $this->db->query($sql);
@@ -568,7 +572,6 @@ FROM hosts";
 
 		// search any new entry without hostid and update it
 		foreach($aHosts as $hostName => $hostId) {
-			// echo "updating $hostName to $hostId\n";
 			$hostName = $this->db->escape_string($hostName);
 			$sql = "
 UPDATE newlogs
