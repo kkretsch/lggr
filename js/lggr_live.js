@@ -78,7 +78,7 @@ function loadLatest() {
 		},
 		error: function(e) {
 			console.log(e.message);
-			alert('Ajax error ' + e.message);
+			// alert 'Ajax error ' + e.message
 		}
 	});
 } // function

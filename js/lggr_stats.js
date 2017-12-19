@@ -9,16 +9,16 @@ var options = {
 
 
 var ctx = $("#chartMsgsPerHour").get(0).getContext("2d");
-var chartMsgsPerHour = new Chart(ctx).Bar(dataMsgsPerHour, options);
+new Chart(ctx).Bar(dataMsgsPerHour, options);
 
 ctx = $("#chartServers").get(0).getContext("2d");
-var chartServers = new Chart(ctx).Bar(dataServers, options);
+new Chart(ctx).Bar(dataServers, options);
 
 ctx = $("#chartLevels").get(0).getContext("2d");
-var chartLevels = new Chart(ctx).PolarArea(dataLevels, {animateRotate: true, showScale: false});
+new Chart(ctx).PolarArea(dataLevels, {animateRotate: true, showScale: false});
 
 ctx = $("#chartServersPie").get(0).getContext("2d");
-var chartServers = new Chart(ctx).Doughnut(dataServersPie, options);
+new Chart(ctx).Doughnut(dataServersPie, options);
 
 $('#cloudcontainer').jQCloud(dataCloudWords, {
 	autoResize: true

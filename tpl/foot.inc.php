@@ -49,6 +49,10 @@ case 'live':
     <script src="js/lggr_live.js"></script>
 EOM;
 	break;
+
+default:
+    // ignore
+    break;
 } // switch
 
 ?>

@@ -27,5 +27,8 @@ switch($_REQUEST['a']) {
 
 		break;
 
+	default:
+	    // ignore
+	    break;
 } // switch
 

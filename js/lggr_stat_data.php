@@ -119,7 +119,9 @@ var dataCloudWords = [
 <?php
 foreach($aCloud as $entry) {
 	$prog = $entry->program;
-	if(false !== strpos($prog, '&')) continue;
+	if(false !== strpos($prog, '&')) {
+	    continue;
+	}
 	$prog = htmlspecialchars($prog, ENT_QUOTES|ENT_HTML5, 'UTF-8', false);
 	echo <<<EOL
 		{
