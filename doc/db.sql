@@ -1,7 +1,7 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server Version:               10.0.32-MariaDB-0+deb8u1 - (Debian)
--- Server Betriebssystem:        debian-linux-gnu
+-- Server Version:               10.1.28-MariaDB - mariadb.org binary distribution
+-- Server Betriebssystem:        Win32
 -- HeidiSQL Version:             9.4.0.5125
 -- --------------------------------------------------------
 
@@ -12,13 +12,13 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Exportiere Datenbank Struktur für logger
-CREATE DATABASE IF NOT EXISTS `logger` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `logger`;
+-- Exportiere Datenbank Struktur für lggrdev
+CREATE DATABASE IF NOT EXISTS `lggrdev` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `lggrdev`;
 
--- Exportiere Struktur von View logger.Archived
+-- Exportiere Struktur von View lggrdev.archived
 -- Erstelle temporäre Tabelle um View Abhängigkeiten zuvorzukommen
-CREATE TABLE `Archived` (
+CREATE TABLE `archived` (
 	`id` BIGINT(20) NOT NULL,
 	`date` DATETIME NOT NULL,
 	`facility` ENUM('kern','user','mail','daemon','auth','syslog','lpr','news','uucp','authpriv','ftp','cron','local0','local1','local2','local3','local4','local5','local6','local7') NOT NULL COLLATE 'utf8_general_ci',
@@ -30,9 +30,9 @@ CREATE TABLE `Archived` (
 	`message` TEXT NOT NULL COLLATE 'utf8_general_ci'
 ) ENGINE=MyISAM;
 
--- Exportiere Struktur von View logger.LastHour
+-- Exportiere Struktur von View lggrdev.lasthour
 -- Erstelle temporäre Tabelle um View Abhängigkeiten zuvorzukommen
-CREATE TABLE `LastHour` (
+CREATE TABLE `lasthour` (
 	`id` BIGINT(20) NOT NULL,
 	`date` DATETIME NOT NULL,
 	`facility` ENUM('kern','user','mail','daemon','auth','syslog','lpr','news','uucp','authpriv','ftp','cron','local0','local1','local2','local3','local4','local5','local6','local7') NOT NULL COLLATE 'utf8_general_ci',
@@ -43,7 +43,7 @@ CREATE TABLE `LastHour` (
 	`message` TEXT NOT NULL COLLATE 'utf8_general_ci'
 ) ENGINE=MyISAM;
 
--- Exportiere Struktur von Tabelle logger.newlogs
+-- Exportiere Struktur von Tabelle lggrdev.newlogs
 CREATE TABLE IF NOT EXISTS `newlogs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `date` datetime NOT NULL,
@@ -54,17 +54,27 @@ CREATE TABLE IF NOT EXISTS `newlogs` (
   `pid` int(10) unsigned NOT NULL,
   `archived` enum('Y','N') NOT NULL DEFAULT 'N',
   `message` text NOT NULL,
+  `idhost` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `date` (`date`),
   KEY `level` (`level`) USING HASH,
   KEY `host` (`host`) USING HASH,
   KEY `program` (`program`(5))
-) ENGINE=Aria AUTO_INCREMENT=113636021 DEFAULT CHARSET=utf8 PAGE_CHECKSUM=1 TRANSACTIONAL=1 COMMENT='New logging table';
+) ENGINE=Aria AUTO_INCREMENT=112111909 DEFAULT CHARSET=utf8 PAGE_CHECKSUM=1 TRANSACTIONAL=1 COMMENT='New logging table';
 
 -- Daten Export vom Benutzer nicht ausgewählt
--- Exportiere Struktur von View logger.Today
+-- Exportiere Struktur von Tabelle lggrdev.servers
+CREATE TABLE IF NOT EXISTS `servers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 COMMENT='List of all servers we have referenced in newlogs';
+
+-- Daten Export vom Benutzer nicht ausgewählt
+-- Exportiere Struktur von View lggrdev.today
 -- Erstelle temporäre Tabelle um View Abhängigkeiten zuvorzukommen
-CREATE TABLE `Today` (
+CREATE TABLE `today` (
 	`id` BIGINT(20) NOT NULL,
 	`date` DATETIME NOT NULL,
 	`facility` ENUM('kern','user','mail','daemon','auth','syslog','lpr','news','uucp','authpriv','ftp','cron','local0','local1','local2','local3','local4','local5','local6','local7') NOT NULL COLLATE 'utf8_general_ci',
@@ -75,9 +85,9 @@ CREATE TABLE `Today` (
 	`message` TEXT NOT NULL COLLATE 'utf8_general_ci'
 ) ENGINE=MyISAM;
 
--- Exportiere Struktur von View logger.Week
+-- Exportiere Struktur von View lggrdev.week
 -- Erstelle temporäre Tabelle um View Abhängigkeiten zuvorzukommen
-CREATE TABLE `Week` (
+CREATE TABLE `week` (
 	`id` BIGINT(20) NOT NULL,
 	`date` DATETIME NOT NULL,
 	`facility` ENUM('kern','user','mail','daemon','auth','syslog','lpr','news','uucp','authpriv','ftp','cron','local0','local1','local2','local3','local4','local5','local6','local7') NOT NULL COLLATE 'utf8_general_ci',
@@ -88,9 +98,9 @@ CREATE TABLE `Week` (
 	`message` TEXT NOT NULL COLLATE 'utf8_general_ci'
 ) ENGINE=MyISAM;
 
--- Exportiere Struktur von View logger.Year
+-- Exportiere Struktur von View lggrdev.year
 -- Erstelle temporäre Tabelle um View Abhängigkeiten zuvorzukommen
-CREATE TABLE `Year` (
+CREATE TABLE `year` (
 	`id` BIGINT(20) NOT NULL,
 	`date` DATETIME NOT NULL,
 	`facility` ENUM('kern','user','mail','daemon','auth','syslog','lpr','news','uucp','authpriv','ftp','cron','local0','local1','local2','local3','local4','local5','local6','local7') NOT NULL COLLATE 'utf8_general_ci',
@@ -101,30 +111,30 @@ CREATE TABLE `Year` (
 	`message` TEXT NOT NULL COLLATE 'utf8_general_ci'
 ) ENGINE=MyISAM;
 
--- Exportiere Struktur von View logger.Archived
+-- Exportiere Struktur von View lggrdev.archived
 -- Entferne temporäre Tabelle und erstelle die eigentliche View
-DROP TABLE IF EXISTS `Archived`;
-CREATE ALGORITHM=TEMPTABLE DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `Archived` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`pid` AS `pid`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`archived` = 'Y');
+DROP TABLE IF EXISTS `archived`;
+CREATE ALGORITHM=TEMPTABLE DEFINER=`root`@`localhost` VIEW `archived` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`pid` AS `pid`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`archived` = 'Y') ;
 
--- Exportiere Struktur von View logger.LastHour
+-- Exportiere Struktur von View lggrdev.lasthour
 -- Entferne temporäre Tabelle und erstelle die eigentliche View
-DROP TABLE IF EXISTS `LastHour`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `LastHour` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`date` >= (now() - interval 1 hour));
+DROP TABLE IF EXISTS `lasthour`;
+CREATE ALGORITHM=TEMPTABLE DEFINER=`root`@`localhost` VIEW `lasthour` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`date` >= (now() - interval 1 hour)) ;
 
--- Exportiere Struktur von View logger.Today
+-- Exportiere Struktur von View lggrdev.today
 -- Entferne temporäre Tabelle und erstelle die eigentliche View
-DROP TABLE IF EXISTS `Today`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `Today` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (cast(now() as date) = cast(`newlogs`.`date` as date));
+DROP TABLE IF EXISTS `today`;
+CREATE ALGORITHM=TEMPTABLE DEFINER=`root`@`localhost` VIEW `today` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (cast(now() as date) = cast(`newlogs`.`date` as date)) ;
 
--- Exportiere Struktur von View logger.Week
+-- Exportiere Struktur von View lggrdev.week
 -- Entferne temporäre Tabelle und erstelle die eigentliche View
-DROP TABLE IF EXISTS `Week`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `Week` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`date` >= (now() - interval 168 hour));
+DROP TABLE IF EXISTS `week`;
+CREATE ALGORITHM=TEMPTABLE DEFINER=`root`@`localhost` VIEW `week` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`date` >= (now() - interval 168 hour)) ;
 
--- Exportiere Struktur von View logger.Year
+-- Exportiere Struktur von View lggrdev.year
 -- Entferne temporäre Tabelle und erstelle die eigentliche View
-DROP TABLE IF EXISTS `Year`;
-CREATE ALGORITHM=TEMPTABLE DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `Year` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`date` >= (now() - interval 1 year));
+DROP TABLE IF EXISTS `year`;
+CREATE ALGORITHM=TEMPTABLE DEFINER=`root`@`localhost` VIEW `year` AS select `newlogs`.`id` AS `id`,`newlogs`.`date` AS `date`,`newlogs`.`facility` AS `facility`,`newlogs`.`level` AS `level`,`newlogs`.`host` AS `host`,`newlogs`.`program` AS `program`,`newlogs`.`archived` AS `archived`,`newlogs`.`message` AS `message` from `newlogs` where (`newlogs`.`date` >= (now() - interval 1 year)) ;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
