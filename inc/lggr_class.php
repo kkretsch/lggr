@@ -516,6 +516,62 @@ AND archived='N'
 		return $this->db->affected_rows;
 	} // function
 
+	function updateServers() {
+	    $perf = new LggrPerf();
+	    $iCount = 0;
+
+	    // First, get list of all known servers
+	    $sql = "SELECT id,name FROM servers";
+	    $perf->start($sql);
+	    $aServersKnownObj = $this->sendResult($sql);
+	    $perf->stop();
+	    $this->aPerf[] = $perf;
+        //print_r($aServersKnownObj);
+        $aServersKnown = array();
+        foreach($aServersKnownObj as $obj) {
+            $aServersKnown[$obj->name] = $obj->id;
+        } // foreach
+        //print_r($aServersKnown);
+        
+	    // Second, get list of all used servers in logs
+	    $sql = "SELECT DISTINCT host FROM newlogs";
+	    $perf->start($sql);
+	    $aServersUsed = $this->sendResult($sql);
+	    $perf->stop();
+	    $this->aPerf[] = $perf;
+	    //print_r($aServersUsed);
+
+	    // Third, Look for servers not yet in the known servers list
+	    foreach($aServersUsed as $obj) {
+	        $sName = $obj->host;
+	        if(array_key_exists($sName, $aServersKnown)) {
+	            // already existing
+	        } else {
+	            $sName = $this->db->escape_string($sName);
+	            $sql = "INSERT INTO servers SET name='$sName'";
+	            $res = $this->db->query($sql);
+	            if(false === $res) {
+	                throw new Exception($this->db->error);
+	            } // if
+	            $iCount++;
+	        } // if
+	    } // foreach
+
+	    // Fourth, add foreign key of server to new entries with null foreign key
+	    foreach($aServersKnown as $sName => $sID) {
+	        $sName = $this->db->escape_string($sName);
+	        $sql = "UPDATE newlogs SET idhost=$sID WHERE host='$sName' AND idhost IS NULL";
+	        $res = $this->db->query($sql);
+	        if(false === $res) {
+	            throw new Exception($this->db->error);
+	        } // if
+	        $iCount += $this->db->affected_rows;
+	    } // foreach
+
+	    // return to caller
+	    return $iCount;
+	}
+
 	function setArchive($iID, $bIsArchived) {
 		$iID = intval($iID);
 		if($bIsArchived) {
