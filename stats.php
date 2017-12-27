@@ -3,6 +3,7 @@
 require 'inc/pre.inc.php';
 
 $searchvalue='';
+$searchvalueprog = '';
 
 define('TITLE', 'statistics');
 require 'tpl/head.inc.php';
