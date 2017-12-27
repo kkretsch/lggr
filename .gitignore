@@ -3,3 +3,4 @@ cache/key_*
 test/*
 test/
 contrib/*
+*.bak
