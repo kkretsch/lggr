@@ -16,6 +16,7 @@ class Config extends AbstractConfig {
 		$this->setUrlJqueryui('//code.jquery.com/ui/1.11.4/');
 		$this->setUrlJAtimepicker('//cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.4.5/');
 		$this->setUrlChartjs('//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/');
+		$this->setUrlJQCloud('//cdnjs.cloudflare.com/ajax/libs/jqcloud/1.0.4/');
 
 /* local storage */
 /*
