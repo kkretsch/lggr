@@ -101,14 +101,8 @@ ORDER BY c DESC
 		$perf = new LggrPerf();
 
 		$sql = "
-SELECT DISTINCT host
-FROM newlogs";
-
-		$a = $this->cache->retrieve("allservers");
-		if(null != $a) {
-			return $a;
-		} // if
-		$a = array();
+SELECT id,name AS host
+FROM servers";
 
 		$perf->start($sql);
 
@@ -123,10 +117,34 @@ FROM newlogs";
 
 		$perf->stop();
 		$this->aPerf[] = $perf;
-
-		$this->cache->store("allservers", $a);
-
+		
 		return $a;
+	} // function
+
+	function getServersName($id) {
+	    $perf = new LggrPerf();
+	    
+	    $sql = "
+SELECT name
+FROM servers
+WHERE id=$id";
+	    
+	    $perf->start($sql);
+
+	    $a = null;
+	    $res = $this->db->query($sql);
+	    if(false === $res) {
+	        throw new Exception($this->db->error);
+	    } // if
+	    if($row = $res->fetch_object()) {
+	        $a = $row;
+	    } // while
+	    $res->close();
+	    
+	    $perf->stop();
+	    $this->aPerf[] = $perf;
+
+	    return $a->name;
 	} // function
 
 	function getServers() {
@@ -325,19 +343,19 @@ LIMIT $from,$count";
 		$perfSize = new LggrPerf();
 		$perfData = new LggrPerf();
 
-		$sHost = $this->db->escape_string($this->state->getHost());
+		$iHost = $this->state->getHostId();
 		$sFrom = $this->db->escape_string($this->state->getFrom());
 		$sTo   = $this->db->escape_string($this->state->getTo());
 
 		$sqlSize = "
 SELECT COUNT(*) AS c FROM newlogs
 WHERE `date` BETWEEN '$sFrom' AND '$sTo'
-AND host='$sHost'";
+AND idhost=$iHost";
 
 		$sqlData = "
 SELECT * FROM newlogs
 WHERE `date` BETWEEN '$sFrom' AND '$sTo'
-AND host='$sHost'
+AND idhost=$iHost
 ORDER BY `date` DESC
 LIMIT $from,$count";
 
@@ -375,8 +393,8 @@ LIMIT $from,$count";
 		} // if
 
 		if(count($aWhere) > 0) {
-		    $sqlSize .= " WHERE " . implode(INNERAND, $aWhere);
-		    $sqlData .= " WHERE " . implode(INNERAND, $aWhere);
+		    $sqlSize .= " WHERE " . implode(Lggr::INNERAND, $aWhere);
+		    $sqlData .= " WHERE " . implode(Lggr::INNERAND, $aWhere);
 		} // if
 
 		$sqlData .= " ORDER BY `date` DESC LIMIT $from,$count";

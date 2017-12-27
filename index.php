@@ -46,19 +46,19 @@ try {
 
 	} elseif($state->isFromTo() && $state->isHost()) {
 
-		$host = $state->getHost();
+		$host = $state->getHostName();
 
 		$aEvents = $l->getHostFromTo($page*LggrState::PAGELEN, LggrState::PAGELEN);
 
 		$sFilter = _('Filter by time range between') . ' <strong>' . htmlentities($state->getFrom(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> ' . _('and') . ' <strong>' . htmlentities($state->getTo(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>, ';
-		$sFilter .= _('Filter by server') . ' <strong>' . htmlentities($state->getHost(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+		$sFilter .= _('Filter by server') . ' <strong>' . htmlentities($state->getHostName(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
 		$searchvalue='';
 		$searchvalueprog='';
 		$isSearch=false;
 
 	} elseif($state->isHost() || $state->isLevel()) {
 
-		$host = $state->getHost();
+		$host = $state->getHostName();
 		$level = $state->getLevel();
 
 		$aEvents = $l->getFiltered($host, $level, $page*LggrState::PAGELEN, LggrState::PAGELEN);
@@ -67,7 +67,7 @@ try {
 		$isSearch=false;
 		$sFilter='';
 		if($state->isHost()) {
-			$sFilter .= _('Filter by server') . ' <strong>' . htmlentities($state->getHost(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+			$sFilter .= _('Filter by server') . ' <strong>' . htmlentities($state->getHostName(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
 		}
 		if($state->isLevel()) {
 			$sFilter .= _('Filter by level') . ' <strong>' . htmlentities($state->getLevel(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
@@ -204,11 +204,11 @@ EOL;
 <?php
 $aServerList = array();
 foreach($aAllServers as $server) {
-	$aServerList[] = $server->host;
+    $aServerList[$server->host] = $server->id;
 } // foreach
-sort($aServerList);
-foreach($aServerList as $server) {
-	echo '<li role="presentation"><a role="menuitem" tabindex="-1" href="./do.php?a=host&host=' . urlencode($server) . '">' . $server . '</a></li>';
+ksort($aServerList);
+foreach($aServerList as $servername => $serverid) {
+    echo '<li role="presentation"><a role="menuitem" tabindex="-1" href="./do.php?a=host&hostid=' . $serverid . '">' . $servername . '</a></li>';
 } // foreach
 ?>
   </ul>

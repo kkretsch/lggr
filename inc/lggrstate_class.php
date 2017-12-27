@@ -10,7 +10,8 @@ class LggrState {
 	private $sSearch=null;
 	private $sSearchProg=null;
 	private $iPage=0;
-	private $sHost=null;
+	private $sHostName=null;
+	private $iHost=0;
 	private $sLevel=null;
 	private $iRange=24;	// default 24h = today, sort of
 	private $bFromTo=false;
@@ -26,7 +27,8 @@ class LggrState {
 		$this->sSearch=null;
 		$this->bSearchProg=false;
 		$this->sSearchProg=null;
-		$this->sHost=null;
+		$this->sHostName=null;
+		$this->iHost=0;
 		$this->sLevel=null;
 		$this->iRange=24;
 		$this->bFromTo=false;
@@ -66,16 +68,22 @@ class LggrState {
 		return $this->iPage;
 	}
 
-	public function setHost($s) {
-		$this->sHost = $s;
+	public function setHostName($s) {
+		$this->sHostName = $s;
 	}
-	public function getHost() {
-		return $this->sHost;
+	public function getHostName() {
+		return $this->sHostName;
+	}
+	public function setHostId($id) {
+	    $this->iHost = $id;
+	}
+	public function getHostId() {
+	    return $this->iHost;
 	}
 	public function isHost() {
-		return null != $this->sHost;
+	    return 0 != $this->iHost;
 	}
-
+	
 	public function setLevel($s) {
 		$this->sLevel = $s;
 	}

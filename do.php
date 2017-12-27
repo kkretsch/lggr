@@ -37,7 +37,11 @@ switch($_REQUEST['a']) {
 		break;
 
 	case 'host':
-		$state->setHost($_GET['host']);
+	    $config = new Config();
+	    $l = new Lggr($state, $config);
+	    $id = intval($_GET['hostid']);
+	    $state->setHostName($l->getServersName($id));
+		$state->setHostId($id);
 		$state->setPage(0);
 		$state->setResultSize(0);
 		break;
