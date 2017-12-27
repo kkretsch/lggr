@@ -14,7 +14,7 @@ class Lggr {
 	function __construct(LggrState $state, AbstractConfig $config) {
 		$this->config = $config;
 		$this->state = $state;
-		$this->cache = new LggrCacheRedis();
+		$this->cache = new LggrCacheFile(); // new LggrCacheRedis();
 		$this->aPerf = array(); // of type LggrPerf objects
 
 		if(!$this->state->isLocalCall()) {
@@ -32,6 +32,10 @@ class Lggr {
 	} // destructor
 
 	private function checkSecurity() {
+	    // local access allowed without login data
+	    if($_SERVER["REMOTE_ADDR"] === "::1") {
+	        return;
+	    }
 		if(!isset($_SERVER['REMOTE_USER'])) {
 			throw new Exception('You must enable basic authentication');
 		} // if
