@@ -37,7 +37,7 @@ class Lggr {
 	        return;
 	    }
 		if(!isset($_SERVER['REMOTE_USER'])) {
-			throw new Exception('You must enable basic authentication');
+		    throw new LggrException('You must enable basic authentication');
 		} // if
 	} // function
 
@@ -74,7 +74,7 @@ ORDER BY c DESC
 
 		$res = $this->db->query($sql);
 		if(false === $res) {
-			throw new Exception($this->db->error);
+		    throw new LggrException($this->db->error);
 		} // if
 		while($row = $res->fetch_object()) {
 			$a[] = $row;
@@ -108,7 +108,7 @@ FROM servers";
 
 		$res = $this->db->query($sql);
 		if(false === $res) {
-			throw new Exception($this->db->error);
+		    throw new LggrException($this->db->error);
 		} // if
 		while($row = $res->fetch_object()) {
 			$a[] = $row;
@@ -134,7 +134,7 @@ WHERE id=$id";
 	    $a = null;
 	    $res = $this->db->query($sql);
 	    if(false === $res) {
-	        throw new Exception($this->db->error);
+	        throw new LggrException($this->db->error);
 	    } // if
 	    if($row = $res->fetch_object()) {
 	        $a = $row;
@@ -168,7 +168,7 @@ ORDER BY c DESC";
 
 		$res = $this->db->query($sql);
 		if(false === $res) {
-			throw new Exception($this->db->error);
+		    throw new LggrException($this->db->error);
 		} // if
 		while($row = $res->fetch_object()) {
 			$a[] = $row;
@@ -526,7 +526,7 @@ AND archived='N'
 		$perf->start($sql);
 		$res = $this->db->query($sql);
 		if(false === $res) {
-			throw new Exception($this->db->error);
+		    throw new LggrException($this->db->error);
 		} // if
 		$perf->stop();
 		$this->aPerf[] = $perf;
@@ -569,7 +569,7 @@ AND archived='N'
 	            $sql = "INSERT INTO servers SET name='$sName'";
 	            $res = $this->db->query($sql);
 	            if(false === $res) {
-	                throw new Exception($this->db->error);
+	                throw new LggrException($this->db->error);
 	            } // if
 	            $iCount++;
 	        } // if
@@ -581,7 +581,7 @@ AND archived='N'
 	        $sql = "UPDATE newlogs SET idhost=$sID WHERE host='$sName' AND idhost IS NULL";
 	        $res = $this->db->query($sql);
 	        if(false === $res) {
-	            throw new Exception($this->db->error);
+	            throw new LggrException($this->db->error);
 	        } // if
 	        $iCount += $this->db->affected_rows;
 	    } // foreach
@@ -601,7 +601,7 @@ AND archived='N'
 		$sql = "UPDATE newlogs SET archived='$sArchive' WHERE id=$iID LIMIT 1";
 		$res = $this->db->query($sql);
 		if(false === $res) {
-			throw new Exception($this->db->error);
+		    throw new LggrException($this->db->error);
 		} // if
 
 		$this->cache->purge(ARCHIVEDSIZE);
@@ -625,14 +625,14 @@ GROUP BY newlogs.host";
 			$sql = "INSERT INTO hosts (name) VALUES ('$host')";
 			$res = $this->db->query($sql);
 			if(false === $res) {
-				throw new Exception($this->db->error);
+			    throw new LggrException($this->db->error);
 			} // if
 			$id = $this->db->insert_id;
 
 			$sql = "UPDATE newlogs SET idhost=$id WHERE host='$host'";
 			$res = $this->db->query($sql);
 			if(false === $res) {
-				throw new Exception($this->db->error);
+			    throw new LggrException($this->db->error);
 			} // if
 		} // foreach
 
@@ -659,7 +659,7 @@ AND host='$hostName'
 ";
 			$res = $this->db->query($sql);
 			if(false === $res) {
-				throw new Exception($this->db->error);
+			    throw new LggrException($this->db->error);
 			} // if
 		} // foreach
 
@@ -669,7 +669,7 @@ AND host='$hostName'
 	private function getResultSize($sql) {
 		$res = $this->db->query($sql);
 		if(false === $res) {
-			throw new Exception($this->db->error);
+		    throw new LggrException($this->db->error);
 		} // if
 		if($row = $res->fetch_object()) {
 			$i = $row->c;
@@ -683,7 +683,7 @@ AND host='$hostName'
 
 		$res = $this->db->query($sql);
 		if(false === $res) {
-			throw new Exception($this->db->error);
+		    throw new LggrException($this->db->error);
 		} // if
 		while($row = $res->fetch_object()) {
 			$a[] = $row;

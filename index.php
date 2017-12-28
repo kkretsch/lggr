@@ -12,7 +12,7 @@ try {
 	$aLevels = $l->getLevels();
 	$aServers = $l->getServers();
 	$aAllServers = $l->getAllServers();
-} catch(Exception $e) {
+} catch(LggrException $e) {
 	echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
 
 	require 'tpl/foot.inc.php';
@@ -91,7 +91,7 @@ try {
 		$isSearch=false;
 
 	} // if search
-} catch(Exception $e) {
+} catch(LggrException $e) {
 	echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
 
 	require 'tpl/foot.inc.php';

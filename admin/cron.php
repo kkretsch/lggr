@@ -17,7 +17,7 @@ try {
 
 	$iCount = $l->purgeOldMessages();
 	$aPerf = $l->getPerf();
-} catch(Exception $e) {
+} catch(LggrException $e) {
 	die($e->getMessage());
 } // try
 

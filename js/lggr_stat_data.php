@@ -39,7 +39,7 @@ try {
 	$aMsgPerHour = $l->getMessagesPerHour();
 
 	$aCloud = $l->getCloud();
-} catch(Exception $e) {
+} catch(LggrException $e) {
 
 	exit;
 }

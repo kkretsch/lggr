@@ -22,7 +22,7 @@ try {
 	$aArchivedStatistic = $aArchivedStatistic[0];
 
 	$aMsgPerHour = $l->getMessagesPerHour();
-} catch(Exception $e) {
+} catch(LggrException $e) {
 	echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
 
 	require 'tpl/foot.inc.php';

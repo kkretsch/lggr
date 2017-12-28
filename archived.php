@@ -8,7 +8,7 @@ require 'tpl/head.inc.php';
 $l = null;
 try {
 	$l = new Lggr($state, $config);
-} catch(Exception $e) {
+} catch(LggrException $e) {
 	echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
 
 	require 'tpl/foot.inc.php';
@@ -23,7 +23,7 @@ try {
 	$searchvalue='';
 	$searchvalueprog='';
 	$isSearch=false;
-} catch(Exception $e) {
+} catch(LggrException $e) {
 	echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
 
 	require 'tpl/foot.inc.php';
