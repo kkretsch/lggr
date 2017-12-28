@@ -1,22 +1,21 @@
 <?php
-
-spl_autoload_register(function($class) {
-	$class = strtolower($class);
-	$class = str_replace('\\', '/', $class);
-	include __DIR__ . '/' . $class . '_class.php';
+spl_autoload_register(function ($class) {
+    $class = strtolower($class);
+    $class = str_replace('\\', '/', $class);
+    include __DIR__ . '/' . $class . '_class.php';
 });
 
 $config = new Config();
 
 session_start();
 
-if(isset($_SESSION[LggrState::SESSIONNAME])) {
-	$state = $_SESSION[LggrState::SESSIONNAME];
+if (isset($_SESSION[LggrState::SESSIONNAME])) {
+    $state = $_SESSION[LggrState::SESSIONNAME];
 } else {
-	$state = new LggrState();
-} // if
-
-
+    $state = new LggrState();
+}
+ // if
+  
 // Uebersetzungen via gettext vorbereiten
 /*
  * Auf dem Server ausführen:
@@ -33,11 +32,11 @@ if(isset($_SESSION[LggrState::SESSIONNAME])) {
  *
  * Ansonsten via dpkg-reconfigure locales die fehlenden locales nacherzeugen!
  */
-const MESSAGES='messages';
+const MESSAGES = 'messages';
 $lang = $config->getLocale() . '.UTF-8';
 putenv("LC_ALL=$lang");
 $rc = setlocale(LC_ALL, $lang);
-if(!$rc) {
+if (! $rc) {
     error_log("setlocale failed! $lang");
 }
 bindtextdomain(MESSAGES, __DIR__ . '/../locale');

@@ -1,36 +1,44 @@
 <?php
 
-class LggrPerf {
-	private $tsStart=null;
-	private $tsEnd=null;
-	private $tsLen=null;
-	private $sQuery=null;
+class LggrPerf
+{
 
-	function __construct() {
-	} // constructor
+    private $tsStart = null;
 
-	public function start($sql) {
-		$this->sQuery = $sql;
-		$this->tsStart = microtime(true);
-	} // function
+    private $tsEnd = null;
 
-	public function stop() {
-		$this->tsEnd = microtime(true);
-		$this->tsLen = $this->tsEnd - $this->tsStart;
-	} // function
+    private $tsLen = null;
 
-	public function getPerf() {
-		$a = array();
+    private $sQuery = null;
 
-		$a['time'] = $this->tsLen;
-		$a['query'] = $this->sQuery;
-
-		$this->logperf();
-
-		return $a;
-	} // function
-
-	private function logPerf() {
-	} // function
+    function __construct()
+    {}
+ // constructor
+    public function start($sql)
+    {
+        $this->sQuery = $sql;
+        $this->tsStart = microtime(true);
+    }
+ // function
+    public function stop()
+    {
+        $this->tsEnd = microtime(true);
+        $this->tsLen = $this->tsEnd - $this->tsStart;
+    }
+ // function
+    public function getPerf()
+    {
+        $a = array();
+        
+        $a['time'] = $this->tsLen;
+        $a['query'] = $this->sQuery;
+        
+        $this->logperf();
+        
+        return $a;
+    }
+ // function
+    private function logPerf()
+    {} // function
 }
 
