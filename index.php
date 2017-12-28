@@ -193,9 +193,9 @@ foreach ($aServers as $server) {
     
     echo <<<EOL
 <div class="progress">
-	<div class="progress-bar" role="progressbar" aria-valuenow="{$server->f}" aria-valuemin="0" aria-valuemax="100" style="width: {$server->f}%; min-width: 3em" title="{$server->host} {$server->f}%">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{$server->f}" aria-valuemin="0" aria-valuemax="100" style="width: {$server->f}%; min-width: 3em" title="{$server->host} {$server->f}%">
 {$server->host} {$server->f}%
-	</div>
+    </div>
 </div>
 EOL;
 } // foreach
@@ -230,10 +230,7 @@ foreach ($aServerList as $servername => $serverid) {
 ?>
   </ul>
                             </div>
-                            <!-- dropdown -->
-
-                            <p>
-                            
+                            <!-- dropdown -->                            
                             
                             <div class="btn-group btn-group-xs"
                                 role="group" aria-label="level">
@@ -247,10 +244,6 @@ foreach ($aLevels as $level) {
 } // foreach
 ?>
 </div>
-                            </p>
-
-                            <p>
-                            
                             
                             <div class="btn-group" role="group"
                                 aria-label="range">
@@ -271,7 +264,6 @@ if ($state->isFromTo()) {
 
 ?>
 </div>
-                            </p>
 
                             <form action="do.php" method="post"
                                 id="tsfromto">
@@ -385,12 +377,12 @@ foreach ($aEvents as $event) {
     
     echo <<<EOL
 <div class="row datarow $rowclass" data-id="{$event->id}">
-	<div class="col-md-2 col-xs-6 newlog-date">{$event->date}</div>
-	<div class="col-md-1 col-xs-2">{$event->facility}</div>
-	<div class="col-md-1 col-xs-2">$archived $label</div>
-	<div class="col-md-1 col-xs-2">$host</div>
-	<div class="col-md-2 col-xs-12">$program</div>
-	<div class="col-md-5 col-xs-12 newlog-msg" title="$msg"><tt>{$msg}</tt></div>
+    <div class="col-md-2 col-xs-6 newlog-date">{$event->date}</div>
+    <div class="col-md-1 col-xs-2">{$event->facility}</div>
+    <div class="col-md-1 col-xs-2">$archived $label</div>
+    <div class="col-md-1 col-xs-2">$host</div>
+    <div class="col-md-2 col-xs-12">$program</div>
+    <div class="col-md-5 col-xs-12 newlog-msg" title="$msg"><tt>{$msg}</tt></div>
 </div><!-- row -->
 EOL;
 } // foreach
