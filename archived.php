@@ -39,7 +39,7 @@ require 'tpl/nav.inc.php';
 
 <div class="container" id="infoheader">
 	<?= _('Archived') ?>, <a href="./do.php?a=exportarchive"
-		target="_blank">export</a> to csv.
+        target="_blank">export</a> to csv.
 </div>
 
 <div class="container">

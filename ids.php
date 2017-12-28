@@ -6,16 +6,16 @@
 <meta name="robots" content="noindex">
 <style type="text/css">
 body {
-	margin: 0;
-	padding: 0;
-	font-family: Verdana, Arial, sans-serif;
-	background-color: #000;
-	color: #f00;
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Arial, sans-serif;
+    background-color: #000;
+    color: #f00;
 }
 
 #wrapper {
-	width: 500px;
-	margin: 0 auto;
+    width: 500px;
+    margin: 0 auto;
 }
 </style>
 </head>

@@ -89,12 +89,12 @@ foreach ($aEvents as $event) {
     
     echo <<<EOL
 <div class="row datarow $rowclass" data-id="{$event->id}">
-	<div class="col-md-2 col-xs-6 newlog-date">{$event->date}</div>
-	<div class="col-md-1 col-xs-2">{$event->facility}</div>
-	<div class="col-md-1 col-xs-2">$label</div>
-	<div class="col-md-1 col-xs-2">$host</div>
-	<div class="col-md-2 col-xs-12">$program</div>
-	<div class="col-md-5 col-xs-12 newlog-msg" title="$msg"><tt>{$msg}</tt></div>
+    <div class="col-md-2 col-xs-6 newlog-date">{$event->date}</div>
+    <div class="col-md-1 col-xs-2">{$event->facility}</div>
+    <div class="col-md-1 col-xs-2">$label</div>
+    <div class="col-md-1 col-xs-2">$host</div>
+    <div class="col-md-2 col-xs-12">$program</div>
+    <div class="col-md-5 col-xs-12 newlog-msg" title="$msg"><tt>{$msg}</tt></div>
 </div><!-- row -->
 EOL;
 } // foreach
@@ -105,5 +105,4 @@ EOL;
 
 <?php
 $aPerf = $l->getPerf();
-require 'tpl/foot.inc.php'
-?>
+require 'tpl/foot.inc.php'?>

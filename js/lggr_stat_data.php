@@ -9,6 +9,8 @@ $searchvalue = '';
 
 session_start();
 
+define('COLORALERT', 'd9534f');
+
 if (isset($_SESSION[LggrState::SESSIONNAME])) {
     $state = $_SESSION[LggrState::SESSIONNAME];
 } else {
@@ -16,9 +18,9 @@ if (isset($_SESSION[LggrState::SESSIONNAME])) {
 } // if
 
 $aColors = array(
-    'emerg' => '#d9534f',
-    'crit' => '#d9534f',
-    'err' => '#d9534f',
+    'emerg' => COLORALERT,
+    'crit' => COLORALERT,
+    'err' => COLORALERT,
     'warning' => '#f0ad4e',
     'notice' => '#337ab7',
     'info' => '#5cb85c'

@@ -393,19 +393,18 @@ foreach ($aEvents as $event) {
 	<div class="col-md-5 col-xs-12 newlog-msg" title="$msg"><tt>{$msg}</tt></div>
 </div><!-- row -->
 EOL;
-
 } // foreach
 
-if(0 < count($aEvents)) {
-	include 'tpl/containerhead.inc.php';
+if (0 < count($aEvents)) {
+    include 'tpl/containerhead.inc.php';
 }
 
 ?>
 <div id="dialog" title="Details">I'm a dialog</div>
 
 <?php
-if(!$isSearch && (0 < count($aEvents))) {
-	include 'tpl/paginate.inc.php';
+if (! $isSearch && (0 < count($aEvents))) {
+    include 'tpl/paginate.inc.php';
 }
 ?>
 
@@ -413,5 +412,4 @@ if(!$isSearch && (0 < count($aEvents))) {
 
 <?php
 $aPerf = $l->getPerf();
-require 'tpl/foot.inc.php'
-?>
+require 'tpl/foot.inc.php'?>
