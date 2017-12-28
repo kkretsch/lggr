@@ -117,7 +117,7 @@ require 'tpl/nav.inc.php';
                 <div class="panel-body">
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 lggr-col-level">
                             <h2
                                 title="Levels of last up to <?= Lggr::LASTSTAT ?> entries">
                                 <span class="glyphicon glyphicon-tasks"
@@ -177,7 +177,7 @@ if (isset($aLevelCount['notice'])) {
 	</p>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 lggr-col-server">
                             <h2
                                 title="Reporting servers of last up to <?= Lggr::LASTSTAT ?> entries">
                                 <span
@@ -203,12 +203,12 @@ EOL;
           <p><?= _('Most reporting servers (5% or more).') ?></p>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 lggr-col-filter">
                             <h2>
                                 <span class="glyphicon glyphicon-filter"
                                     aria-hidden="true"></span> Filter
                             </h2>
-                            <div class="dropdown">
+                            <div class="dropdown lggr-formelement">
                                 <button
                                     class="btn btn-default dropdown-toggle"
                                     type="button" id="dropdownMenu1"
@@ -232,7 +232,7 @@ foreach ($aServerList as $servername => $serverid) {
                             </div>
                             <!-- dropdown -->                            
                             
-                            <div class="btn-group btn-group-xs"
+                            <div class="btn-group btn-group-xs lggr-formelement"
                                 role="group" aria-label="level">
 <?php
 foreach ($aLevels as $level) {
@@ -245,7 +245,7 @@ foreach ($aLevels as $level) {
 ?>
 </div>
                             
-                            <div class="btn-group" role="group"
+                            <div class="btn-group lggr-formelement" role="group"
                                 aria-label="range">
 <?php
 foreach ($aRanges as $rangeValue => $rangeText) {
