@@ -174,7 +174,7 @@ if (isset($aLevelCount['notice'])) {
     echo '<button class="btn btn-sm btn-primary" type="button">Notice <span class="badge">' . $aLevelCount['notice'] . '</span></button> ';
 }
 ?>
-	</p>
+    </p>
                         </div>
 
                         <div class="col-md-4 lggr-col-server">

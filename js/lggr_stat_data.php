@@ -85,11 +85,11 @@ foreach ($aLevels as $level) {
     $newVal = round(log($level->c));
     $newCol = $aColors[$level->level];
     echo <<<EOL
-	{
-		value: $newVal,
-		color: "$newCol",
-		label: "{$level->level}",
-	},
+    {
+        value: $newVal,
+        color: "$newCol",
+        label: "{$level->level}",
+    },
 
 EOL;
 } // foreach
@@ -103,12 +103,12 @@ foreach ($aServers as $server) {
     $cHash = $sHash[0] . '0' . $sHash[1] . '0' . $sHash[2] . '0';
     $cHashHigh = $sHash[0] . 'f' . $sHash[1] . 'f' . $sHash[2] . 'f';
     echo <<<EOL
-	{
-		value: {$server->c},
-		color: "#$cHash",
-		highlight: "#$cHashHigh",
-		label: "{$server->host}"
-	},
+    {
+        value: {$server->c},
+        color: "#$cHash",
+        highlight: "#$cHashHigh",
+        label: "{$server->host}"
+    },
 
 EOL;
 } // foreach
@@ -125,10 +125,10 @@ foreach ($aCloud as $entry) {
     }
     $prog = htmlspecialchars($prog, ENT_QUOTES | ENT_HTML5, 'UTF-8', false);
     echo <<<EOL
-		{
-			text: "{$prog}",
-			weight: {$entry->c}
-		},
+        {
+            text: "{$prog}",
+            weight: {$entry->c}
+        },
 
 EOL;
 } // foreach
