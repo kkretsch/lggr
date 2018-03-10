@@ -1,11 +1,14 @@
 <nav>
     <ul class="pagination">
 <?php
+
+define('TAG_ARIALABEL', '" aria-label="');
+
 $maxPages = ceil($state->getResultSize() / LggrState::PAGELEN); // maximum pages
 
 if ($page > 9) {
     echo '<li><a class="" href="./do.php?a=paginate&page=' . ($page - 10) .
-         '" aria-label="' . _('Ten left') .
+    TAG_ARIALABEL . _('Ten left') .
          '"><span aria-hidden="true">&lArr;</span></a></li>';
 } else {
     echo '<li class="disabled"><a href="#" aria-label="' . _('Ten left') .
@@ -14,7 +17,7 @@ if ($page > 9) {
 
 if ($page > 0) {
     echo '<li><a class="pageleft" href="./do.php?a=paginate&page=' . ($page - 1) .
-         '" aria-label="' . _('Previous') .
+    TAG_ARIALABEL . _('Previous') .
          '"><span aria-hidden="true">&laquo;</span></a></li>';
 } else {
     echo '<li class="disabled"><a href="#" aria-label="' . _('Previous') .
@@ -44,21 +47,21 @@ if ($page + 4 < $maxPages) {
 
 if ($page + 1 >= $maxPages) {
     echo '<li class="disabled"><a href="./do.php?a=paginate&page=' . ($page + 1) .
-         '" aria-label="' . _('Next') .
+    TAG_ARIALABEL . _('Next') .
          '"><span aria-hidden="true">&raquo;</span></a></li>';
 } else {
     echo '<li><a class="pageright" href="./do.php?a=paginate&page=' . ($page + 1) .
-         '" aria-label="' . _('Next') .
+    TAG_ARIALABEL . _('Next') .
          '"><span aria-hidden="true">&raquo;</span></a></li>';
 } // if
 
 if ($page + 10 >= $maxPages) {
     echo '<li class="disabled"><a href="./do.php?a=paginate&page=' . ($page + 10) .
-         '" aria-label="' . _('Ten right') .
+    TAG_ARIALABEL . _('Ten right') .
          '"><span aria-hidden="true">&rArr;</span></a></li>';
 } else {
     echo '<li><a class="pageright" href="./do.php?a=paginate&page=' .
-         ($page + 10) . '" aria-label="' . _('Ten right') .
+        ($page + 10) . TAG_ARIALABEL . _('Ten right') .
          '"><span aria-hidden="true">&rArr;</span></a></li>';
 } // if
 
