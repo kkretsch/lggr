@@ -4,6 +4,8 @@ require 'inc/pre.inc.php';
 define('TITLE', 'overview');
 require 'tpl/head.inc.php';
 
+define('INC_FOOTER', 'tpl/foot.inc.php');
+
 $l = null;
 try {
     $l = new Lggr($state, $config);
@@ -13,10 +15,9 @@ try {
     $aAllServers = $l->getAllServers();
 }
 catch (LggrException $e) {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">' .
-         $e->getMessage() . '</div></div>';
-    
-    require 'tpl/foot.inc.php';
+    echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
+
+    require INC_FOOTER;
     
     exit();
 }
@@ -110,10 +111,9 @@ try {
     } // if search
 }
 catch (LggrException $e) {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">' .
-         $e->getMessage() . '</div></div>';
-    
-    require 'tpl/foot.inc.php';
+    echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
+
+    require INC_FOOTER;
     
     exit();
 }
@@ -448,4 +448,5 @@ if (! $isSearch && (0 < count($aEvents))) {
 
 <?php
 $aPerf = $l->getPerf();
-require 'tpl/foot.inc.php'?>
+require INC_FOOTER;
+?>
