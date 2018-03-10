@@ -6,6 +6,10 @@ require 'tpl/head.inc.php';
 
 define('INC_FOOTER', 'tpl/foot.inc.php');
 
+define('TAG_STRONG_CLOSE', '</strong>');
+define('TAG_BUTTON_CLOSE', '</button>');
+define('TAG_SPANBUTTON_CLOSE', '</span></button>');
+
 $l = null;
 try {
     $l = new Lggr($state, $config);
@@ -43,10 +47,10 @@ try {
         $isSearch = true;
         $sFilter = _('Text search for');
         if ('' != $state->getSearch()) {
-            $sFilter .= ' message <strong>' . $searchvalue . '</strong>';
+            $sFilter .= ' message <strong>' . $searchvalue . TAG_STRONG_CLOSE;
         }
         if ('' != $state->getSearchProg()) {
-            $sFilter .= ' program <strong>' . $searchvalueprog . '</strong>';
+            $sFilter .= ' program <strong>' . $searchvalueprog . TAG_STRONG_CLOSE;
         }
     } elseif ($state->isFromTo() && $state->isHost()) {
         
@@ -55,15 +59,15 @@ try {
         $aEvents = $l->getHostFromTo($page * LggrState::PAGELEN,
             LggrState::PAGELEN);
         
-        $sFilter = _('Filter by time range between') . ' <strong>' .
+        $sFilter = _('Filter by time range between') . ' ' . TAG_STRONG_CLOSE .
              htmlentities($state->getFrom(),
-                ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> ' .
+                 ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . TAG_STRONG_CLOSE . ' ' .
              _('and') . ' <strong>' .
              htmlentities($state->getTo(),
-                ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>, ';
+                 ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . TAG_STRONG_CLOSE . ', ';
         $sFilter .= _('Filter by server') . ' <strong>' .
              htmlentities($state->getHostName(),
-                ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+                 ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . TAG_STRONG_CLOSE;
         $searchvalue = '';
         $searchvalueprog = '';
         $isSearch = false;
@@ -93,10 +97,10 @@ try {
         $aEvents = $l->getFromTo($page * LggrState::PAGELEN, LggrState::PAGELEN);
         $sFilter = _('Filter by time range between') . ' <strong>' .
              htmlentities($state->getFrom(),
-                ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> ' .
+                 ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . TAG_STRONG_CLOSE . ' ' .
              _('and') . ' <strong>' .
              htmlentities($state->getTo(),
-                ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+                 ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . TAG_STRONG_CLOSE;
         $searchvalue = '';
         $searchvalueprog = '';
         $isSearch = false;
@@ -186,23 +190,23 @@ EOL;
 <?php
 if (isset($aLevelCount[MessageLevel::EMERG])) {
     echo '<button class="btn btn-sm btn-danger" type="button">Emergency <span class="badge">' .
-        $aLevelCount[MessageLevel::EMERG] . '</span></button> ';
+        $aLevelCount[MessageLevel::EMERG] . TAG_SPANBUTTON_CLOSE . ' ';
 }
 if (isset($aLevelCount[MessageLevel::CRIT])) {
     echo '<button class="btn btn-sm btn-danger" type="button">Critical <span class="badge">' .
-        $aLevelCount[MessageLevel::CRIT] . '</span></button> ';
+        $aLevelCount[MessageLevel::CRIT] . TAG_SPANBUTTON_CLOSE . ' ';
 }
 if (isset($aLevelCount[MessageLevel::ERR])) {
     echo '<button class="btn btn-sm btn-danger" type="button">Error <span class="badge">' .
-        $aLevelCount[MessageLevel::ERR] . '</span></button> ';
+        $aLevelCount[MessageLevel::ERR] . TAG_SPANBUTTON_CLOSE . ' ';
 }
 if (isset($aLevelCount[MessageLevel::WARNING])) {
     echo '<button class="btn btn-sm btn-warning" type="button">Warning <span class="badge">' .
-        $aLevelCount[MessageLevel::WARNING] . '</span></button> ';
+        $aLevelCount[MessageLevel::WARNING] . TAG_SPANBUTTON_CLOSE . ' ';
 }
 if (isset($aLevelCount[MessageLevel::NOTICE])) {
     echo '<button class="btn btn-sm btn-primary" type="button">Notice <span class="badge">' .
-        $aLevelCount[MessageLevel::NOTICE] . '</span></button> ';
+        $aLevelCount[MessageLevel::NOTICE] . TAG_SPANBUTTON_CLOSE . ' ';
 }
 ?>
     </p>
@@ -271,10 +275,10 @@ foreach ($aServerList as $servername => $serverid) {
 foreach ($aLevels as $level) {
     if ($state->isLevel() && ($level->level == $state->getLevel())) {
         echo '<button type="button" class="btn btn-primary newlog-level">' .
-             $level->level . '</button>';
+            $level->level . TAG_BUTTON_CLOSE;
     } else {
         echo '<button type="button" class="btn btn-default newlog-level">' .
-             $level->level . '</button>';
+            $level->level . TAG_BUTTON_CLOSE;
     }
 } // foreach
 ?>
@@ -286,19 +290,19 @@ foreach ($aLevels as $level) {
 foreach ($aRanges as $rangeValue => $rangeText) {
     if ($state->getRange() == $rangeValue) {
         echo '<button type="button" class="btn btn-primary newlog-range" data-range="' .
-             $rangeValue . '">' . $rangeText . '</button>';
+            $rangeValue . '">' . $rangeText . TAG_BUTTON_CLOSE;
     } else {
         echo '<button type="button" class="btn btn-default newlog-range" data-range="' .
-             $rangeValue . '">' . $rangeText . '</button>';
+            $rangeValue . '">' . $rangeText . TAG_BUTTON_CLOSE;
     }
 } // foreach
 
 if ($state->isFromTo()) {
     echo '<button type="button" class="btn btn-primary newlog-range" id="btnspecialrange">' .
-         _('Special') . '</button>';
+        _('Special') . TAG_BUTTON_CLOSE;
 } else {
     echo '<button type="button" class="btn btn-default newlog-range" id="btnspecialrange">' .
-         _('Special') . '</button>';
+        _('Special') . TAG_BUTTON_CLOSE;
 } // if
 
 ?>
