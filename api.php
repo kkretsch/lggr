@@ -1,7 +1,8 @@
 <?php
-spl_autoload_register(function ($class) {
-    include 'inc/' . strtolower($class) . '_class.php';
-});
+spl_autoload_register(
+    function ($class) {
+        include 'inc/' . strtolower($class) . '_class.php';
+    });
 
 session_start();
 

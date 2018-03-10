@@ -1,7 +1,6 @@
 <?php
 
-abstract class AbstractLggrCache
-{
+abstract class AbstractLggrCache {
 
     abstract protected function store($key, $value);
 

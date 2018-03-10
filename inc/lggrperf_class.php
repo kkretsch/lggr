@@ -1,7 +1,6 @@
 <?php
 
-class LggrPerf
-{
+class LggrPerf {
 
     private $tsStart = null;
 
@@ -11,23 +10,22 @@ class LggrPerf
 
     private $sQuery = null;
 
-    function __construct()
-    {}
- // constructor
-    public function start($sql)
-    {
+    function __construct() {}
+
+    // constructor
+    public function start($sql) {
         $this->sQuery = $sql;
         $this->tsStart = microtime(true);
     }
- // function
-    public function stop()
-    {
+
+    // function
+    public function stop() {
         $this->tsEnd = microtime(true);
         $this->tsLen = $this->tsEnd - $this->tsStart;
     }
- // function
-    public function getPerf()
-    {
+
+    // function
+    public function getPerf() {
         $a = array();
         
         $a['time'] = $this->tsLen;
@@ -37,8 +35,8 @@ class LggrPerf
         
         return $a;
     }
- // function
-    private function logPerf()
-    {} // function
+
+    // function
+    private function logPerf() {} // function
 }
 

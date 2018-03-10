@@ -1,9 +1,10 @@
 <?php
-spl_autoload_register(function ($class) {
-    $class = strtolower($class);
-    $class = str_replace('\\', '/', $class);
-    include __DIR__ . '/' . $class . '_class.php';
-});
+spl_autoload_register(
+    function ($class) {
+        $class = strtolower($class);
+        $class = str_replace('\\', '/', $class);
+        include __DIR__ . '/' . $class . '_class.php';
+    });
 
 $config = new Config();
 
@@ -14,8 +15,9 @@ if (isset($_SESSION[LggrState::SESSIONNAME])) {
 } else {
     $state = new LggrState();
 }
- // if
-  
+
+// if
+
 // Uebersetzungen via gettext vorbereiten
 /*
  * Auf dem Server ausführen:

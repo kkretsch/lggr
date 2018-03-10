@@ -1,10 +1,10 @@
 <?php
 
-class LggrCacheRedis extends AbstractLggrCache
-{
+class LggrCacheRedis extends AbstractLggrCache {
 
+    // 5 minutes
     const MAXAGE = 300;
- // 5 minutes
+
     const REDISHOST = 'localhost';
 
     const REDISDB = 0;
@@ -13,35 +13,34 @@ class LggrCacheRedis extends AbstractLggrCache
 
     private $r = null;
 
-    function __construct()
-    {
+    function __construct() {
         $this->r = new Redis();
         $this->r->connect(self::REDISHOST);
         $this->r->select(self::REDISDB);
     }
- // constructor
-    function __destruct()
-    {
+
+    // constructor
+    function __destruct() {
         $this->r->close();
     }
- // destructor
-    public function store($key, $value)
-    {
+
+    // destructor
+    public function store($key, $value) {
         $s = serialize($value);
         $this->r->setex(SELF::REDISPFX . $key, self::MAXAGE, $s);
     }
- // function
-    public function retrieve($key)
-    {
+
+    // function
+    public function retrieve($key) {
         $value = $this->r->get(SELF::REDISPFX . $key);
         if (false === $value) {
             return null;
         }
         return unserialize($value);
     }
- // function
-    public function purge($key)
-    {
+
+    // function
+    public function purge($key) {
         $this->r->delete(SELF::REDISPFX . $key);
     } // function
 } // class

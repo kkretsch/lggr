@@ -11,8 +11,10 @@ try {
     $aLevels = $l->getLevels();
     $aServers = $l->getServers();
     $aAllServers = $l->getAllServers();
-} catch (LggrException $e) {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
+}
+catch (LggrException $e) {
+    echo '<div class="container"><div class="alert alert-danger" role="alert">' .
+         $e->getMessage() . '</div></div>';
     
     require 'tpl/foot.inc.php';
     
@@ -31,9 +33,12 @@ $page = $state->getPage();
 try {
     if ($state->isSearch()) {
         
-        $aEvents = $l->getText($state->getSearch(), $state->getSearchProg(), $page * LggrState::PAGELEN, LggrState::PAGELEN);
-        $searchvalue = htmlentities($state->getSearch(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
-        $searchvalueprog = htmlentities($state->getSearchProg(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
+        $aEvents = $l->getText($state->getSearch(), $state->getSearchProg(),
+            $page * LggrState::PAGELEN, LggrState::PAGELEN);
+        $searchvalue = htmlentities($state->getSearch(),
+            ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
+        $searchvalueprog = htmlentities($state->getSearchProg(),
+            ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
         $isSearch = true;
         $sFilter = _('Text search for');
         if ('' != $state->getSearch()) {
@@ -46,10 +51,18 @@ try {
         
         $host = $state->getHostName();
         
-        $aEvents = $l->getHostFromTo($page * LggrState::PAGELEN, LggrState::PAGELEN);
+        $aEvents = $l->getHostFromTo($page * LggrState::PAGELEN,
+            LggrState::PAGELEN);
         
-        $sFilter = _('Filter by time range between') . ' <strong>' . htmlentities($state->getFrom(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> ' . _('and') . ' <strong>' . htmlentities($state->getTo(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>, ';
-        $sFilter .= _('Filter by server') . ' <strong>' . htmlentities($state->getHostName(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+        $sFilter = _('Filter by time range between') . ' <strong>' .
+             htmlentities($state->getFrom(),
+                ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> ' .
+             _('and') . ' <strong>' .
+             htmlentities($state->getTo(),
+                ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>, ';
+        $sFilter .= _('Filter by server') . ' <strong>' .
+             htmlentities($state->getHostName(),
+                ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
         $searchvalue = '';
         $searchvalueprog = '';
         $isSearch = false;
@@ -58,21 +71,31 @@ try {
         $host = $state->getHostName();
         $level = $state->getLevel();
         
-        $aEvents = $l->getFiltered($host, $level, $page * LggrState::PAGELEN, LggrState::PAGELEN);
+        $aEvents = $l->getFiltered($host, $level, $page * LggrState::PAGELEN,
+            LggrState::PAGELEN);
         $searchvalue = '';
         $searchvalueprog = '';
         $isSearch = false;
         $sFilter = '';
         if ($state->isHost()) {
-            $sFilter .= _('Filter by server') . ' <strong>' . htmlentities($state->getHostName(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+            $sFilter .= _('Filter by server') . ' <strong>' .
+                 htmlentities($state->getHostName(),
+                    ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
         }
         if ($state->isLevel()) {
-            $sFilter .= _('Filter by level') . ' <strong>' . htmlentities($state->getLevel(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+            $sFilter .= _('Filter by level') . ' <strong>' .
+                 htmlentities($state->getLevel(),
+                    ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
         }
     } elseif ($state->isFromTo()) {
         
         $aEvents = $l->getFromTo($page * LggrState::PAGELEN, LggrState::PAGELEN);
-        $sFilter = _('Filter by time range between') . ' <strong>' . htmlentities($state->getFrom(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> ' . _('and') . ' <strong>' . htmlentities($state->getTo(), ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+        $sFilter = _('Filter by time range between') . ' <strong>' .
+             htmlentities($state->getFrom(),
+                ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong> ' .
+             _('and') . ' <strong>' .
+             htmlentities($state->getTo(),
+                ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
         $searchvalue = '';
         $searchvalueprog = '';
         $isSearch = false;
@@ -85,8 +108,10 @@ try {
         $searchvalueprog = '';
         $isSearch = false;
     } // if search
-} catch (LggrException $e) {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
+}
+catch (LggrException $e) {
+    echo '<div class="container"><div class="alert alert-danger" role="alert">' .
+         $e->getMessage() . '</div></div>';
     
     require 'tpl/foot.inc.php';
     
@@ -94,7 +119,8 @@ try {
 }
 
 if (version_compare(phpversion(), '5.4', '<')) {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">Your PHP version ' . phpversion() . ' might be too old, expecting at least 5.4</div></div>';
+    echo '<div class="container"><div class="alert alert-danger" role="alert">Your PHP version ' .
+         phpversion() . ' might be too old, expecting at least 5.4</div></div>';
 } // if
 
 require 'tpl/nav.inc.php';
@@ -129,18 +155,18 @@ foreach ($aLevels as $level) {
     $aLevelCount[$level->level] = $level->c;
     $level->f = round($level->f);
     switch ($level->level) {
-        case 'emerg':
-        case 'crit':
-        case 'err':
+        case MessageLevel::EMERG:
+        case MessageLevel::CRIT:
+        case MessageLevel::ERR:
             $label = 'progress-bar-danger';
             break;
-        case 'warning':
+        case MessageLevel::WARNING:
             $label = 'progress-bar-warning';
             break;
-        case 'notice':
+        case MessageLevel::NOTICE:
             $label = 'progress-bar-primary';
             break;
-        case 'info':
+        case MessageLevel::INFO:
             $label = 'progress-bar-success';
             break;
         default:
@@ -158,20 +184,25 @@ EOL;
                             <p><?= _('Distribution of selected event levels.') ?></p>
                             <p class="lggr-level-buttons">
 <?php
-if (isset($aLevelCount['emerg'])) {
-    echo '<button class="btn btn-sm btn-danger" type="button">Emergency <span class="badge">' . $aLevelCount['emerg'] . '</span></button> ';
+if (isset($aLevelCount[MessageLevel::EMERG])) {
+    echo '<button class="btn btn-sm btn-danger" type="button">Emergency <span class="badge">' .
+        $aLevelCount[MessageLevel::EMERG] . '</span></button> ';
 }
-if (isset($aLevelCount['crit'])) {
-    echo '<button class="btn btn-sm btn-danger" type="button">Critical <span class="badge">' . $aLevelCount['crit'] . '</span></button> ';
+if (isset($aLevelCount[MessageLevel::CRIT])) {
+    echo '<button class="btn btn-sm btn-danger" type="button">Critical <span class="badge">' .
+        $aLevelCount[MessageLevel::CRIT] . '</span></button> ';
 }
-if (isset($aLevelCount['err'])) {
-    echo '<button class="btn btn-sm btn-danger" type="button">Error <span class="badge">' . $aLevelCount['err'] . '</span></button> ';
+if (isset($aLevelCount[MessageLevel::ERR])) {
+    echo '<button class="btn btn-sm btn-danger" type="button">Error <span class="badge">' .
+        $aLevelCount[MessageLevel::ERR] . '</span></button> ';
 }
-if (isset($aLevelCount['err'])) {
-    echo '<button class="btn btn-sm btn-warning" type="button">Warning <span class="badge">' . $aLevelCount['warning'] . '</span></button> ';
+if (isset($aLevelCount[MessageLevel::WARNING])) {
+    echo '<button class="btn btn-sm btn-warning" type="button">Warning <span class="badge">' .
+        $aLevelCount[MessageLevel::WARNING] . '</span></button> ';
 }
-if (isset($aLevelCount['notice'])) {
-    echo '<button class="btn btn-sm btn-primary" type="button">Notice <span class="badge">' . $aLevelCount['notice'] . '</span></button> ';
+if (isset($aLevelCount[MessageLevel::NOTICE])) {
+    echo '<button class="btn btn-sm btn-primary" type="button">Notice <span class="badge">' .
+        $aLevelCount[MessageLevel::NOTICE] . '</span></button> ';
 }
 ?>
     </p>
@@ -225,41 +256,49 @@ foreach ($aAllServers as $server) {
 } // foreach
 ksort($aServerList);
 foreach ($aServerList as $servername => $serverid) {
-    echo '<li role="presentation"><a role="menuitem" tabindex="-1" href="./do.php?a=host&hostid=' . $serverid . '">' . $servername . '</a></li>';
+    echo '<li role="presentation"><a role="menuitem" tabindex="-1" href="./do.php?a=host&hostid=' .
+         $serverid . '">' . $servername . '</a></li>';
 } // foreach
 ?>
   </ul>
                             </div>
-                            <!-- dropdown -->                            
-                            
-                            <div class="btn-group btn-group-xs lggr-formelement"
+                            <!-- dropdown -->
+
+                            <div
+                                class="btn-group btn-group-xs lggr-formelement"
                                 role="group" aria-label="level">
 <?php
 foreach ($aLevels as $level) {
     if ($state->isLevel() && ($level->level == $state->getLevel())) {
-        echo '<button type="button" class="btn btn-primary newlog-level">' . $level->level . '</button>';
+        echo '<button type="button" class="btn btn-primary newlog-level">' .
+             $level->level . '</button>';
     } else {
-        echo '<button type="button" class="btn btn-default newlog-level">' . $level->level . '</button>';
+        echo '<button type="button" class="btn btn-default newlog-level">' .
+             $level->level . '</button>';
     }
 } // foreach
 ?>
 </div>
-                            
-                            <div class="btn-group lggr-formelement" role="group"
-                                aria-label="range">
+
+                            <div class="btn-group lggr-formelement"
+                                role="group" aria-label="range">
 <?php
 foreach ($aRanges as $rangeValue => $rangeText) {
     if ($state->getRange() == $rangeValue) {
-        echo '<button type="button" class="btn btn-primary newlog-range" data-range="' . $rangeValue . '">' . $rangeText . '</button>';
+        echo '<button type="button" class="btn btn-primary newlog-range" data-range="' .
+             $rangeValue . '">' . $rangeText . '</button>';
     } else {
-        echo '<button type="button" class="btn btn-default newlog-range" data-range="' . $rangeValue . '">' . $rangeText . '</button>';
+        echo '<button type="button" class="btn btn-default newlog-range" data-range="' .
+             $rangeValue . '">' . $rangeText . '</button>';
     }
 } // foreach
 
 if ($state->isFromTo()) {
-    echo '<button type="button" class="btn btn-primary newlog-range" id="btnspecialrange">' . _('Special') . '</button>';
+    echo '<button type="button" class="btn btn-primary newlog-range" id="btnspecialrange">' .
+         _('Special') . '</button>';
 } else {
-    echo '<button type="button" class="btn btn-default newlog-range" id="btnspecialrange">' . _('Special') . '</button>';
+    echo '<button type="button" class="btn btn-default newlog-range" id="btnspecialrange">' .
+         _('Special') . '</button>';
 } // if
 
 ?>
@@ -309,7 +348,8 @@ if (null != $sFilter) {
 } // if
 
 if (0 == count($aEvents)) {
-    echo '<div class="alert alert-danger" role="alert">' . _('empty result') . '</div>';
+    echo '<div class="alert alert-danger" role="alert">' . _('empty result') .
+         '</div>';
 } // if
 
 ?>
@@ -357,22 +397,26 @@ foreach ($aEvents as $event) {
             $label = '<span class="label label-success">Info</span>';
             break;
         default:
-            $label = '<span class="label label-default">' . $event->level . '</span>';
+            $label = '<span class="label label-default">' . $event->level .
+                 '</span>';
     } // switch
     
     switch ($event->archived) {
         case 'Y':
-            $archived = '<span id="arch' . $event->id . '" class="lggr-archived glyphicon glyphicon-warning-sign" aria-hidden="true" title="archived"></span>';
+            $archived = '<span id="arch' . $event->id .
+                 '" class="lggr-archived glyphicon glyphicon-warning-sign" aria-hidden="true" title="archived"></span>';
             break;
         case 'N':
-            $archived = '<span id="arch' . $event->id . '" class="lggr-notarchived glyphicon glyphicon-pushpin" aria-hidden="true" title=""></span>';
+            $archived = '<span id="arch' . $event->id .
+                 '" class="lggr-notarchived glyphicon glyphicon-pushpin" aria-hidden="true" title=""></span>';
             break;
         default:
             $archived = '?';
     } // switch
     
     $host = htmlentities($event->host, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
-    $program = htmlentities($event->program, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
+    $program = htmlentities($event->program,
+        ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
     $msg = htmlentities($event->message, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
     
     echo <<<EOL

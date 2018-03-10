@@ -1,10 +1,8 @@
 <?php
 
-class AdminConfig extends AbstractConfig
-{
+class AdminConfig extends AbstractConfig {
 
-    function __construct()
-    {
+    function __construct() {
         $this->setDbUser('loggeradmin');
         $this->setDbPwd('lggr');
         $this->setDbName('lggrdev');

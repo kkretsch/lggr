@@ -21,8 +21,10 @@ try {
     $aArchivedStatistic = $aArchivedStatistic[0];
     
     $aMsgPerHour = $l->getMessagesPerHour();
-} catch (LggrException $e) {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
+}
+catch (LggrException $e) {
+    echo '<div class="container"><div class="alert alert-danger" role="alert">' .
+         $e->getMessage() . '</div></div>';
     
     require 'tpl/foot.inc.php';
     
@@ -77,5 +79,4 @@ require 'tpl/nav.inc.php';
 
 <?php
 $aPerf = $l->getPerf();
-require 'tpl/foot.inc.php'
-?>
+require 'tpl/foot.inc.php'?>

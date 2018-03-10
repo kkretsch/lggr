@@ -1,7 +1,6 @@
 <?php
 
-class LggrState
-{
+class LggrState {
 
     const SESSIONNAME = 'LggrState';
 
@@ -24,7 +23,8 @@ class LggrState
     private $sLevel = null;
 
     private $iRange = 24;
- // default 24h = today, sort of
+
+    // default 24h = today, sort of
     private $bFromTo = false;
 
     private $tsFrom = null;
@@ -32,11 +32,11 @@ class LggrState
     private $tsTo = null;
 
     private $iResultSize = 0;
- // result size of last query
+
+    // result size of last query
     private $bPanelOpen = false;
 
-    function __construct()
-    {
+    function __construct() {
         $this->bLocalCall = false;
         $this->iPage = 0;
         $this->bSearch = false;
@@ -53,100 +53,83 @@ class LggrState
         $this->iResultSize = 0;
         $this->bPanelOpen = false;
     }
- // constructor
-    public function setSearch($s)
-    {
+
+    // constructor
+    public function setSearch($s) {
         if (null != $s) {
             $this->bSearch = true;
             $this->sSearch = $s;
         }
     }
 
-    public function isSearch()
-    {
+    public function isSearch() {
         return $this->bSearch;
     }
 
-    public function getSearch()
-    {
+    public function getSearch() {
         return $this->sSearch;
     }
 
-    public function setSearchProg($s)
-    {
+    public function setSearchProg($s) {
         if (null != $s) {
             $this->bSearch = true;
             $this->sSearchProg = $s;
         } // if
     }
 
-    public function getSearchProg()
-    {
+    public function getSearchProg() {
         return $this->sSearchProg;
     }
 
-    public function setPage($i)
-    {
+    public function setPage($i) {
         $this->iPage = $i;
     }
 
-    public function getPage()
-    {
+    public function getPage() {
         return $this->iPage;
     }
 
-    public function setHostName($s)
-    {
+    public function setHostName($s) {
         $this->sHostName = $s;
     }
 
-    public function getHostName()
-    {
+    public function getHostName() {
         return $this->sHostName;
     }
 
-    public function setHostId($id)
-    {
+    public function setHostId($id) {
         $this->iHost = $id;
     }
 
-    public function getHostId()
-    {
+    public function getHostId() {
         return $this->iHost;
     }
 
-    public function isHost()
-    {
+    public function isHost() {
         return 0 != $this->iHost;
     }
 
-    public function setLevel($s)
-    {
+    public function setLevel($s) {
         $this->sLevel = $s;
     }
 
-    public function getLevel()
-    {
+    public function getLevel() {
         return $this->sLevel;
     }
 
-    public function isLevel()
-    {
+    public function isLevel() {
         return null != $this->sLevel;
     }
 
-    public function setRange($i)
-    {
+    public function setRange($i) {
         $this->iRange = $i;
     }
 
-    public function getRange()
-    {
+    public function getRange() {
         return $this->iRange;
     }
 
-    public function setFromTo($tsFrom, $tsTo)
-    {
+    public function setFromTo($tsFrom, $tsTo) {
         if (null == $tsFrom && null == $tsTo) {
             $this->bFromTo = false;
         } else {
@@ -156,48 +139,39 @@ class LggrState
         $this->tsTo = $tsTo;
     }
 
-    public function isFromTo()
-    {
+    public function isFromTo() {
         return $this->bFromTo;
     }
 
-    public function getFrom()
-    {
+    public function getFrom() {
         return $this->tsFrom;
     }
 
-    public function getTo()
-    {
+    public function getTo() {
         return $this->tsTo;
     }
 
-    public function setResultSize($i)
-    {
+    public function setResultSize($i) {
         $this->iResultSize = $i;
     }
 
-    public function getResultSize()
-    {
+    public function getResultSize() {
         return $this->iResultSize;
     }
 
-    public function setLocalCall($b)
-    {
+    public function setLocalCall($b) {
         $this->bLocalCall = $b;
     }
 
-    public function isLocalCall()
-    {
+    public function isLocalCall() {
         return $this->bLocalCall;
     }
 
-    public function setPanelOpen($b)
-    {
+    public function setPanelOpen($b) {
         $this->bPanelOpen = $b;
     }
 
-    public function isPanelOpen()
-    {
+    public function isPanelOpen() {
         return $this->bPanelOpen;
     }
 } // class

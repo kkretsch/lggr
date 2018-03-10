@@ -7,8 +7,10 @@ require 'tpl/head.inc.php';
 $l = null;
 try {
     $l = new Lggr($state, $config);
-} catch (LggrException $e) {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
+}
+catch (LggrException $e) {
+    echo '<div class="container"><div class="alert alert-danger" role="alert">' .
+         $e->getMessage() . '</div></div>';
     
     require 'tpl/foot.inc.php';
     
@@ -22,8 +24,10 @@ try {
     $searchvalue = '';
     $searchvalueprog = '';
     $isSearch = false;
-} catch (LggrException $e) {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
+}
+catch (LggrException $e) {
+    echo '<div class="container"><div class="alert alert-danger" role="alert">' .
+         $e->getMessage() . '</div></div>';
     
     require 'tpl/foot.inc.php';
     
@@ -31,7 +35,8 @@ try {
 }
 
 if (version_compare(phpversion(), '5.4', '<')) {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">Your PHP version ' . phpversion() . ' might be too old, expecting at least 5.4</div></div>';
+    echo '<div class="container"><div class="alert alert-danger" role="alert">Your PHP version ' .
+         phpversion() . ' might be too old, expecting at least 5.4</div></div>';
 } // if
 
 require 'tpl/nav.inc.php';
@@ -46,7 +51,8 @@ require 'tpl/nav.inc.php';
 <?php
 
 if (0 == count($aEvents)) {
-    echo '<div class="alert alert-danger" role="alert">' . _('empty result') . '</div>';
+    echo '<div class="alert alert-danger" role="alert">' . _('empty result') .
+         '</div>';
 } // if
 
 ?>
@@ -92,22 +98,26 @@ foreach ($aEvents as $event) {
             $label = '<span class="label label-success">Info</span>';
             break;
         default:
-            $label = '<span class="label label-default">' . $event->level . '</span>';
+            $label = '<span class="label label-default">' . $event->level .
+                 '</span>';
     } // switch
     
     switch ($event->archived) {
         case 'Y':
-            $archived = '<span id="arch' . $event->id . '" class="lggr-archived glyphicon glyphicon-warning-sign" aria-hidden="true" title="archived"></span>';
+            $archived = '<span id="arch' . $event->id .
+                 '" class="lggr-archived glyphicon glyphicon-warning-sign" aria-hidden="true" title="archived"></span>';
             break;
         case 'N':
-            $archived = '<span id="arch' . $event->id . '" class="lggr-notarchived glyphicon glyphicon-pushpin" aria-hidden="true" title=""></span>';
+            $archived = '<span id="arch' . $event->id .
+                 '" class="lggr-notarchived glyphicon glyphicon-pushpin" aria-hidden="true" title=""></span>';
             break;
         default:
             $archived = '?';
     } // switch
     
     $host = htmlentities($event->host, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
-    $program = htmlentities($event->program, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
+    $program = htmlentities($event->program,
+        ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
     $msg = htmlentities($event->message, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
     
     echo <<<EOL
@@ -135,5 +145,4 @@ if (! $isSearch) {
 
 <?php
 $aPerf = $l->getPerf();
-require 'tpl/foot.inc.php'
-?>
+require 'tpl/foot.inc.php'?>

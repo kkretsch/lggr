@@ -1,9 +1,10 @@
 <?php
 header('Content-Type: text/javascript');
 
-spl_autoload_register(function ($class) {
-    include '../inc/' . strtolower($class) . '_class.php';
-});
+spl_autoload_register(
+    function ($class) {
+        include '../inc/' . strtolower($class) . '_class.php';
+    });
 
 $searchvalue = '';
 
@@ -40,7 +41,8 @@ try {
     $aMsgPerHour = $l->getMessagesPerHour();
     
     $aCloud = $l->getCloud();
-} catch (LggrException $e) {
+}
+catch (LggrException $e) {
     
     exit();
 }

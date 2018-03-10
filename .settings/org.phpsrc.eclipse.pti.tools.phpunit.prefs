@@ -1,0 +1,10 @@
+bootstrap=
+debug_print_output=true
+eclipse.preferences.version=1
+no_namespace_check=true
+pear_library=<Internal>
+php_executable=PHP 5.6.32 (CLI)
+source_file_pattern_folder=\\%p\\inc
+test_file_pattern_file=%fTest.%e
+test_file_pattern_folder=\\%p\\tests
+test_file_super_class=PHPUnit_Framework_TestCase

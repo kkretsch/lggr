@@ -18,9 +18,14 @@ if (isset($_COOKIE['PHPSESSID'])) {
 } else {
     $dbgsession = '-';
 } // if
+if (isset($_SERVER['REMOTE_USER'])) {
+    $remoteUser = $_SERVER['REMOTE_USER'];
+} else {
+    $remoteUser = 'ANONYMOUS';
+} // if
 
 ?>
-        <p class="debugfooter"><?= $pCount ?> <?= _('queries in') ?> <?= $pTime ?> <?= _('seconds') ?>. <?= _('Session') ?>: <?= $dbgsession ?> <?= _('by') ?> <?= htmlentities($_SERVER['REMOTE_USER']) ?></p>
+        <p class="debugfooter"><?=$pCount?> <?=_('queries in')?> <?=$pTime?> <?=_('seconds')?>. <?=_('Session')?>: <?=$dbgsession?> <?=_('by')?> <?=htmlentities($remoteUser)?></p>
         <p>
             &copy; <a href="http://lggr.io" target="_blank">lggr.io</a>
             2018
@@ -30,12 +35,12 @@ if (isset($_COOKIE['PHPSESSID'])) {
 <!-- /container -->
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="<?= $config->getUrlJquery() ?>jquery-1.11.3.min.js"></script>
-<script src="<?= $config->getUrlJqueryui() ?>jquery-ui.min.js"></script>
+<script src="<?=$config->getUrlJquery()?>jquery-1.11.3.min.js"></script>
+<script src="<?=$config->getUrlJqueryui()?>jquery-ui.min.js"></script>
 <script
-    src="<?= $config->getUrlJAtimepicker() ?>jquery-ui-timepicker-addon.min.js"></script>
+    src="<?=$config->getUrlJAtimepicker()?>jquery-ui-timepicker-addon.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="<?= $config->getUrlBootstrap() ?>js/bootstrap.min.js"></script>
+<script src="<?=$config->getUrlBootstrap()?>js/bootstrap.min.js"></script>
 <?php
 switch (basename($_SERVER['SCRIPT_NAME'], '.php')) {
     case 'stats':

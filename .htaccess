@@ -1,8 +1,8 @@
 Options -indexes
 
-Header always set Strict-Transport-Security "max-age=31536000"
+#Header always set Strict-Transport-Security "max-age=31536000"
 
-Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; report-uri https://report-uri.io/report/e7e84fa898ae6e0d0e8d70e25cd237c7;"
+#Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; report-uri https://report-uri.io/report/e7e84fa898ae6e0d0e8d70e25cd237c7;"
 
 <Files stats.php>
 # Chart.js uses some dynamic functions.
@@ -18,3 +18,5 @@ AuthType	Basic
 AuthName	"Restricted Area"
 AuthUserFile	/var/www/webuser
 Require		valid-user
+Require		ip 127.0.0.1
+Require		ip ::1

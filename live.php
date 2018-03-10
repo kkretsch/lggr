@@ -9,8 +9,10 @@ try {
     $l = new Lggr($state, $config);
     
     $aEvents = $l->getLatest(0, LggrState::PAGELEN);
-} catch (LggrException $e) {
-    echo '<div class="container"><div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div></div>';
+}
+catch (LggrException $e) {
+    echo '<div class="container"><div class="alert alert-danger" role="alert">' .
+         $e->getMessage() . '</div></div>';
     
     require 'tpl/foot.inc.php';
     
@@ -27,7 +29,8 @@ require 'tpl/nav.inc.php';
 <?php
 
 if (0 == count($aEvents)) {
-    echo '<div class="alert alert-danger" role="alert">' . _('empty result') . '</div>';
+    echo '<div class="alert alert-danger" role="alert">' . _('empty result') .
+         '</div>';
 } // if
 
 ?>
@@ -80,11 +83,13 @@ foreach ($aEvents as $event) {
             $label = '<span class="label label-success">Info</span>';
             break;
         default:
-            $label = '<span class="label label-default">' . $event->level . '</span>';
+            $label = '<span class="label label-default">' . $event->level .
+                 '</span>';
     } // switch
     
     $host = htmlentities($event->host, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
-    $program = htmlentities($event->program, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
+    $program = htmlentities($event->program,
+        ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
     $msg = htmlentities($event->message, ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES);
     
     echo <<<EOL

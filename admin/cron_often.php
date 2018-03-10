@@ -1,7 +1,8 @@
 <?php
-spl_autoload_register(function ($class) {
-    include __DIR__ . '/../inc/' . strtolower($class) . '_class.php';
-});
+spl_autoload_register(
+    function ($class) {
+        include __DIR__ . '/../inc/' . strtolower($class) . '_class.php';
+    });
 
 $iCountServers = 0;
 $aPerf = array();
@@ -17,7 +18,8 @@ try {
     $iCountServers = $l->updateServers();
     
     $aPerf = $l->getPerf();
-} catch (LggrException $e) {
+}
+catch (LggrException $e) {
     die($e->getMessage());
 } // try
 

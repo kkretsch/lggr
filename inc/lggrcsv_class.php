@@ -1,8 +1,7 @@
 <?php
 
 /* speichern als UTF8 ohne BOM */
-class LggrCsv
-{
+class LggrCsv {
 
     private $lggr = null;
 
@@ -17,20 +16,20 @@ class LggrCsv
         'message'
     ];
 
-    function __construct(Lggr &$oLggr)
-    {
+    function __construct(Lggr &$oLggr) {
         $this->lggr = & $oLggr;
     }
- // constructor
-    private function generiereDateiname()
-    {
+
+    // constructor
+    private function generiereDateiname() {
         return 'lggrarchive_' . date('Ymd') . '.csv';
     }
 
-    function generiere()
-    {
+    function generiere() {
         header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename="' . $this->generiereDateiname() . '"');
+        header(
+            'Content-Disposition: attachment; filename="' .
+                 $this->generiereDateiname() . '"');
         
         $iCnt = 0;
         $aEntries = $this->lggr->getArchived(0, 9999);

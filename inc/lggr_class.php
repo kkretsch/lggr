@@ -1,7 +1,6 @@
 <?php
 
-class Lggr
-{
+class Lggr {
 
     const LASTSTAT = 5000;
 
@@ -19,8 +18,7 @@ class Lggr
 
     private $aPerf = null;
 
-    function __construct(LggrState $state, AbstractConfig $config)
-    {
+    function __construct(LggrState $state, AbstractConfig $config) {
         $this->config = $config;
         $this->state = $state;
         $this->cache = new LggrCacheFile(); // or use LggrCacheRedis instead
@@ -30,30 +28,34 @@ class Lggr
             $this->checkSecurity();
         }
         
-        $this->db = new mysqli('localhost', $this->config->getDbUSer(), $this->config->getDbPwd(), $this->config->getDbName());
+        $this->db = new mysqli('localhost', $this->config->getDbUSer(),
+            $this->config->getDbPwd(), $this->config->getDbName());
         $this->db->set_charset('utf8');
     }
- // constructor
-    function __destruct()
-    {
+
+    // constructor
+    function __destruct() {
         if (null != $this->db) {
             $this->db->close();
         } // if
     }
- // destructor
-    private function checkSecurity()
-    {
+
+    // destructor
+    private function checkSecurity() {
         // local access allowed without login data
         if ($_SERVER["REMOTE_ADDR"] === "::1") {
+            return;
+        }
+        if ($_SERVER["REMOTE_ADDR"] === "127.0.0.1") {
             return;
         }
         if (! isset($_SERVER['REMOTE_USER'])) {
             throw new LggrException('You must enable basic authentication');
         } // if
     }
- // function
-    private function getViewName()
-    {
+
+    // function
+    private function getViewName() {
         $rcView = '';
         switch ($this->state->getRange()) {
             case 1:
@@ -75,14 +77,14 @@ class Lggr
         return $rcView;
     }
 
-    function getLevels()
-    {
+    function getLevels() {
         $perf = new LggrPerf();
         
         $v = $this->getViewName();
         $sql = "
 SELECT level, COUNT(*) AS c
-FROM (SELECT level FROM $v ORDER BY `date` DESC LIMIT " . self::LASTSTAT . ") AS sub
+FROM (SELECT level FROM $v ORDER BY `date` DESC LIMIT " .
+             self::LASTSTAT . ") AS sub
 GROUP BY level
 ORDER BY c DESC
 ";
@@ -119,9 +121,9 @@ ORDER BY c DESC
         $this->cache->store("levels$v", $a);
         return $a;
     }
- // function
-    function getAllServers()
-    {
+
+    // function
+    function getAllServers() {
         $perf = new LggrPerf();
         
         $sql = "
@@ -144,9 +146,9 @@ FROM servers";
         
         return $a;
     }
- // function
-    function getServersName($id)
-    {
+
+    // function
+    function getServersName($id) {
         $perf = new LggrPerf();
         
         $sql = "
@@ -171,16 +173,17 @@ WHERE id=$id";
         
         return $a->name;
     }
- // function
-    function getServers()
-    {
+
+    // function
+    function getServers() {
         $perf = new LggrPerf();
         
         $v = $this->getViewName();
         
         $sql = "
-SELECT host, COUNT(*) AS c 
-FROM (SELECT host FROM $v ORDER BY `date` DESC LIMIT " . self::LASTSTAT . ") AS sub
+SELECT host, COUNT(*) AS c
+FROM (SELECT host FROM $v ORDER BY `date` DESC LIMIT " .
+             self::LASTSTAT . ") AS sub
 GROUP BY host
 ORDER BY c DESC";
         
@@ -216,9 +219,9 @@ ORDER BY c DESC";
         $this->cache->store("servers$v", $a);
         return $a;
     }
- // function
-    function getArchived($from = 0, $count = LggrState::PAGELEN)
-    {
+
+    // function
+    function getArchived($from = 0, $count = LggrState::PAGELEN) {
         $iArchivedSize = $this->cache->retrieve(ARCHIVEDSIZE);
         $aArchivedData = $this->cache->retrieve(ARCHIVEDSIZE . intval($from));
         
@@ -252,9 +255,9 @@ LIMIT $from,$count";
         
         return $a;
     }
- // function
-    function getLatest($from = 0, $count = LggrState::PAGELEN)
-    {
+
+    // function
+    function getLatest($from = 0, $count = LggrState::PAGELEN) {
         $perfSize = new LggrPerf();
         $perfData = new LggrPerf();
         
@@ -279,9 +282,9 @@ LIMIT $from,$count";
         
         return $a;
     }
- // function
-    function getCloud()
-    {
+
+    // function
+    function getCloud() {
         $perf = new LggrPerf();
         
         $v = $this->getViewName();
@@ -302,9 +305,9 @@ LIMIT $from,$count";
         
         return $a;
     }
- // function
-    function getNewer($id)
-    {
+
+    // function
+    function getNewer($id) {
         $perf = new LggrPerf();
         
         $sqlData = "
@@ -321,9 +324,9 @@ LIMIT " . LggrState::PAGELEN;
         
         return $a;
     }
- // function
-    function getEntry($id)
-    {
+
+    // function
+    function getEntry($id) {
         $perf = new LggrPerf();
         
         $sqlData = "
@@ -337,9 +340,9 @@ WHERE id=$id";
         $this->aPerf[] = $perf;
         return $a;
     }
- // function
-    function getFromTo($from = 0, $count = LggrState::PAGELEN)
-    {
+
+    // function
+    function getFromTo($from = 0, $count = LggrState::PAGELEN) {
         $perfSize = new LggrPerf();
         $perfData = new LggrPerf();
         
@@ -369,9 +372,9 @@ LIMIT $from,$count";
         
         return $a;
     }
- // function
-    function getHostFromTo($from = 0, $count = LggrState::PAGELEN)
-    {
+
+    // function
+    function getHostFromTo($from = 0, $count = LggrState::PAGELEN) {
         $perfSize = new LggrPerf();
         $perfData = new LggrPerf();
         
@@ -404,9 +407,10 @@ LIMIT $from,$count";
         
         return $a;
     }
- // function
-    function getFiltered($host = null, $level = null, $from = 0, $count = LggrState::PAGELEN)
-    {
+
+    // function
+    function getFiltered($host = null, $level = null, $from = 0,
+        $count = LggrState::PAGELEN) {
         $perfSize = new LggrPerf();
         $perfData = new LggrPerf();
         
@@ -445,9 +449,9 @@ LIMIT $from,$count";
         
         return $a;
     }
- // function
-    function getText($msg = '', $prog = '', $from = 0, $count = LggrState::PAGELEN)
-    {
+
+    // function
+    function getText($msg = '', $prog = '', $from = 0, $count = LggrState::PAGELEN) {
         $perf = new LggrPerf();
         
         $v = $this->getViewName();
@@ -477,9 +481,9 @@ LIMIT $from,$count";
         
         return $a;
     }
- // function
-    function getMessagesPerHour()
-    {
+
+    // function
+    function getMessagesPerHour() {
         $perf = new LggrPerf();
         
         $sql = "
@@ -501,9 +505,9 @@ GROUP BY h";
         $this->cache->store('mph', $a);
         return $a;
     }
- // function
-    function getArchivedStatistic()
-    {
+
+    // function
+    function getArchivedStatistic() {
         $perf = new LggrPerf();
         
         $sql = "
@@ -525,9 +529,9 @@ FROM Archived
         $this->cache->store('archivedstats', $a);
         return $a;
     }
- // function
-    function getStatistic()
-    {
+
+    // function
+    function getStatistic() {
         $perf = new LggrPerf();
         
         $sql = "
@@ -549,11 +553,11 @@ FROM newlogs
         $this->cache->store('stats', $a);
         return $a;
     }
- // function
+
+    // function
     
     /* delete anything older than maxage hours, or 4 weeks */
-    function purgeOldMessages($maxage = 672)
-    {
+    function purgeOldMessages($maxage = 672) {
         $perf = new LggrPerf();
         
         $sql = "
@@ -572,9 +576,9 @@ AND archived='N'
         
         return $this->db->affected_rows;
     }
- // function
-    function updateServers()
-    {
+
+    // function
+    function updateServers() {
         $perf = new LggrPerf();
         $iCount = 0;
         
@@ -584,7 +588,7 @@ AND archived='N'
         $aServersKnownObj = $this->sendResult($sql);
         $perf->stop();
         $this->aPerf[] = $perf;
-
+        
         $aServersKnown = array();
         foreach ($aServersKnownObj as $obj) {
             $aServersKnown[$obj->name] = $obj->id;
@@ -628,8 +632,7 @@ AND archived='N'
         return $iCount;
     }
 
-    function setArchive($iID, $bIsArchived)
-    {
+    function setArchive($iID, $bIsArchived) {
         $iID = intval($iID);
         if ($bIsArchived) {
             $sArchive = 'Y';
@@ -646,9 +649,9 @@ AND archived='N'
         $this->cache->purge(ARCHIVEDSIZE);
         $this->cache->purge("archivedData0");
     }
- // function
-    function normalizeHosts()
-    {
+
+    // function
+    function normalizeHosts() {
         
         // Find any new hostnames
         $sql = "
@@ -703,9 +706,9 @@ AND host='$hostName'
             } // if
         } // foreach
     }
- // function
-    private function getResultSize($sql)
-    {
+
+    // function
+    private function getResultSize($sql) {
         $res = $this->db->query($sql);
         if (false === $res) {
             throw new LggrException($this->db->error);
@@ -716,9 +719,9 @@ AND host='$hostName'
         } // if
         $res->close();
     }
- // function
-    private function sendResult($sql)
-    {
+
+    // function
+    private function sendResult($sql) {
         $a = array();
         
         $res = $this->db->query($sql);
@@ -732,9 +735,9 @@ AND host='$hostName'
         $res->close();
         return $a;
     }
- // function
-    public function getPerf()
-    {
+
+    // function
+    public function getPerf() {
         return $this->aPerf;
     } // function
 } // class
