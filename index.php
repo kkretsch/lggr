@@ -86,12 +86,12 @@ try {
         if ($state->isHost()) {
             $sFilter .= _('Filter by server') . ' ' . TAG_STRONG_OPEN .
                  htmlentities($state->getHostName(),
-                    ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+                     ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . TAG_STRONG_CLOSE;
         }
         if ($state->isLevel()) {
             $sFilter .= _('Filter by level') . ' ' . TAG_STRONG_OPEN .
                  htmlentities($state->getLevel(),
-                    ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . '</strong>';
+                     ENT_HTML5 | ENT_SUBSTITUTE | ENT_QUOTES) . TAG_STRONG_CLOSE;
         }
     } elseif ($state->isFromTo()) {
         
