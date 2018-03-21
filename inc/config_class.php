@@ -3,8 +3,8 @@
 class Config extends AbstractConfig {
 
     function __construct() {
-        $this->setDbUser('lggr');
-        $this->setDbPwd('lggr');
+        $this->setDbUser('logviewer');
+        $this->setDbPwd('xxx');
         $this->setDbName('lggr');
         
         // Set your preferred language en_US, de_DE, or pt_BR
