@@ -1,3 +1,5 @@
+node('MASTER') {    
+
 pipeline {
     agent { dockerfile true }
     stages {
@@ -8,4 +10,6 @@ pipeline {
             }
         }
     }
+}
+
 }
