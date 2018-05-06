@@ -233,9 +233,9 @@ ORDER BY c DESC";
         $perfSize = new LggrPerf();
         $perfData = new LggrPerf();
         
-        $sqlSize = "SELECT COUNT(*) AS c FROM Archived";
+        $sqlSize = "SELECT COUNT(*) AS c FROM archived";
         $sqlData = "
-SELECT * FROM Archived
+SELECT * FROM archived
 ORDER BY `date` DESC
 LIMIT $from,$count";
         
@@ -311,7 +311,7 @@ LIMIT $from,$count";
         $perf = new LggrPerf();
         
         $sqlData = "
-SELECT * FROM LastHour
+SELECT * FROM lasthour
 WHERE id>$id
 ORDER BY `date` DESC
 LIMIT " . LggrState::PAGELEN;
@@ -330,7 +330,7 @@ LIMIT " . LggrState::PAGELEN;
         $perf = new LggrPerf();
         
         $sqlData = "
-SELECT * FROM LastHour
+SELECT * FROM lasthour
 WHERE id=$id";
         
         $perf->start($sqlData);
@@ -488,7 +488,7 @@ LIMIT $from,$count";
         
         $sql = "
 SELECT HOUR(TIME(`date`)) AS h, COUNT(*) AS c
-FROM Today
+FROM today
 GROUP BY h";
         
         $a = $this->cache->retrieve('mph');
@@ -512,7 +512,7 @@ GROUP BY h";
         
         $sql = "
 SELECT COUNT(*) AS cnt
-FROM Archived
+FROM archived
 ";
         
         $a = $this->cache->retrieve('archivedstats');
